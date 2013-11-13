@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tile_dimen">32dp</dimen>
+    <dimen name="button_size">35dp</dimen>
+
+</resources>
