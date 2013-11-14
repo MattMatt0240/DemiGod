@@ -17,7 +17,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.demigod.activity;
+package high.caliber.productions.demigod.activity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,8 +45,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.demigod.R;
-import com.example.demigod.drawing.Sprite;
+import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.drawing.Sprite;
 
 public class HomeTown extends Activity implements View.OnTouchListener {
 

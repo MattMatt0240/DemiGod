@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.demigod"
+    package="high.caliber.productions.demigod"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.demigod.activity.TitleScreen"
+            android:name="high.caliber.productions.demigod.activity.TitleScreen"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -24,11 +24,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.demigod.activity.HeroHome"
+            android:name="high.caliber.productions.demigod.activity.HeroHome"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.example.demigod.activity.HomeTown"
+            android:name="high.caliber.productions.demigod.activity.HomeTown"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
     </application>

@@ -17,7 +17,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.demigod.database;
+package high.caliber.productions.demigod.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -28,7 +28,7 @@ import android.util.Log;
 
 public class DbHero extends SQLiteOpenHelper {
 
-	private static final String DB_PATH = "data/data/com.example.demigod/databases/Hero.db";
+	private static final String DB_PATH = "data/data/high.caliber.productions.demigod/databases/Hero.db";
 	private static final String DB_NAME = "Hero.db";
 	private static final String TABLE_STATS = "Stats";
 	private static final String TABLE_INVENTORY = "Inventory";

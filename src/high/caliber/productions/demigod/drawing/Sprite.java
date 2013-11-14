@@ -17,7 +17,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.demigod.drawing;
+package high.caliber.productions.demigod.drawing;
 
 import android.content.Context;
 import android.content.res.Resources;

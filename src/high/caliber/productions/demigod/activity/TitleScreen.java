@@ -17,7 +17,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.demigod.activity;
+package high.caliber.productions.demigod.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,8 +31,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.demigod.R;
-import com.example.demigod.database.DbHero;
+import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.database.DbHero;
 
 public class TitleScreen extends Activity implements View.OnClickListener {
 
