@@ -51,10 +51,7 @@ import android.widget.Toast;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.drawing.Sprite;
 import high.caliber.productions.demigod.drawing.Tile;
-
-/**
- * Created by Matt Matt on 8/25/13.
- */
+ 
 public class HeroHome extends Activity implements View.OnTouchListener {
 
 	private static int tileDimen;
@@ -444,8 +441,10 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 					opts.inDither = true;
 					opts.inPreferQualityOverSpeed = true;
 
+					
+					//buttons
 					Bitmap bLeftTemp = getBitmapFromAssets(
-							"drawables/views/left_key.png", opts);
+							"views/left_key.png", opts);
 					bLeft = Bitmap.createScaledBitmap(bLeftTemp, buttonDimen,
 							buttonDimen, true);
 					bLeftTemp.recycle();
@@ -455,7 +454,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 							buttonDimen, screenHeight - buttonDimen);
 
 					Bitmap bUpTemp = getBitmapFromAssets(
-							"drawables/views/up_key.png", opts);
+							"views/up_key.png", opts);
 					bUp = Bitmap.createScaledBitmap(bUpTemp, buttonDimen,
 							buttonDimen, true);
 					bUpTemp.recycle();
@@ -466,7 +465,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 							- (buttonDimen * 2));
 
 					Bitmap bRightTemp = getBitmapFromAssets(
-							"drawables/views/right_key.png", opts);
+							"views/right_key.png", opts);
 					bRight = Bitmap.createScaledBitmap(bRightTemp, buttonDimen,
 							buttonDimen, true);
 					bRightTemp.recycle();
@@ -477,7 +476,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 							- buttonDimen);
 
 					Bitmap bDownTemp = getBitmapFromAssets(
-							"drawables/views/down_key.png", opts);
+							"views/down_key.png", opts);
 					bDown = Bitmap.createScaledBitmap(bDownTemp, buttonDimen,
 							buttonDimen, true);
 					bDownTemp.recycle();
@@ -487,7 +486,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 							- buttonDimen, buttonDimen * 2, screenHeight);
 
 					Bitmap aButtonTemp = getBitmapFromAssets(
-							"drawables/views/a_button.png", opts);
+							"views/a_button.png", opts);
 					aButton = Bitmap.createScaledBitmap(aButtonTemp,
 							buttonDimen, buttonDimen, true);
 					aButtonTemp.recycle();
@@ -498,7 +497,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 									- buttonDimen, screenHeight - buttonDimen);
 
 					Bitmap bButtonTemp = getBitmapFromAssets(
-							"drawables/views/b_button.png", opts);
+							"views/b_button.png", opts);
 					bButton = Bitmap.createScaledBitmap(bButtonTemp,
 							buttonDimen, buttonDimen, true);
 					bButtonTemp.recycle();
@@ -509,10 +508,10 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 									- (buttonDimen * 3), screenHeight
 									- (buttonDimen));
 
-					// Load memory-efficient Bitmaps
-					// grass
+									
+					// objects
 					Bitmap tempWallHoriz = getBitmapFromAssets(
-							"drawables/objects/wall_wood_top_horizontal.png",
+							"drawables/x32/objects/wall_wood_top_horizontal.png",
 							opts);
 					wallHoriz = Bitmap.createScaledBitmap(tempWallHoriz,
 							tileDimen, tileDimen, true);
@@ -522,7 +521,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap tempWallVert = getBitmapFromAssets(
-							"drawables/objects/wall_wood_top_vertical.png",
+							"drawables/x32/objects/wall_wood_top_vertical.png",
 							opts);
 					wallVert = Bitmap.createScaledBitmap(tempWallVert,
 							tileDimen, tileDimen, true);
@@ -531,9 +530,8 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 					progressCounter = 15;
 					publishProgress(progressCounter);
 
-					// fence
 					Bitmap tempFloorHoriz = getBitmapFromAssets(
-							"drawables/objects/floor_wood_horizontal.png", opts);
+							"drawables/x32/objects/floor_wood_horizontal.png", opts);
 					floorHoriz = Bitmap.createScaledBitmap(tempFloorHoriz,
 							tileDimen, tileDimen, true);
 					tempFloorHoriz.recycle();
@@ -542,14 +540,14 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap tempDoor = getBitmapFromAssets(
-							"drawables/objects/door_wood.png", opts);
+							"drawables/x32/objects/door_wood.png", opts);
 					doorWood = Bitmap.createScaledBitmap(tempDoor, tileDimen,
 							tileDimen, true);
 					tempDoor.recycle();
 					tempDoor = null;
 
 					Bitmap tempChair = getBitmapFromAssets(
-							"drawables/objects/chair_blue_front.png", opts);
+							"drawables/x32/objects/chair_blue_front.png", opts);
 					chairBlue = Bitmap.createScaledBitmap(tempChair, tileDimen,
 							tileDimen, true);
 					tempChair.recycle();
@@ -558,14 +556,14 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap tempTable = getBitmapFromAssets(
-							"drawables/objects/table_wood.png", opts);
+							"drawables/x32/objects/table_wood.png", opts);
 					tableWood = Bitmap.createScaledBitmap(tempTable, tileDimen,
 							tileDimen, true);
 					tempTable.recycle();
 					tempTable = null;
 
 					Bitmap tempHeroFront = getBitmapFromAssets(
-							"drawables/characters/knight/knight_male_front_spritesheet.png",
+							"drawables/x32/characters/knight/knight_male_front_spritesheet.png",
 							opts);
 					spriteHeroFront = Bitmap.createScaledBitmap(tempHeroFront,
 							tileDimen * 4, tileDimen, true);
@@ -573,7 +571,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 					tempHeroFront = null;
 
 					Bitmap tempHeroRight = getBitmapFromAssets(
-							"drawables/characters/knight/knight_male_right1.png",
+							"drawables/x32/characters/knight/knight_male_right1.png",
 							opts);
 					spriteHeroRight = Bitmap.createScaledBitmap(tempHeroRight,
 							tileDimen, tileDimen, true);
@@ -588,14 +586,14 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap bedWoodTemp = getBitmapFromAssets(
-							"drawables/objects/bed_wood.png", opts);
+							"drawables/x32/objects/bed_wood.png", opts);
 					bedWood = Bitmap.createScaledBitmap(bedWoodTemp, tileDimen,
 							tileDimen * 2, true);
 					bedWoodTemp.recycle();
 					bedWoodTemp = null;
 
 					Bitmap shieldTemp = getBitmapFromAssets(
-							"drawables/objects/shield.png", opts);
+							"drawables/x32/objects/shield.png", opts);
 					shield = Bitmap.createScaledBitmap(shieldTemp, tileDimen,
 							tileDimen, true);
 					shieldTemp.recycle();

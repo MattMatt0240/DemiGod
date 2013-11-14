@@ -367,7 +367,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					opts.inPreferQualityOverSpeed = true;
 
 					Bitmap bLeftTemp = getBitmapFromAssets(
-							"drawables/views/left_key.png", opts);
+							"views/left_key.png", opts);
 					bLeft = Bitmap.createScaledBitmap(bLeftTemp, buttonDimen,
 							buttonDimen, true);
 					bLeftTemp.recycle();
@@ -377,7 +377,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 							buttonDimen, screenHeight - buttonDimen);
 
 					Bitmap bUpTemp = getBitmapFromAssets(
-							"drawables/views/up_key.png", opts);
+							"views/up_key.png", opts);
 					bUp = Bitmap.createScaledBitmap(bUpTemp, buttonDimen,
 							buttonDimen, true);
 					bUpTemp.recycle();
@@ -388,7 +388,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 							- (buttonDimen * 2));
 
 					Bitmap bRightTemp = getBitmapFromAssets(
-							"drawables/views/right_key.png", opts);
+							"views/right_key.png", opts);
 					bRight = Bitmap.createScaledBitmap(bRightTemp, buttonDimen,
 							buttonDimen, true);
 					bRightTemp.recycle();
@@ -399,7 +399,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 							- buttonDimen);
 
 					Bitmap bDownTemp = getBitmapFromAssets(
-							"drawables/views/down_key.png", opts);
+							"views/down_key.png", opts);
 					bDown = Bitmap.createScaledBitmap(bDownTemp, buttonDimen,
 							buttonDimen, true);
 					bDownTemp.recycle();
@@ -409,7 +409,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 							- buttonDimen, buttonDimen * 2, screenHeight);
 
 					Bitmap aButtonTemp = getBitmapFromAssets(
-							"drawables/views/a_button.png", opts);
+							"views/a_button.png", opts);
 					aButton = Bitmap.createScaledBitmap(aButtonTemp,
 							buttonDimen, buttonDimen, true);
 					aButtonTemp.recycle();
@@ -420,7 +420,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 									- buttonDimen, screenHeight - buttonDimen);
 
 					Bitmap bButtonTemp = getBitmapFromAssets(
-							"drawables/views/b_button.png", opts);
+							"views/b_button.png", opts);
 					bButton = Bitmap.createScaledBitmap(bButtonTemp,
 							buttonDimen, buttonDimen, true);
 					bButtonTemp.recycle();
@@ -435,14 +435,14 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					// grass
 
 					Bitmap tempGrass1 = getBitmapFromAssets(
-							"drawables/tiles/grass1.png", opts);
+							"drawables/x32/tiles/grass1.png", opts);
 					grass1 = Bitmap.createScaledBitmap(tempGrass1, tileDimen,
 							tileDimen, true);
 					tempGrass1.recycle();
 					tempGrass1 = null;
 
 					Bitmap tempWallVert = getBitmapFromAssets(
-							"drawables/objects/floor_wood_vertical.png", opts);
+							"drawables/x32/objects/floor_wood_vertical.png", opts);
 					wallVert = Bitmap.createScaledBitmap(tempWallVert,
 							tileDimen, tileDimen, true);
 					tempWallVert.recycle();
@@ -451,14 +451,14 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap tempDoorWood = getBitmapFromAssets(
-							"drawables/objects/door_wood.png", opts);
+							"drawables/x32/objects/door_wood.png", opts);
 					doorWood = Bitmap.createScaledBitmap(tempDoorWood,
 							tileDimen, tileDimen, true);
 					tempDoorWood.recycle();
 					tempDoorWood = null;
 
 					Bitmap tempHeroSheet = getBitmapFromAssets(
-							"drawables/characters/knight/knight_male_front_spritesheet.png",
+							"drawables/x32/characters/knight/knight_male_front_spritesheet.png",
 							opts);
 					spriteHero = Bitmap.createScaledBitmap(tempHeroSheet,
 							tileDimen * 4, tileDimen, true);
