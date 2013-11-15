@@ -1,0 +1,2 @@
+This is a project I made, mainly to learn the basics from. I want to add some of the classes from it into the current project, and improve
+it (old, novice code) I will merge some of this while I'm out of town this weekend.

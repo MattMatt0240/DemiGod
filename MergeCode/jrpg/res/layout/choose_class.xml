@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/TV_Choose_Class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:text="@string/Choose_Class"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/B_Warrior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_Choose_Class"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/wood_bttn_bg"
+            android:padding="5dp"
+            android:text="Warrior"/>
+
+        <TextView
+            android:id="@+id/TV_Choose_Warrior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/B_Warrior"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/Warrior_Brief"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/B_Mage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_Choose_Warrior"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/wood_bttn_bg"
+            android:padding="5dp"
+            android:text="Mage"/>
+
+        <TextView
+            android:id="@+id/TV_Choose_Mage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/B_Mage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/Mage_Brief"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/B_Mercenary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_Choose_Mage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/wood_bttn_bg"
+            android:padding="5dp"
+            android:text="Mercenary"/>
+
+        <TextView
+            android:id="@+id/TV_Choose_Mercenary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/B_Mercenary"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/Mercenary_Brief"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+
+</ScrollView>

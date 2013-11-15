@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DemiGod</string>
+    <string name="action_settings">Settings</string>
+    <string name="Prologue1">The mainland was once a peaceful, prosperous kingdom, thriving on its citizen\'s loyalty to
+        the king. There were no such existence of a beggar, nor a rebel. The general populus was content with life, as
+        they had all reason to be. Everything was balanced, in an asynchronous understanding with the very ground it was
+        built upon. Life was simply golden.</string>
+    <string name="Prologue2">In the peak of the kingdom\'s prosperity, terror struck at the heart of the mainland. The
+        king was assassinated. This was no ordinary death, nothing like anything the people had ever seen. Not even the
+        king\'s finest witch-doctors could conclude at what had happened. One thing was for certain, it was no accident.
+        The king was plastered against the halls of his sleeping quarters, yet no sign of evidence remained. No start,
+        no end, only complete chaos written with the king\'s remains. The culprit of this horrid crime is yet to be
+        discovered.</string>
+    <string name="Prologue3">Following the king\'s death, the kingdom was not able to re-establish it\'s order. It\'s
+        noble citizens were enraged by the actions against the former king, and they demanded an answer. On a path seeking
+        out revenge, they formed a militia under the name of their dead king. Others seen the death of the king as an
+        act of the gods. They didn\'t agree with the militia\'s cause, and went their own way to start a new life. They
+        established their own sense of order, remaining completely ignorant to the outside world. Those who were caught
+        in between dispensed amongst the mainland, slowly dwindling down to a primitive state of being. This effectively
+        segregated the kingdom, leaving it nothing more than grounds for war.</string>
+    <string name="Prologue4">Wake up!\n\n WAKE UP!!\n\n We must hurry, there isn\'t much time!</string>
+    <string name="Prologue5">Finally, you open your eyes. You sleep like a damned wild Bear in hibernation after its
+        last meal.\n\n Our village is about to be attacked by those bastard bandits again. Last time they destroyed
+        half the village, took most of our food and livestock, and a few of or woman. We were lucky they didn\'t finish
+        us off just then. This time, oh this time will be different, for this time, we have you.</string>
+    <string name="Prologue6">Ah, shit, I think I hear someone now. We must stop them while we have the upper hand,
+        can\'t hurt to freshen up on your skills either eh? First, I need to know your name...</string>
+    <string name="Choose_Class">Perfect, now how do you prefer to make your enemies fall? Do you bash their brains in,
+        or do you prefer magic over might? Or maybe you prefer to make use of technique rather than a direct approach.
+        Which is it?</string>
+    <string name="Warrior_Brief">"A cold, brutal, thoughtless war fiend. He has no fear, no mercy, and no remorse.
+        Rarely is he defeated in battle, as his skin is that of a dragon\'s, and his armor as its scales."</string>
+    <string name="Mage_Brief">"A witty, magical genius prepared for any kind of circumstance. She has highly trained
+        magical auras embedded in her soul. Some bright and beautiful, some, dark as night, and vicious as a hydra. She
+        is not to be under-estimated or taken lightly. You will regret it"</string>
+    <string name="Mercenary_Brief">"A rogue-like wanderer. Highly agile, highly versatile. He has no emotions, and does
+        not consider consequences. Deadly when met in battle, even worse when his opponent doesn\'t know he\'s there."</string>
+    <string name="Status"><b><u>Status</u></b></string>
+
+</resources>

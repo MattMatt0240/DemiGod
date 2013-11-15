@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TestLinearCanvasHolder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rlOverlayControlsTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <com.example.rpg.MapLoader
+            android:id="@+id/Test1Surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/bCancel"
+            android:layout_toRightOf="@+id/B_Right"
+            class="com.example.rpg.MapLoader"
+            android:background="@color/forest_green" />
+
+        <Button
+            android:id="@+id/B_Left"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/B_Down"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/left_key" />
+
+        <Button
+            android:id="@+id/B_Up"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/B_Right"
+            android:layout_toLeftOf="@+id/B_Right"
+            android:background="@drawable/up_key" />
+
+        <Button
+            android:id="@+id/B_Down"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/B_Left"
+            android:background="@drawable/down_key" />
+
+        <Button
+            android:id="@+id/B_Right"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/B_Down"
+            android:layout_toRightOf="@+id/B_Down"
+            android:background="@drawable/right_key" />
+
+        <View
+            android:id="@+id/CenterKey"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/B_Down"
+            android:layout_toRightOf="@+id/B_Left"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/bSelect"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBaseline="@+id/B_Right"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/wood_bttn_bg"
+            android:text="A" />
+
+        <Button
+            android:id="@+id/bCancel"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBaseline="@+id/bSelect"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@+id/bSelect"
+            android:background="@drawable/wood_bttn_bg"
+            android:text="B" />
+    </RelativeLayout>
+
+</LinearLayout>

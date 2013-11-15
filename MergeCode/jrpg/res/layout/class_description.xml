@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:text="Header"
+            android:id="@+id/tvConfirmClass_CharacterHeader"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_below="@+id/tvConfirmClass_CharacterHeader"
+            android:text="Class Description"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tvConfirmClass_CharacterDescription"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:background="@drawable/wood_bttn_bg"
+            android:text="Cancel"
+            android:id="@+id/bCancel"
+            android:layout_alignParentBottom="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/wood_bttn_bg"
+            android:text="Confirm"
+            android:textColor="@color/black"
+            android:id="@+id/bConfirm"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</ScrollView>

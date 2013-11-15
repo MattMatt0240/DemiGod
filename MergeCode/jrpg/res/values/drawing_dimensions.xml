@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="map_width">1600dp</dimen>
+    <dimen name="map_height">1280dp</dimen>
+    <dimen name="hero_width">32dp</dimen>
+    <dimen name="hero_height">32dp</dimen>
+    <dimen name="button_size">35dp</dimen>
+    <dimen name="shop_size">96dp</dimen>
+
+</resources>

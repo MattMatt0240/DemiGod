@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/svPrologue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fillViewport="true"
+    android:keepScreenOn="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp" >
+
+        <com.example.rpg.tools.TypeWriter
+            android:id="@+id/TV_prologue1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/Prologue1"
+            android:textColor="@color/white" />
+
+        <com.example.rpg.tools.TypeWriter
+            android:id="@+id/TV_prologue2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_prologue1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/Prologue2"
+            android:textColor="@color/white" />
+
+        <com.example.rpg.tools.TypeWriter
+            android:id="@+id/TV_prologue3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_prologue2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="55dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/Prologue3"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bPrologueContinue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_prologue3"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/wood_bttn_bg"
+            android:padding="10dp"
+            android:text="Continue" />
+    </RelativeLayout>
+
+</ScrollView>

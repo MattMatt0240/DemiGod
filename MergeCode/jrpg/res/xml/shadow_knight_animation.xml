@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animations>
+
+    <animation
+        name="front"
+        canLoop="true" >
+        <framerect
+            bottom="16"
+            delayNextFrame="25"
+            left="0"
+            right="16"
+            top="0" />
+        <framerect
+            bottom="16"
+            delayNextFrame="25"
+            left="16"
+            right="32"
+            top="0" />
+        <framerect
+            bottom="16"
+            delayNextFrame="25"
+            left="32"
+            right="48"
+            top="0" />
+        <framerect
+            bottom="16"
+            delayNextFrame="25"
+            left="48"
+            right="64"
+            top="0" />
+    </animation>
+
+</animations>
