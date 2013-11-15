@@ -6,12 +6,14 @@ Android RPG game
 
  As an all-time gamer, I would like to create a retro-style, 
  turn-based RPG game. This project is being developed in java, using
- eclipse IDE, and AIDE android application,support for gradle builds is addex so now it can be built on any platform. 
- Any help, contributions,
- ideas, and/or concerns are welcome. This is a learning project for me,
- and am very excited to see where this goes.
+ eclipse IDE, Android Studio, and AIDE android application. Support for 
+ gradle builds has been added, so now it can be built on any platform. 
+ Any help, contributions, ideas, and/or concerns are welcome. 
+ This is a learning project for me, and I'm very excited to see where this goes.
  
- Images are currently 32x32 px, but am considering a higher resolution (64x64). 
+ Images are currently 32x32 px, but am considering a higher resolution (64x64).
+ 
+ This project is licensed under GNU GPL v3
  
 
 Storyline:
