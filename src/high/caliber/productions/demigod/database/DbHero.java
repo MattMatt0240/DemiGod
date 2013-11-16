@@ -104,6 +104,102 @@ public class DbHero extends SQLiteOpenHelper {
 		this.context = context;
 	}
 
+	public static String getCOL_DEXTERITY ()
+	{
+		return COL_DEXTERITY;
+	}
+
+	public static String getCOL_AGILITY ()
+	{
+		return COL_AGILITY;
+	}
+
+	public static String getCOL_MG_DEFENSE ()
+	{
+		return COL_MG_DEFENSE;
+	}
+
+	public static String getCOL_PH_DEFENSE ()
+	{
+		return COL_PH_DEFENSE;
+	}
+
+	public static String getCOL_MAGIC ()
+	{
+		return COL_MAGIC;
+	}
+
+	public static String getCOL_ATTACK ()
+	{
+		return COL_ATTACK;
+	}
+
+	public static String getCOL_MAX_MANA ()
+	{
+		return COL_MAX_MANA;
+	}
+
+	public static String getCOL_MANA ()
+	{
+		return COL_MANA;
+	}
+
+	public static String getCOL_MAX_ENERGY ()
+	{
+		return COL_MAX_ENERGY;
+	}
+
+	public static String getCOL_ENERGY ()
+	{
+		return COL_ENERGY;
+	}
+
+	public static String getCOL_MAX_HEALTH ()
+	{
+		return COL_MAX_HEALTH;
+	}
+
+	public static String getCOL_HEALTH ()
+	{
+		return COL_HEALTH;
+	}
+
+	public static String getCOL_MAX_EXP ()
+	{
+		return COL_MAX_EXP;
+	}
+
+	public static String getCOL_EXP ()
+	{
+		return COL_EXP;
+	}
+
+	public static String getCOL_LVL ()
+	{
+		return COL_LVL;
+	}
+
+	public static String getCOL_NAME ()
+	{
+		return COL_NAME;
+	}
+
+	public static String getCOL_CLASS ()
+	{
+		return COL_CLASS;
+	}
+
+	public static String getCOL_ID ()
+	{
+		return COL_ID;
+	}
+
+	
+
+	
+
+	
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(STATS_CREATE);
@@ -195,5 +291,25 @@ public class DbHero extends SQLiteOpenHelper {
 		Log.d("DB created?", String.valueOf(isCreated));
 		return isCreated;
 
+	}
+	
+	public static String getPath()
+	{
+		return DB_PATH;
+	}
+	
+	public static String getDB_NAME ()
+	{
+		return DB_NAME;
+	}
+	
+	public static String getTABLE_STATS ()
+	{
+		return TABLE_STATS;
+	}
+	
+	public static String getTABLE_INVENTORY ()
+	{
+		return TABLE_INVENTORY;
 	}
 }
