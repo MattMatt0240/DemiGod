@@ -3,5 +3,6 @@
 
     <string name="app_name">DemiGod</string>
     <string name="action_settings">Settings</string>
+    <string name="status">Status</string>
 
 </resources>

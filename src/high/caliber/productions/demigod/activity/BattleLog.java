@@ -1,5 +1,6 @@
-package com.example.rpg;
+package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,27 +35,27 @@ public class BattleLog extends Activity implements OnClickListener {
 		damageRecieved = prefs.getInt("DamageRecieved", 0);
 		lifeTimeDamageRecieved = prefs.getInt("LifeTimeDamageRecieved", 0);
 
-		tvDamageDealt = (TextView) findViewById(R.id.TV_BattleLog_DamageDealt);
+		tvDamageDealt = (TextView) findViewById(R.id.tvBattleLog_DamageDealt);
 		tvDamageDealt.setText(String.valueOf(damageDealt));
 
-		tvLifeTimeDamageDealt = (TextView) findViewById(R.id.TV_BattleLog_LifeTimeDamageDealt);
+		tvLifeTimeDamageDealt = (TextView) findViewById(R.id.tvBattleLog_LifeTimeDamageDealt);
 		tvLifeTimeDamageDealt.setText(String.valueOf(lifeTimeDamageDealt));
 
-		tvDamageRecieved = (TextView) findViewById(R.id.TV_BattleLog_DamageRecieved);
+		tvDamageRecieved = (TextView) findViewById(R.id.tvBattleLog_DamageRecieved);
 		tvDamageRecieved.setText(String.valueOf(damageRecieved));
 
-		tvLifeTimeDamageRecieved = (TextView) findViewById(R.id.TV_BattleLog_LifeTimeDamageRecieved);
+		tvLifeTimeDamageRecieved = (TextView) findViewById(R.id.tvBattleLog_LifeTimeDamageRecieved);
 		tvLifeTimeDamageRecieved
 				.setText(String.valueOf(lifeTimeDamageRecieved));
 
-		bContinue = (Button) findViewById(R.id.B_BattleLog_Continue);
+		bContinue = (Button) findViewById(R.id.bBattleLog_Continue);
 		bContinue.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 
-		if (v.getId() == R.id.B_BattleLog_Continue) {
+		if (v.getId() == R.id.bBattleLog_Continue) {
 
 			Intent intent = new Intent("com.example.rpg.WORLD");
 			startActivity(intent);

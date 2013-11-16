@@ -9,10 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp" >
-        <ScrollView
+
+        <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/B_BattleLog_Continue"
+            android:layout_above="@+id/bBattleLog_Continue"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true" >
 
@@ -54,7 +55,7 @@
                         android:textColor="@color/white" />
 
                     <TextView
-                        android:id="@+id/TV_BattleLog_LifeTimeDamageDealt"
+                        android:id="@+id/tvBattleLog_LifeTimeDamageDealt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="2"
@@ -74,7 +75,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/TV_BattleLog_DamageDealt"
+                        android:id="@+id/tvBattleLog_DamageDealt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="2"
@@ -94,7 +95,7 @@
                         android:textColor="@color/white" />
 
                     <TextView
-                        android:id="@+id/TV_BattleLog_LifeTimeDamageRecieved"
+                        android:id="@+id/tvBattleLog_LifeTimeDamageRecieved"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="2"
@@ -115,7 +116,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/TV_BattleLog_DamageRecieved"
+                        android:id="@+id/tvBattleLog_DamageRecieved"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="2"
@@ -129,7 +130,7 @@
         </ScrollView>
 
         <Button
-            android:id="@+id/B_BattleLog_Continue"
+            android:id="@+id/bBattleLog_Continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

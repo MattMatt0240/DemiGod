@@ -30,13 +30,10 @@ public class LevelUpWorker {
 	static final String colMagic = "Magic";
 	static final String colPhDefense = "PhDefense";
 	static final String colMgDefense = "MgDefense";
-	static final String colSpeed = "Speed";
 	static final String colAgility = "Agility";
 	static final String colDexterity = "Dexterity";
 
 	String Hero_Name, Hero_Class;
-	
-	DbHero heroDbHelper;
 
 	SQLiteDatabase db;
 	Cursor c;
@@ -60,11 +57,11 @@ public class LevelUpWorker {
 	// Warrior Level-Up Algorithm
 	public void Warrior() {
 
-		db = SQLiteDatabase.openDatabase(heroDbHelper.getPath(), null,
+		db = SQLiteDatabase.openDatabase(DbHero.getPath(), null,
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(
-				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Speed, Agility, Dexterity FROM Stats",
+				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Agility, Dexterity FROM Stats",
 				null);
 
 		if (c != null) {
@@ -88,7 +85,6 @@ public class LevelUpWorker {
 					Hero_Magic = c.getInt(c.getColumnIndex(colMagic));
 					Hero_PhDefense = c.getInt(c.getColumnIndex(colPhDefense));
 					Hero_MgDefense = c.getInt(c.getColumnIndex(colMgDefense));
-					Hero_Speed = c.getInt(c.getColumnIndex(colSpeed));
 					Hero_Agility = c.getInt(c.getColumnIndex(colAgility));
 					Hero_Dexterity = c.getInt(c.getColumnIndex(colDexterity));
 
@@ -114,7 +110,6 @@ public class LevelUpWorker {
 		Hero_Magic = (Hero_Magic + Hero_Level);
 		Hero_PhDefense = (Hero_PhDefense + (Hero_Level + 2));
 		Hero_MgDefense = (Hero_MgDefense + Hero_Level);
-		Hero_Speed = (Hero_Speed + (Hero_Level - 1));
 		Hero_Agility = (Hero_Agility + (Hero_Level - 1));
 		Hero_Dexterity = (Hero_Dexterity + (Hero_Level - 1));
 
@@ -132,7 +127,6 @@ public class LevelUpWorker {
 		cv.put(colMagic, Hero_Magic);
 		cv.put(colPhDefense, Hero_PhDefense);
 		cv.put(colMgDefense, Hero_MgDefense);
-		cv.put(colSpeed, Hero_Speed);
 		cv.put(colAgility, Hero_Agility);
 		cv.put(colDexterity, Hero_Dexterity);
 
@@ -144,7 +138,7 @@ public class LevelUpWorker {
 	// Mage Level-Up Algorithm
 	public void Mage() {
 
-		db = SQLiteDatabase.openDatabase(heroDbHelper.getPath(), null,
+		db = SQLiteDatabase.openDatabase(DbHero.getPath(), null,
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(
@@ -172,7 +166,6 @@ public class LevelUpWorker {
 					Hero_Magic = c.getInt(c.getColumnIndex(colMagic));
 					Hero_PhDefense = c.getInt(c.getColumnIndex(colPhDefense));
 					Hero_MgDefense = c.getInt(c.getColumnIndex(colMgDefense));
-					Hero_Speed = c.getInt(c.getColumnIndex(colSpeed));
 					Hero_Agility = c.getInt(c.getColumnIndex(colAgility));
 					Hero_Dexterity = c.getInt(c.getColumnIndex(colDexterity));
 
@@ -198,7 +191,6 @@ public class LevelUpWorker {
 		Hero_Magic = (Hero_Magic + (Hero_Level * 2));
 		Hero_PhDefense = (Hero_PhDefense + (Hero_Level - 1));
 		Hero_MgDefense = (Hero_MgDefense + (Hero_Level + 1));
-		Hero_Speed = (Hero_Speed + Hero_Level);
 		Hero_Agility = (Hero_Agility + Hero_Level);
 		Hero_Dexterity = (Hero_Dexterity + Hero_Level);
 
@@ -216,7 +208,6 @@ public class LevelUpWorker {
 		cv.put(colMagic, Hero_Magic);
 		cv.put(colPhDefense, Hero_PhDefense);
 		cv.put(colMgDefense, Hero_MgDefense);
-		cv.put(colSpeed, Hero_Speed);
 		cv.put(colAgility, Hero_Agility);
 		cv.put(colDexterity, Hero_Dexterity);
 
@@ -227,7 +218,7 @@ public class LevelUpWorker {
 	// Mercenary Level-Up Algorithm
 	public void Mercenary() {
 
-		db = SQLiteDatabase.openDatabase(heroDbHelper.getPath(), null,
+		db = SQLiteDatabase.openDatabase(DbHero.getPath(), null,
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(
@@ -255,7 +246,6 @@ public class LevelUpWorker {
 					Hero_Magic = c.getInt(c.getColumnIndex(colMagic));
 					Hero_PhDefense = c.getInt(c.getColumnIndex(colPhDefense));
 					Hero_MgDefense = c.getInt(c.getColumnIndex(colMgDefense));
-					Hero_Speed = c.getInt(c.getColumnIndex(colSpeed));
 					Hero_Agility = c.getInt(c.getColumnIndex(colAgility));
 					Hero_Dexterity = c.getInt(c.getColumnIndex(colDexterity));
 
@@ -281,7 +271,6 @@ public class LevelUpWorker {
 		Hero_Magic = (Hero_Magic + (Hero_Level + 1));
 		Hero_PhDefense = (Hero_PhDefense + (Hero_Level + 1));
 		Hero_MgDefense = (Hero_MgDefense + (Hero_Level + 1));
-		Hero_Speed = (Hero_Speed + (Hero_Level + 1));
 		Hero_Agility = (Hero_Agility + (Hero_Level + 1));
 		Hero_Dexterity = (Hero_Dexterity + (Hero_Level + 1));
 
@@ -299,7 +288,6 @@ public class LevelUpWorker {
 		cv.put(colMagic, Hero_Magic);
 		cv.put(colPhDefense, Hero_PhDefense);
 		cv.put(colMgDefense, Hero_MgDefense);
-		cv.put(colSpeed, Hero_Speed);
 		cv.put(colAgility, Hero_Agility);
 		cv.put(colDexterity, Hero_Dexterity);
 

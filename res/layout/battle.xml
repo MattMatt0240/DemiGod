@@ -5,28 +5,28 @@
     android:background="@color/black" >
 
     <TextView
-        android:id="@+id/TV_Battle_Hero_Name"
+        android:id="@+id/tvBattle_Hero_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/TV_Battle_Hero_Level"
+        android:layout_above="@+id/tvBattle_Hero_Level"
         android:layout_alignParentLeft="true"
         android:text="Name"
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/TV_Battle_Hero_Level"
+        android:id="@+id/tvBattle_Hero_Level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/TV_Battle_Hero_Health"
+        android:layout_above="@+id/tvBattle_Hero_Health"
         android:layout_alignParentLeft="true"
         android:text="Level: "
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/TV_Battle_Hero_Health"
+        android:id="@+id/tvBattle_Hero_Health"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ProgBar_HeroHealth"
+        android:layout_above="@+id/progBar_HeroHealth"
         android:layout_alignParentLeft="true"
         android:saveEnabled="true"
         android:text="Health: "
@@ -34,21 +34,21 @@
         android:textColor="@color/white" />
 
     <ProgressBar
-        android:id="@+id/ProgBar_HeroHealth"
+        android:id="@+id/progBar_HeroHealth"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="100dp"
         android:layout_height="5dp"
-        android:layout_above="@+id/TV_Battle_Hero_Energy"
+        android:layout_above="@+id/tvBattle_Hero_Energy"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         android:layoutDirection="ltr"
         android:progressDrawable="@drawable/health_progbar" />
 
     <TextView
-        android:id="@+id/TV_Battle_Hero_Energy"
+        android:id="@+id/tvBattle_Hero_Energy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ProgBar_HeroEnergy"
+        android:layout_above="@+id/progBar_HeroEnergy"
         android:layout_alignParentLeft="true"
         android:saveEnabled="true"
         android:text="Energy: "
@@ -56,21 +56,21 @@
         android:textColor="@color/white" />
 
     <ProgressBar
-        android:id="@+id/ProgBar_HeroEnergy"
+        android:id="@+id/progBar_HeroEnergy"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="100dp"
         android:layout_height="5dp"
-        android:layout_above="@+id/TV_Battle_Hero_EXP"
+        android:layout_above="@+id/tvBattle_Hero_EXP"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         android:layoutDirection="ltr"
         android:progressDrawable="@drawable/energy_progbar" />
 
     <TextView
-        android:id="@+id/TV_Battle_Hero_EXP"
+        android:id="@+id/tvBattle_Hero_EXP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ProgBar_HeroExp"
+        android:layout_above="@+id/progBar_HeroExp"
         android:layout_alignParentLeft="true"
         android:saveEnabled="true"
         android:text="EXP: "
@@ -78,7 +78,7 @@
         android:textColor="@color/white" />
 
     <ProgressBar
-        android:id="@+id/ProgBar_HeroExp"
+        android:id="@+id/progBar_HeroExp"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="100dp"
         android:layout_height="5dp"
@@ -90,7 +90,7 @@
         android:progressDrawable="@drawable/exp_progbar" />
 
     <Button
-        android:id="@+id/B_Battle_Attack"
+        android:id="@+id/bBattle_Attack"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,11 +101,11 @@
         android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/B_Battle_Defend"
+        android:id="@+id/bBattle_Defend"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/B_Battle_Attack"
+        android:layout_above="@+id/bBattle_Attack"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
         android:background="@color/white"
@@ -113,7 +113,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/TV_Battle_Enemy_Name"
+        android:id="@+id/tvBattle_Enemy_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -122,56 +122,56 @@
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/TV_Battle_Enemy_Level"
+        android:id="@+id/tvBattle_Enemy_Level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TV_Battle_Enemy_Name"
+        android:layout_below="@+id/tvBattle_Enemy_Name"
         android:text="Level: "
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/TV_Battle_Enemy_Health"
+        android:id="@+id/tvBattle_Enemy_Health"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TV_Battle_Enemy_Level"
+        android:layout_below="@+id/tvBattle_Enemy_Level"
         android:text="Health: "
         android:textColor="@color/white" />
 
     <ProgressBar
-        android:id="@+id/ProgBar_EnemyHealth"
+        android:id="@+id/progBar_EnemyHealth"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="100dp"
         android:layout_height="5dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TV_Battle_Enemy_Health"
+        android:layout_below="@+id/tvBattle_Enemy_Health"
         android:layout_marginLeft="5dp"
         android:layoutDirection="ltr"
         android:progressDrawable="@drawable/health_progbar" />
 
     <TextView
-        android:id="@+id/TV_Battle_Enemy_Energy"
+        android:id="@+id/tvBattle_Enemy_Energy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ProgBar_EnemyHealth"
+        android:layout_below="@+id/progBar_EnemyHealth"
         android:text="Energy: "
         android:textColor="@color/white" />
 
     <ProgressBar
-        android:id="@+id/ProgBar_EnemyEnergy"
+        android:id="@+id/progBar_EnemyEnergy"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="100dp"
         android:layout_height="5dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TV_Battle_Enemy_Energy"
+        android:layout_below="@+id/tvBattle_Enemy_Energy"
         android:layout_marginLeft="5dp"
         android:layoutDirection="ltr"
         android:progressDrawable="@drawable/energy_progbar" />
 
     <ImageView
-        android:id="@+id/IV_Enemy"
+        android:id="@+id/ivEnemy"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentTop="true"

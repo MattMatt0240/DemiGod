@@ -10,31 +10,31 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/TV_Status_TitleBanner"
+            android:id="@+id/tvStatus_TitleBanner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:background="@color/dark_grey"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:text="@string/Status"
+            android:text="@string/status"
             android:textColor="@color/white" />
 
         <ImageView
-            android:id="@+id/IV_Status"
+            android:id="@+id/ivStatus"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/TV_Status_TitleBanner"
+            android:layout_below="@+id/tvStatus_TitleBanner"
             android:layout_margin="15dp"
             android:src="@drawable/shadow_knight_front1" />
 
         <TableLayout
-            android:id="@+id/Row_Status_Class"
+            android:id="@+id/tlStatus_Class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/IV_Status"
+            android:layout_below="@+id/ivStatus"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -49,7 +49,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Class"
+                    android:id="@+id/tvStatus_Class"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -59,11 +59,11 @@
         </TableLayout>
 
         <TableLayout
-            android:id="@+id/Row_Status_Name"
+            android:id="@+id/tlStatus_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Row_Status_Class"
+            android:layout_below="@+id/tlStatus_Class"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -78,7 +78,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Name"
+                    android:id="@+id/tvStatus_Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -88,11 +88,11 @@
         </TableLayout>
 
         <TableLayout
-            android:id="@+id/Row_Status_Level"
+            android:id="@+id/tlStatus_Level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Row_Status_Name"
+            android:layout_below="@+id/tlStatus_Name"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -107,7 +107,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Level"
+                    android:id="@+id/tvStatus_Level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -117,11 +117,11 @@
         </TableLayout>
 
         <TableLayout
-            android:id="@+id/Row_Status_Health"
+            android:id="@+id/tlStatus_Health"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Row_Status_Level"
+            android:layout_below="@+id/tlStatus_Level"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -136,7 +136,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Health"
+                    android:id="@+id/tvStatus_Health"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -147,22 +147,22 @@
         </TableLayout>
 
         <ProgressBar
-            android:id="@+id/ProgBar__Status_Health"
+            android:id="@+id/progBar_Status_Health"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="100dp"
             android:layout_height="5dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Row_Status_Health"
+            android:layout_below="@+id/tlStatus_Health"
             android:layout_marginLeft="5dp"
             android:layoutDirection="ltr"
             android:progressDrawable="@drawable/health_progbar" />
 
         <TableLayout
-            android:id="@+id/Row_Status_Energy"
+            android:id="@+id/tlStatus_Energy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/ProgBar__Status_Health"
+            android:layout_below="@+id/progBar_Status_Health"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -177,7 +177,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Energy"
+                    android:id="@+id/tvStatus_Energy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -188,22 +188,22 @@
         </TableLayout>
 
         <ProgressBar
-            android:id="@+id/ProgBar__Status_Energy"
+            android:id="@+id/progBar_Status_Energy"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="100dp"
             android:layout_height="5dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Row_Status_Energy"
+            android:layout_below="@+id/tlStatus_Energy"
             android:layout_marginLeft="5dp"
             android:layoutDirection="ltr"
             android:progressDrawable="@drawable/energy_progbar" />
 
         <TableLayout
-            android:id="@+id/Row_Status_Mana"
+            android:id="@+id/tlStatus_Mana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/ProgBar__Status_Energy"
+            android:layout_below="@+id/progBar_Status_Energy"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -218,7 +218,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Mana"
+                    android:id="@+id/tvStatus_Mana"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -229,22 +229,22 @@
         </TableLayout>
 
         <ProgressBar
-            android:id="@+id/ProgBar__Status_Mana"
+            android:id="@+id/progBar_Status_Mana"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="100dp"
             android:layout_height="5dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Row_Status_Mana"
+            android:layout_below="@+id/tlStatus_Mana"
             android:layout_marginLeft="5dp"
             android:layoutDirection="ltr"
             android:progressDrawable="@drawable/mana_progbar" />
 
         <TableLayout
-            android:id="@+id/Row_Status_Exp"
+            android:id="@+id/tlStatus_Exp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/ProgBar__Status_Mana"
+            android:layout_below="@+id/progBar_Status_Mana"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -259,7 +259,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Exp"
+                    android:id="@+id/tvStatus_Exp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -270,12 +270,12 @@
         </TableLayout>
 
         <ProgressBar
-            android:id="@+id/ProgBar__Status_Exp"
+            android:id="@+id/progBar_Status_Exp"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="100dp"
             android:layout_height="5dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Row_Status_Exp"
+            android:layout_below="@+id/tlStatus_Exp"
             android:layout_marginLeft="5dp"
             android:layoutDirection="ltr"
             android:progressDrawable="@drawable/exp_progbar" />
@@ -284,7 +284,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/TV_Status_TitleBanner"
+            android:layout_below="@+id/tvStatus_TitleBanner"
             android:padding="10dp" >
 
             <TableRow
@@ -300,7 +300,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Attack"
+                    android:id="@+id/tvStatus_Attack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -321,7 +321,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Magic"
+                    android:id="@+id/tvStatus_Magic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -342,7 +342,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_PhDefense"
+                    android:id="@+id/tvStatus_PhDefense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -364,28 +364,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_MgDefense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:text="0"
-                    android:textColor="@color/white" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:text="Speed: "
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/TV_Status_Speed"
+                    android:id="@+id/tvStatus_MgDefense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -406,7 +385,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Agility"
+                    android:id="@+id/tvStatus_Agility"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
@@ -427,7 +406,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/TV_Status_Dexterity"
+                    android:id="@+id/tvStatus_Dexterity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"

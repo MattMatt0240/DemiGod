@@ -1,5 +1,8 @@
 package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.database.DbHero;
+import high.caliber.productions.demigod.utils.LevelUpWorker;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -14,10 +17,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import high.caliber.productions.demigod.database.*;
 
-public class Battle_Activity extends Activity implements OnClickListener
-{
+public class Battle_Activity extends Activity implements OnClickListener {
 
 	static final String dbPath = "data/data/com.example.rpg/databases/Hero.db";
 	static final String dbName = "Hero.db";
@@ -41,7 +42,6 @@ public class Battle_Activity extends Activity implements OnClickListener
 	static final String colMagic = "Magic";
 	static final String colPhDefense = "PhDefense";
 	static final String colMgDefense = "MgDefense";
-	static final String colSpeed = "Speed";
 	static final String colAgility = "Agility";
 	static final String colDexterity = "Dexterity";
 
@@ -65,7 +65,6 @@ public class Battle_Activity extends Activity implements OnClickListener
 	int heroMagic;
 	int heroPhDefense;
 	int heroMgDefense;
-	int heroSpeed;
 	int heroAgility;
 	int heroDexterity;
 
@@ -74,12 +73,12 @@ public class Battle_Activity extends Activity implements OnClickListener
 	LevelUpWorker lvlUp;
 
 	TextView hero_name, hero_level, hero_health, hero_energy, hero_exp,
-	enemy_name, enemy_level, enemy_health, enemy_energy;
+			enemy_name, enemy_level, enemy_health, enemy_energy;
 
 	Button bAttack, bDefend;
 
 	ProgressBar progBarHealth, progBarEnergy, progBarEXP, progBarEnemyHealth,
-	progBarEnemyEnergy;
+			progBarEnemyEnergy;
 
 	int enemyLevel = 1;
 	int enemyHealth = 10;
@@ -93,18 +92,16 @@ public class Battle_Activity extends Activity implements OnClickListener
 	int enemyAgility = 6;
 	int enemyDexterity = 3;
 	int enemyExpValue = 101;
-
 	int enemyMaxHealth = 10;
 	int enemyMaxEnergy = 4;
 
 	int damageDealt, lifeTimeDamageDealt, damageRecieved,
-	lifeTimeDamageRecieved;
+			lifeTimeDamageRecieved;
 
 	boolean PlayerTurn;
 
 	@Override
-	protected void onCreate (Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.battle);
 
@@ -112,15 +109,13 @@ public class Battle_Activity extends Activity implements OnClickListener
 		db = heroDbHelper.getWritableDatabase();
 
 		c = db.rawQuery(
-			"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Speed, Agility, Dexterity FROM Stats",
-			null);
+				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Agility, Dexterity FROM Stats",
+				null);
 
-		if (c != null)
-		{
+		if (c != null) {
 
 			// if 1st Row
-			if (c.moveToFirst())
-			{
+			if (c.moveToFirst()) {
 				do {
 					// Retrieve values from columns
 					heroClass = c.getString(c.getColumnIndex(colClass));
@@ -138,7 +133,6 @@ public class Battle_Activity extends Activity implements OnClickListener
 					heroMagic = c.getInt(c.getColumnIndex(colMagic));
 					heroPhDefense = c.getInt(c.getColumnIndex(colPhDefense));
 					heroMgDefense = c.getInt(c.getColumnIndex(colMgDefense));
-					heroSpeed = c.getInt(c.getColumnIndex(colSpeed));
 					heroAgility = c.getInt(c.getColumnIndex(colAgility));
 					heroDexterity = c.getInt(c.getColumnIndex(colDexterity));
 
@@ -156,88 +150,83 @@ public class Battle_Activity extends Activity implements OnClickListener
 		lifeTimeDamageDealt = battleLogPrefs.getInt("LifeTimeDamageDealt", 0);
 		damageRecieved = battleLogPrefs.getInt("DamageReceived", 0);
 		lifeTimeDamageRecieved = battleLogPrefs.getInt(
-			"LifeTimeDamageRecieved", 0);
+				"LifeTimeDamageRecieved", 0);
 
 		// Initialize variables (TextViews, Buttons, & ProgressBars)
-		hero_name = (TextView) findViewById(R.id.TV_Battle_Hero_Name);
+		hero_name = (TextView) findViewById(R.id.tvBattle_Hero_Name);
 		hero_name.setText(heroName);
 		hero_name.bringToFront();
 
-		hero_level = (TextView) findViewById(R.id.TV_Battle_Hero_Level);
+		hero_level = (TextView) findViewById(R.id.tvBattle_Hero_Level);
 		hero_level.setText("LVL: " + heroLevel);
 		hero_name.bringToFront();
 
-		hero_health = (TextView) findViewById(R.id.TV_Battle_Hero_Health);
+		hero_health = (TextView) findViewById(R.id.tvBattle_Hero_Health);
 		hero_health.setText("Health: " + heroHealth + " / " + heroMaxHealth);
 
-		progBarHealth = (ProgressBar) findViewById(R.id.ProgBar_HeroHealth);
+		progBarHealth = (ProgressBar) findViewById(R.id.progBar_HeroHealth);
 		progBarHealth.setProgress(heroHealth);
 		progBarHealth.setMax(heroMaxHealth);
 
-		hero_energy = (TextView) findViewById(R.id.TV_Battle_Hero_Energy);
+		hero_energy = (TextView) findViewById(R.id.tvBattle_Hero_Energy);
 		hero_energy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
 
-		progBarEnergy = (ProgressBar) findViewById(R.id.ProgBar_HeroEnergy);
+		progBarEnergy = (ProgressBar) findViewById(R.id.progBar_HeroEnergy);
 		progBarEnergy.setProgress(heroEnergy);
 		progBarEnergy.setMax(heroEnergy);
 
-		hero_exp = (TextView) findViewById(R.id.TV_Battle_Hero_EXP);
+		hero_exp = (TextView) findViewById(R.id.tvBattle_Hero_EXP);
 		hero_exp.setText("EXP: " + heroExp + " / " + heroMaxExp);
 
-		progBarEXP = (ProgressBar) findViewById(R.id.ProgBar_HeroExp);
+		progBarEXP = (ProgressBar) findViewById(R.id.progBar_HeroExp);
 		progBarEXP.setProgress(heroExp);
 		progBarEXP.setMax(heroMaxExp);
 
-		enemy_name = (TextView) findViewById(R.id.TV_Battle_Enemy_Name);
+		enemy_name = (TextView) findViewById(R.id.tvBattle_Enemy_Name);
 		enemy_name.setText("Punk");
 
-		enemy_level = (TextView) findViewById(R.id.TV_Battle_Enemy_Level);
+		enemy_level = (TextView) findViewById(R.id.tvBattle_Enemy_Level);
 		enemy_level.setText(String.valueOf("LVL: " + enemyLevel));
 
-		enemy_health = (TextView) findViewById(R.id.TV_Battle_Enemy_Health);
+		enemy_health = (TextView) findViewById(R.id.tvBattle_Enemy_Health);
 		enemy_health.setText("Health: " + String.valueOf(enemyHealth) + " / "
-							 + enemyMaxHealth);
+				+ enemyMaxHealth);
 
-		progBarEnemyHealth = (ProgressBar) findViewById(R.id.ProgBar_EnemyHealth);
+		progBarEnemyHealth = (ProgressBar) findViewById(R.id.progBar_EnemyHealth);
 		progBarEnemyHealth.setProgress(enemyHealth);
 		progBarEnemyHealth.setMax(enemyMaxHealth);
 
-		enemy_energy = (TextView) findViewById(R.id.TV_Battle_Enemy_Energy);
+		enemy_energy = (TextView) findViewById(R.id.tvBattle_Enemy_Energy);
 		enemy_energy.setText("Energy: " + String.valueOf(enemyEnergy) + " / "
-							 + enemyMaxEnergy);
+				+ enemyMaxEnergy);
 
-		progBarEnemyEnergy = (ProgressBar) findViewById(R.id.ProgBar_EnemyEnergy);
+		progBarEnemyEnergy = (ProgressBar) findViewById(R.id.progBar_EnemyEnergy);
 		progBarEnemyEnergy.setProgress(enemyEnergy);
 		progBarEnemyEnergy.setMax(enemyMaxEnergy);
 
-		bAttack = (Button) findViewById(R.id.B_Battle_Attack);
+		bAttack = (Button) findViewById(R.id.bBattle_Attack);
 		bAttack.setOnClickListener(this);
 
-		bDefend = (Button) findViewById(R.id.B_Battle_Defend);
+		bDefend = (Button) findViewById(R.id.bBattle_Defend);
 		bDefend.setOnClickListener(this);
 
-		if (heroSpeed >= enemySpeed)
-		{
+		if (heroAgility >= enemyAgility) {
 			PlayerTurn = true;
-		}
-		if (enemySpeed > heroSpeed)
-		{
+		} else {
 			PlayerTurn = false;
 			bAttack.setText("Enemy's Turn");
 		}
 
-		if (PlayerTurn == true)
-		{
+		if (PlayerTurn == true) {
 			Toast.makeText(getApplicationContext(), "Your turn",
-						   Toast.LENGTH_SHORT).show();
-		}
-		else
+					Toast.LENGTH_SHORT).show();
+		} else {
 			Toast.makeText(getApplicationContext(), "Enemy's Turn",
-						   Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
-	protected void onResume ()
-	{
+	protected void onResume() {
 		super.onResume();
 
 		progBarHealth.setProgress(0);
@@ -258,20 +247,16 @@ public class Battle_Activity extends Activity implements OnClickListener
 	}
 
 	// User Attack Formula
-	public void Attack ()
-	{
+	public void Attack() {
 
 		int Damage = ((heroAttack / enemyPhDefense) + 1);
 
-		if (heroEnergy <= 0)
-		{
+		if (heroEnergy <= 0) {
 			Damage = 0;
 
 			heroEnergy = heroEnergy + 2;
 
-		}
-		else
-		{
+		} else {
 
 			enemyHealth = enemyHealth - Damage;
 
@@ -280,7 +265,7 @@ public class Battle_Activity extends Activity implements OnClickListener
 			battleLogPrefs = getSharedPreferences("BattleLog", 0);
 			damageDealt = battleLogPrefs.getInt("DamageDealt", 0);
 			lifeTimeDamageDealt = battleLogPrefs.getInt("LifeTimeDamageDealt",
-														0);
+					0);
 
 			Editor editor = battleLogPrefs.edit();
 			editor.putInt("DamageDealt", damageDealt + Damage);
@@ -308,10 +293,10 @@ public class Battle_Activity extends Activity implements OnClickListener
 		hero_energy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
 
 		enemy_name.setBackgroundColor(getApplicationContext().getResources()
-									  .getColor(R.color.dark_grey));
+				.getColor(R.color.dark_grey));
 
 		hero_name.setBackgroundColor(getApplicationContext().getResources()
-									 .getColor(R.color.black));
+				.getColor(R.color.black));
 
 		bAttack.setText("Enemy's Turn");
 
@@ -319,30 +304,26 @@ public class Battle_Activity extends Activity implements OnClickListener
 	}
 
 	// AI Attack Formula
-	public void EnemyAttack ()
-	{
+	public void EnemyAttack() {
 
 		int Damage = ((enemyAttack / heroPhDefense) + 1);
 
-		if (enemyEnergy <= 0)
-		{
+		if (enemyEnergy <= 0) {
 			Damage = 0;
 			enemyEnergy = enemyEnergy + 2;
-		}
-		else
-		{
+		} else {
 
 			heroHealth = heroHealth - Damage;
 
 			battleLogPrefs = getSharedPreferences("BattleLog", 0);
 			damageRecieved = battleLogPrefs.getInt("DamageRecieved", 0);
 			lifeTimeDamageRecieved = battleLogPrefs.getInt(
-				"LifeTimeDamageRecieved", 0);
+					"LifeTimeDamageRecieved", 0);
 
 			Editor editor = battleLogPrefs.edit();
 			editor.putInt("DamageRecieved", damageRecieved + Damage);
 			editor.putInt("LifeTimeDamageRecieved", lifeTimeDamageRecieved
-						  + Damage);
+					+ Damage);
 			editor.commit();
 		}
 
@@ -367,26 +348,22 @@ public class Battle_Activity extends Activity implements OnClickListener
 		enemy_energy.setText("Energy: " + enemyEnergy + " / " + enemyMaxEnergy);
 
 		hero_name.setBackgroundColor(getApplicationContext().getResources()
-									 .getColor(R.color.dark_grey));
+				.getColor(R.color.dark_grey));
 
 		enemy_name.setBackgroundColor(getApplicationContext().getResources()
-									  .getColor(R.color.black));
+				.getColor(R.color.black));
 
 		bAttack.setText("Attack");
 
 		PlayerTurn = true;
 	}
 
-	public void Defend ()
-	{
+	public void Defend() {
 
-		if (heroEnergy + 2 > heroMaxEnergy)
-		{
+		if (heroEnergy + 2 > heroMaxEnergy) {
 			heroEnergy = heroMaxEnergy;
 
-		}
-		else
-		{
+		} else {
 			heroEnergy = heroEnergy + 2;
 		}
 
@@ -399,52 +376,43 @@ public class Battle_Activity extends Activity implements OnClickListener
 	}
 
 	@Override
-	public void onClick (View v)
-	{
+	public void onClick(View v) {
 
 		// ATTACK BUTTON
-		if (v.getId() == R.id.B_Battle_Attack)
-		{
+		if (v.getId() == R.id.bBattle_Attack) {
 
-			if (PlayerTurn == true)
-			{
+			if (PlayerTurn == true) {
 				Attack();
 
-			}
-			else
-			{
+			} else {
 				EnemyAttack();
 			}
 
 		}
 
 		// DEFEND BUTTON
-		if (v.getId() == R.id.B_Battle_Defend)
-		{
+		if (v.getId() == R.id.bBattle_Defend) {
 
 			hero_health
-				.setText("Health: " + heroHealth + " / " + heroMaxHealth);
+					.setText("Health: " + heroHealth + " / " + heroMaxHealth);
 			hero_energy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
 
-			if (PlayerTurn == true)
-			{
+			if (PlayerTurn == true) {
 				Defend();
 				heroPhDefense = heroPhDefense - 2;
 			}
-			if (PlayerTurn == false)
-			{
+			if (PlayerTurn == false) {
 				EnemyAttack();
 			}
 		}
 
 		// BATTLE VICTORY
-		if (enemyHealth <= 0)
-		{
+		if (enemyHealth <= 0) {
 
 			enemyEnergy = 0;
 
 			enemy_health.setText("Health: " + enemyHealth + " / "
-								 + enemyMaxHealth);
+					+ enemyMaxHealth);
 
 			Victory();
 
@@ -455,12 +423,11 @@ public class Battle_Activity extends Activity implements OnClickListener
 		}
 
 		// BATTLE DEFEAT
-		if (heroHealth <= 0)
-		{
+		if (heroHealth <= 0) {
 			heroHealth = 0;
 
 			hero_health
-				.setText("Health: " + heroHealth + " / " + heroMaxHealth);
+					.setText("Health: " + heroHealth + " / " + heroMaxHealth);
 
 			Defeat();
 
@@ -473,8 +440,7 @@ public class Battle_Activity extends Activity implements OnClickListener
 
 	}
 
-	public void Victory ()
-	{
+	public void Victory() {
 
 		db = heroDbHelper.getWritableDatabase();
 
@@ -488,39 +454,32 @@ public class Battle_Activity extends Activity implements OnClickListener
 		cv.put(colMana, heroMana);
 		db.update(statsTable, cv, "1", null);
 
-		if (heroExp >= heroMaxExp)
-		{
+		if (heroExp >= heroMaxExp) {
 			db.close();
 
 			Toast.makeText(getApplicationContext(), "Level Up!",
-						   Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();
 
-			if (heroClass.equals("Warrior"))
-			{
+			if (heroClass.equals("Warrior")) {
 				lvlUp.Warrior();
 			}
-			if (heroClass.equals("Mage"))
-			{
+			if (heroClass.equals("Mage")) {
 				lvlUp.Mage();
 			}
-			if (heroClass.equals("Mercenary"))
-			{
+			if (heroClass.equals("Mercenary")) {
 				lvlUp.Mercenary();
 			}
 
-		}
-		else
-		{
+		} else {
 
 			db.close();
 		}
 
 	}
 
-	private void Defeat ()
-	{
+	private void Defeat() {
 		Toast.makeText(getApplicationContext(),
-					   "Come back when you get stronger", Toast.LENGTH_LONG).show();
+				"Come back when you get stronger", Toast.LENGTH_LONG).show();
 
 		db.close();
 

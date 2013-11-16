@@ -1,5 +1,7 @@
-package com.example.rpg;
+package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.database.DbHero;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,13 +29,12 @@ public class Status extends Activity {
 	static final String ColMagic = "Magic";
 	static final String ColPhDefense = "PhDefense";
 	static final String ColMgDefense = "MgDefense";
-	static final String ColSpeed = "Speed";
 	static final String ColAgility = "Agility";
 	static final String ColDexterity = "Dexterity";
 
 	String Hero_Name, Hero_Class;
 
-	HeroDB helper;
+	DbHero heroDbHelper;
 	SQLiteDatabase db;
 	Cursor c;
 
@@ -64,11 +65,11 @@ public class Status extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.status_screen);
 
-		helper = new HeroDB(this);
-		db = helper.getWritableDatabase();
+		heroDbHelper = new DbHero(this);
+		db = heroDbHelper.getWritableDatabase();
 
 		c = db.rawQuery(
-				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Speed, Agility, Dexterity FROM Stats",
+				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Agility, Dexterity FROM Stats",
 				null);
 
 		if (c != null) {
@@ -92,7 +93,6 @@ public class Status extends Activity {
 					Hero_Magic = c.getInt(c.getColumnIndex(ColMagic));
 					Hero_PhDefense = c.getInt(c.getColumnIndex(ColPhDefense));
 					Hero_MgDefense = c.getInt(c.getColumnIndex(ColMgDefense));
-					Hero_Speed = c.getInt(c.getColumnIndex(ColSpeed));
 					Hero_Agility = c.getInt(c.getColumnIndex(ColAgility));
 					Hero_Dexterity = c.getInt(c.getColumnIndex(ColDexterity));
 
@@ -102,62 +102,59 @@ public class Status extends Activity {
 		}
 		c.close();
 
-		Class = (TextView) findViewById(R.id.TV_Status_Class);
+		Class = (TextView) findViewById(R.id.tvStatus_Class);
 		Class.setText(Hero_Class);
 
-		Name = (TextView) findViewById(R.id.TV_Status_Name);
+		Name = (TextView) findViewById(R.id.tvStatus_Name);
 		Name.setText(Hero_Name);
 
-		Level = (TextView) findViewById(R.id.TV_Status_Level);
+		Level = (TextView) findViewById(R.id.tvStatus_Level);
 		Level.setText(String.valueOf(Hero_Level));
 
-		Health = (TextView) findViewById(R.id.TV_Status_Health);
+		Health = (TextView) findViewById(R.id.tvStatus_Health);
 		Health.setText(Hero_Health + " / " + String.valueOf(Hero_MaxHealth));
 
-		healthbar = (ProgressBar) findViewById(R.id.ProgBar__Status_Health);
+		healthbar = (ProgressBar) findViewById(R.id.progBar_Status_Health);
 		healthbar.setProgress(Hero_Health);
 		healthbar.setMax(Hero_MaxHealth);
 
-		Energy = (TextView) findViewById(R.id.TV_Status_Energy);
+		Energy = (TextView) findViewById(R.id.tvStatus_Energy);
 		Energy.setText(Hero_Energy + " /" + String.valueOf(Hero_MaxEnergy));
 
-		energybar = (ProgressBar) findViewById(R.id.ProgBar__Status_Energy);
+		energybar = (ProgressBar) findViewById(R.id.progBar_Status_Energy);
 		energybar.setProgress(Hero_Energy);
 		energybar.setMax(Hero_MaxEnergy);
 
-		Exp = (TextView) findViewById(R.id.TV_Status_Exp);
+		Exp = (TextView) findViewById(R.id.tvStatus_Exp);
 		Exp.setText(Hero_Exp + " / " + String.valueOf(Hero_MaxExp));
 
-		expbar = (ProgressBar) findViewById(R.id.ProgBar__Status_Exp);
+		expbar = (ProgressBar) findViewById(R.id.progBar_Status_Exp);
 		expbar.setProgress(Hero_Exp);
 		expbar.setMax(Hero_MaxExp);
 
-		Mana = (TextView) findViewById(R.id.TV_Status_Mana);
+		Mana = (TextView) findViewById(R.id.tvStatus_Mana);
 		Mana.setText(Hero_Mana + " / " + String.valueOf(Hero_MaxMana));
 
-		manabar = (ProgressBar) findViewById(R.id.ProgBar__Status_Mana);
+		manabar = (ProgressBar) findViewById(R.id.progBar_Status_Mana);
 		manabar.setProgress(Hero_Mana);
 		manabar.setMax(Hero_MaxMana);
 
-		Attack = (TextView) findViewById(R.id.TV_Status_Attack);
+		Attack = (TextView) findViewById(R.id.tvStatus_Attack);
 		Attack.setText(String.valueOf(Hero_Attack));
 
-		Magic = (TextView) findViewById(R.id.TV_Status_Magic);
+		Magic = (TextView) findViewById(R.id.tvStatus_Magic);
 		Magic.setText(String.valueOf(Hero_Magic));
 
-		PhDef = (TextView) findViewById(R.id.TV_Status_PhDefense);
+		PhDef = (TextView) findViewById(R.id.tvStatus_PhDefense);
 		PhDef.setText(String.valueOf(Hero_PhDefense));
 
-		MgDef = (TextView) findViewById(R.id.TV_Status_MgDefense);
+		MgDef = (TextView) findViewById(R.id.tvStatus_MgDefense);
 		MgDef.setText(String.valueOf(Hero_MgDefense));
 
-		Speed = (TextView) findViewById(R.id.TV_Status_Speed);
-		Speed.setText(String.valueOf(Hero_Speed));
-
-		Agility = (TextView) findViewById(R.id.TV_Status_Agility);
+		Agility = (TextView) findViewById(R.id.tvStatus_Agility);
 		Agility.setText(String.valueOf(Hero_Agility));
 
-		Dexterity = (TextView) findViewById(R.id.TV_Status_Dexterity);
+		Dexterity = (TextView) findViewById(R.id.tvStatus_Dexterity);
 		Dexterity.setText(String.valueOf(Hero_Dexterity));
 
 	}
