@@ -34,49 +34,65 @@ import android.widget.TextView;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.DbHero;
 
-public class TitleScreen extends Activity implements View.OnClickListener {
+public class TitleScreen extends Activity implements View.OnClickListener
+{
 
 	ProgressBar progbar;
 	ImageView loadingSprite;
 	TextView tvMainTitle;
-	Button bPlay;
+	Button bPlay,bStatus,bBattleLog;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate (Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 
 		new DatabaseCreator().execute();
 	}
 
 	@Override
-	public void onClick(View v) {
+	public void onClick (View v)
+	{
 
-		if (v.getId() == R.id.bMainPlay) {
+		if (v.getId() == R.id.bMainPlay)
+		{
 			startActivity(new Intent(TitleScreen.this, HeroHome.class));
+		}
+
+		if (v.getId() == R.id.bStatus)
+		{
+			startActivity(new Intent(TitleScreen.this, Status.class));
+		}
+
+		if (v.getId() == R.id.bBattleLog)
+		{
+			startActivity(new Intent(TitleScreen.this, BattleLog.class));
 		}
 
 	}
 
-	private class DatabaseCreator extends AsyncTask<Void, Integer, Void> {
+	private class DatabaseCreator extends AsyncTask<Void, Integer, Void>
+	{
 		// Before running code in separate thread
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute ()
+		{
 
 			setContentView(R.layout.loading_screen);
 
 			AnimationDrawable anim = new AnimationDrawable();
 			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front1),
-					150);
+				getResources().getDrawable(R.drawable.shadow_knight_front1),
+				150);
 			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front2),
-					150);
+				getResources().getDrawable(R.drawable.shadow_knight_front2),
+				150);
 			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front1),
-					150);
+				getResources().getDrawable(R.drawable.shadow_knight_front1),
+				150);
 			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front3),
-					150);
+				getResources().getDrawable(R.drawable.shadow_knight_front3),
+				150);
 
 			progbar = (ProgressBar) findViewById(R.id.progBarLoadingScreen);
 			progbar.setIndeterminate(false);
@@ -92,31 +108,40 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected Void doInBackground (Void... params)
+		{
 			// Get the current thread's token
-			synchronized (this) {
+			synchronized (this)
+			{
 
 				int progressCounter = 0;
 
-				while (progressCounter < 100) {
+				while (progressCounter < 100)
+				{
 
 					DbHero heroDbHelper = new DbHero(getApplicationContext());
 
-					if (heroDbHelper.isCreated() == false) {
+					if (heroDbHelper.isCreated() == false)
+					{
 						SQLiteDatabase db = heroDbHelper.getWritableDatabase();
 						heroDbHelper.PopulateInventoryFields();
+						heroDbHelper.putTempHeroStats();
 						heroDbHelper.close();
+						db.close();
 					}
 
 					progressCounter = 50;
 
 					publishProgress(progressCounter);
 
-					try {
+					try
+					{
 						wait(1000);
 						progressCounter = 100;
 						publishProgress(progressCounter);
-					} catch (InterruptedException e) {
+					}
+					catch (InterruptedException e)
+					{
 						e.printStackTrace();
 					}
 
@@ -128,14 +153,16 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 		// Update the progress
 		@Override
-		protected void onProgressUpdate(Integer... values) {
+		protected void onProgressUpdate (Integer... values)
+		{
 
 			progbar.setProgress(values[0]);
 
 		}
 
 		@Override
-		protected void onPostExecute(Void aVoid) {
+		protected void onPostExecute (Void aVoid)
+		{
 			super.onPostExecute(aVoid);
 
 			setContentView(R.layout.title_screen);
@@ -144,6 +171,12 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 			bPlay = (Button) findViewById(R.id.bMainPlay);
 			bPlay.setOnClickListener(TitleScreen.this);
+
+			bStatus = (Button) findViewById(R.id.bStatus);
+			bStatus.setOnClickListener(TitleScreen.this);
+
+			bBattleLog = (Button) findViewById(R.id.bBattleLog);
+			bBattleLog.setOnClickListener(TitleScreen.this);
 		}
 	}
 

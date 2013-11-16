@@ -31,6 +31,14 @@
             android:name="high.caliber.productions.demigod.activity.HomeTown"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
+		<activity
+            android:name="high.caliber.productions.demigod.activity.Status"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
+		<activity
+            android:name="high.caliber.productions.demigod.activity.BattleLog"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
