@@ -18,7 +18,7 @@ public class LevelUpWorker {
 	static final String colClass = DbHero.COL_CLASS;
 	static final String colName = DbHero.COL_NAME;
 	static final String colLevel = DbHero.COL_LVL;
-	static final String colExp = DbHero.COL_LVL;
+	static final String colExp = DbHero.COL_EXP;
 	static final String colMaxExp = DbHero.COL_MAX_EXP;
 	static final String colHealth = DbHero.COL_HEALTH;
 	static final String colMaxHealth = DbHero.COL_MAX_HEALTH;
@@ -33,26 +33,26 @@ public class LevelUpWorker {
 	static final String colAgility = DbHero.COL_AGILITY;
 	static final String colDexterity = DbHero.COL_DEXTERITY;
 
-	String Hero_Name, Hero_Class;
+	String heroName, heroClass;
 
 	SQLiteDatabase db;
 	Cursor c;
 
-	private int Hero_Level;
-	private int Hero_Health;
-	private int Hero_MaxHealth;
-	private int Hero_Exp;
-	private int Hero_MaxExp;
-	private int Hero_Energy;
-	private int Hero_MaxEnergy;
-	private int Hero_Mana;
-	private int Hero_MaxMana;
-	private int Hero_Attack;
-	private int Hero_Magic;
-	private int Hero_PhDefense;
-	private int Hero_MgDefense;
-	private int Hero_Agility;
-	private int Hero_Dexterity;
+	private int heroLevel;
+	private int heroHealth;
+	private int heroMaxHealth;
+	private int heroExp;
+	private int heroMaxExp;
+	private int heroEnergy;
+	private int heroMaxEnergy;
+	private int heroMana;
+	private int heroMaxMana;
+	private int heroAttack;
+	private int heroMagic;
+	private int heroPhDefense;
+	private int heroMgDefense;
+	private int heroAgility;
+	private int heroDexterity;
 
 	// Warrior Level-Up Algorithm
 	public void Warrior() {
@@ -70,23 +70,23 @@ public class LevelUpWorker {
 			if (c.moveToFirst()) {
 				do {
 					// Retrieve values from columns
-					Hero_Class = c.getString(c.getColumnIndex(colClass));
-					Hero_Name = c.getString(c.getColumnIndex(colName));
-					Hero_Level = c.getInt(c.getColumnIndex(colLevel));
-					Hero_Exp = c.getInt(c.getColumnIndex(colExp));
-					Hero_MaxExp = c.getInt(c.getColumnIndex(colMaxExp));
-					Hero_Health = c.getInt(c.getColumnIndex(colHealth));
-					Hero_MaxHealth = c.getInt(c.getColumnIndex(colMaxHealth));
-					Hero_Energy = c.getInt(c.getColumnIndex(colEnergy));
-					Hero_MaxEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
-					Hero_Mana = c.getInt(c.getColumnIndex(colMana));
-					Hero_MaxMana = c.getInt(c.getColumnIndex(colMaxMana));
-					Hero_Attack = c.getInt(c.getColumnIndex(colAttack));
-					Hero_Magic = c.getInt(c.getColumnIndex(colMagic));
-					Hero_PhDefense = c.getInt(c.getColumnIndex(colPhDefense));
-					Hero_MgDefense = c.getInt(c.getColumnIndex(colMgDefense));
-					Hero_Agility = c.getInt(c.getColumnIndex(colAgility));
-					Hero_Dexterity = c.getInt(c.getColumnIndex(colDexterity));
+					heroClass = c.getString(c.getColumnIndex(colClass));
+					heroName = c.getString(c.getColumnIndex(colName));
+					heroLevel = c.getInt(c.getColumnIndex(colLevel));
+					heroExp = c.getInt(c.getColumnIndex(colExp));
+					heroMaxExp = c.getInt(c.getColumnIndex(colMaxExp));
+					heroHealth = c.getInt(c.getColumnIndex(colHealth));
+					heroMaxHealth = c.getInt(c.getColumnIndex(colMaxHealth));
+					heroEnergy = c.getInt(c.getColumnIndex(colEnergy));
+					heroMaxEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
+					heroMana = c.getInt(c.getColumnIndex(colMana));
+					heroMaxMana = c.getInt(c.getColumnIndex(colMaxMana));
+					heroAttack = c.getInt(c.getColumnIndex(colAttack));
+					heroMagic = c.getInt(c.getColumnIndex(colMagic));
+					heroPhDefense = c.getInt(c.getColumnIndex(colPhDefense));
+					heroMgDefense = c.getInt(c.getColumnIndex(colMgDefense));
+					heroAgility = c.getInt(c.getColumnIndex(colAgility));
+					heroDexterity = c.getInt(c.getColumnIndex(colDexterity));
 
 				} while (c.moveToNext());
 
@@ -98,37 +98,37 @@ public class LevelUpWorker {
 
 		ContentValues cv = new ContentValues();
 
-		Hero_Exp = (Hero_Exp - Hero_MaxExp);
-		Hero_MaxExp = (Hero_MaxExp + (Hero_Level * 10));
-		Hero_MaxHealth = (Hero_MaxHealth + (Hero_Level * 4));
-		Hero_Health = Hero_MaxHealth;
-		Hero_MaxEnergy = (Hero_MaxEnergy + (Hero_Level * 2));
-		Hero_Energy = Hero_MaxEnergy;
-		Hero_MaxMana = (Hero_MaxMana + Hero_Level);
-		Hero_Mana = Hero_MaxMana;
-		Hero_Attack = (Hero_Attack + (Hero_Level + 1));
-		Hero_Magic = (Hero_Magic + Hero_Level);
-		Hero_PhDefense = (Hero_PhDefense + (Hero_Level + 2));
-		Hero_MgDefense = (Hero_MgDefense + Hero_Level);
-		Hero_Agility = (Hero_Agility + (Hero_Level - 1));
-		Hero_Dexterity = (Hero_Dexterity + (Hero_Level - 1));
+		heroExp = (heroExp - heroMaxExp);
+		heroMaxExp = (heroMaxExp + (heroLevel * 10));
+		heroMaxHealth = (heroMaxHealth + (heroLevel * 4));
+		heroHealth = heroMaxHealth;
+		heroMaxEnergy = (heroMaxEnergy + (heroLevel * 2));
+		heroEnergy = heroMaxEnergy;
+		heroMaxMana = (heroMaxMana + heroLevel);
+		heroMana = heroMaxMana;
+		heroAttack = (heroAttack + (heroLevel + 1));
+		heroMagic = (heroMagic + heroLevel);
+		heroPhDefense = (heroPhDefense + (heroLevel + 2));
+		heroMgDefense = (heroMgDefense + heroLevel);
+		heroAgility = (heroAgility + (heroLevel - 1));
+		heroAgility = (heroDexterity + (heroLevel - 1));
 
 		cv.put(colID, "1");
-		cv.put(colLevel, Hero_Level + 1);
-		cv.put(colMaxExp, Hero_MaxExp);
-		cv.put(colExp, Hero_Exp);
-		cv.put(colMaxHealth, Hero_MaxHealth);
-		cv.put(colHealth, Hero_Health);
-		cv.put(colMaxEnergy, Hero_MaxEnergy);
-		cv.put(colEnergy, Hero_Energy);
-		cv.put(colMaxMana, Hero_MaxMana);
-		cv.put(colMana, Hero_Mana);
-		cv.put(colAttack, Hero_Attack);
-		cv.put(colMagic, Hero_Magic);
-		cv.put(colPhDefense, Hero_PhDefense);
-		cv.put(colMgDefense, Hero_MgDefense);
-		cv.put(colAgility, Hero_Agility);
-		cv.put(colDexterity, Hero_Dexterity);
+		cv.put(colLevel, heroLevel + 1);
+		cv.put(colMaxExp, heroMaxExp);
+		cv.put(colExp, heroExp);
+		cv.put(colMaxHealth, heroMaxHealth);
+		cv.put(colHealth, heroHealth);
+		cv.put(colMaxEnergy, heroMaxEnergy);
+		cv.put(colEnergy, heroEnergy);
+		cv.put(colMaxMana, heroMaxMana);
+		cv.put(colMana, heroMana);
+		cv.put(colAttack, heroAttack);
+		cv.put(colMagic, heroMagic);
+		cv.put(colPhDefense, heroPhDefense);
+		cv.put(colMgDefense, heroMgDefense);
+		cv.put(colAgility, heroAgility);
+		cv.put(colDexterity, heroDexterity);
 
 		db.update(statsTable, cv, colID, null);
 		db.close();
@@ -151,23 +151,23 @@ public class LevelUpWorker {
 			if (c.moveToFirst()) {
 				do {
 					// Retrieve values from columns
-					Hero_Class = c.getString(c.getColumnIndex(colClass));
-					Hero_Name = c.getString(c.getColumnIndex(colName));
-					Hero_Level = c.getInt(c.getColumnIndex(colLevel));
-					Hero_Exp = c.getInt(c.getColumnIndex(colExp));
-					Hero_MaxExp = c.getInt(c.getColumnIndex(colMaxExp));
-					Hero_Health = c.getInt(c.getColumnIndex(colHealth));
-					Hero_MaxHealth = c.getInt(c.getColumnIndex(colMaxHealth));
-					Hero_Energy = c.getInt(c.getColumnIndex(colEnergy));
-					Hero_MaxEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
-					Hero_Mana = c.getInt(c.getColumnIndex(colMana));
-					Hero_MaxMana = c.getInt(c.getColumnIndex(colMaxMana));
-					Hero_Attack = c.getInt(c.getColumnIndex(colAttack));
-					Hero_Magic = c.getInt(c.getColumnIndex(colMagic));
-					Hero_PhDefense = c.getInt(c.getColumnIndex(colPhDefense));
-					Hero_MgDefense = c.getInt(c.getColumnIndex(colMgDefense));
-					Hero_Agility = c.getInt(c.getColumnIndex(colAgility));
-					Hero_Dexterity = c.getInt(c.getColumnIndex(colDexterity));
+					heroClass = c.getString(c.getColumnIndex(colClass));
+					heroName = c.getString(c.getColumnIndex(colName));
+					heroLevel = c.getInt(c.getColumnIndex(colLevel));
+					heroExp = c.getInt(c.getColumnIndex(colExp));
+					heroMaxExp = c.getInt(c.getColumnIndex(colMaxExp));
+					heroHealth = c.getInt(c.getColumnIndex(colHealth));
+					heroMaxHealth = c.getInt(c.getColumnIndex(colMaxHealth));
+					heroEnergy = c.getInt(c.getColumnIndex(colEnergy));
+					heroMaxEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
+					heroMana = c.getInt(c.getColumnIndex(colMana));
+					heroMaxMana = c.getInt(c.getColumnIndex(colMaxMana));
+					heroAttack = c.getInt(c.getColumnIndex(colAttack));
+					heroMagic = c.getInt(c.getColumnIndex(colMagic));
+					heroPhDefense = c.getInt(c.getColumnIndex(colPhDefense));
+					heroMgDefense = c.getInt(c.getColumnIndex(colMgDefense));
+					heroAgility = c.getInt(c.getColumnIndex(colAgility));
+					heroAgility = c.getInt(c.getColumnIndex(colDexterity));
 
 				} while (c.moveToNext());
 
@@ -179,37 +179,37 @@ public class LevelUpWorker {
 
 		ContentValues cv = new ContentValues();
 
-		Hero_Exp = (Hero_Exp - Hero_MaxExp);
-		Hero_MaxExp = (Hero_MaxExp + (Hero_Level * 10));
-		Hero_MaxHealth = (Hero_Health + (Hero_Level * 2));
-		Hero_Health = Hero_MaxHealth;
-		Hero_MaxEnergy = (Hero_Energy + Hero_Level);
-		Hero_Energy = Hero_MaxEnergy;
-		Hero_MaxMana = (Hero_Mana + (Hero_Level * 2));
-		Hero_Mana = Hero_MaxMana;
-		Hero_Attack = (Hero_Attack + (Hero_Level - 1));
-		Hero_Magic = (Hero_Magic + (Hero_Level * 2));
-		Hero_PhDefense = (Hero_PhDefense + (Hero_Level - 1));
-		Hero_MgDefense = (Hero_MgDefense + (Hero_Level + 1));
-		Hero_Agility = (Hero_Agility + Hero_Level);
-		Hero_Dexterity = (Hero_Dexterity + Hero_Level);
+		heroExp = (heroExp - heroMaxExp);
+		heroMaxExp = (heroMaxExp + (heroLevel * 10));
+		heroMaxHealth = (heroHealth + (heroLevel * 2));
+		heroHealth = heroMaxHealth;
+		heroMaxEnergy = (heroEnergy + heroLevel);
+		heroEnergy = heroMaxEnergy;
+		heroMaxMana = (heroMana + (heroLevel * 2));
+		heroMana = heroMaxMana;
+		heroAttack = (heroAttack + (heroLevel - 1));
+		heroMagic = (heroMagic + (heroLevel * 2));
+		heroPhDefense = (heroPhDefense + (heroLevel - 1));
+		heroMgDefense = (heroMgDefense + (heroLevel + 1));
+		heroAgility = (heroAgility + heroLevel);
+		heroDexterity = (heroDexterity + heroLevel);
 
 		cv.put(colID, "1");
-		cv.put(colLevel, Hero_Level + 1);
-		cv.put(colMaxExp, Hero_MaxExp);
-		cv.put(colExp, Hero_Exp);
-		cv.put(colMaxHealth, Hero_MaxHealth);
-		cv.put(colHealth, Hero_Health);
-		cv.put(colMaxEnergy, Hero_MaxEnergy);
-		cv.put(colEnergy, Hero_Energy);
-		cv.put(colMaxMana, Hero_MaxMana);
-		cv.put(colMana, Hero_Mana);
-		cv.put(colAttack, Hero_Attack);
-		cv.put(colMagic, Hero_Magic);
-		cv.put(colPhDefense, Hero_PhDefense);
-		cv.put(colMgDefense, Hero_MgDefense);
-		cv.put(colAgility, Hero_Agility);
-		cv.put(colDexterity, Hero_Dexterity);
+		cv.put(colLevel, heroLevel + 1);
+		cv.put(colMaxExp, heroMaxExp);
+		cv.put(colExp, heroExp);
+		cv.put(colMaxHealth, heroMaxHealth);
+		cv.put(colHealth, heroHealth);
+		cv.put(colMaxEnergy, heroMaxEnergy);
+		cv.put(colEnergy, heroEnergy);
+		cv.put(colMaxMana, heroMaxMana);
+		cv.put(colMana, heroMana);
+		cv.put(colAttack, heroAttack);
+		cv.put(colMagic, heroMagic);
+		cv.put(colPhDefense, heroPhDefense);
+		cv.put(colMgDefense, heroMgDefense);
+		cv.put(colAgility, heroAgility);
+		cv.put(colDexterity, heroDexterity);
 
 		db.update(statsTable, cv, colID, null);
 		db.close();
@@ -222,7 +222,7 @@ public class LevelUpWorker {
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(
-				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Speed, Agility, Dexterity FROM Stats",
+				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Agility, Dexterity FROM Stats",
 				null);
 
 		if (c != null) {
@@ -231,23 +231,23 @@ public class LevelUpWorker {
 			if (c.moveToFirst()) {
 				do {
 					// Retrieve values from columns
-					Hero_Class = c.getString(c.getColumnIndex(colClass));
-					Hero_Name = c.getString(c.getColumnIndex(colName));
-					Hero_Level = c.getInt(c.getColumnIndex(colLevel));
-					Hero_Exp = c.getInt(c.getColumnIndex(colExp));
-					Hero_MaxExp = c.getInt(c.getColumnIndex(colMaxExp));
-					Hero_Health = c.getInt(c.getColumnIndex(colHealth));
-					Hero_MaxHealth = c.getInt(c.getColumnIndex(colMaxHealth));
-					Hero_Energy = c.getInt(c.getColumnIndex(colEnergy));
-					Hero_MaxEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
-					Hero_Mana = c.getInt(c.getColumnIndex(colMana));
-					Hero_MaxMana = c.getInt(c.getColumnIndex(colMaxMana));
-					Hero_Attack = c.getInt(c.getColumnIndex(colAttack));
-					Hero_Magic = c.getInt(c.getColumnIndex(colMagic));
-					Hero_PhDefense = c.getInt(c.getColumnIndex(colPhDefense));
-					Hero_MgDefense = c.getInt(c.getColumnIndex(colMgDefense));
-					Hero_Agility = c.getInt(c.getColumnIndex(colAgility));
-					Hero_Dexterity = c.getInt(c.getColumnIndex(colDexterity));
+					heroClass = c.getString(c.getColumnIndex(colClass));
+					heroName = c.getString(c.getColumnIndex(colName));
+					heroLevel = c.getInt(c.getColumnIndex(colLevel));
+					heroExp = c.getInt(c.getColumnIndex(colExp));
+					heroMaxExp = c.getInt(c.getColumnIndex(colMaxExp));
+					heroHealth = c.getInt(c.getColumnIndex(colHealth));
+					heroMaxHealth = c.getInt(c.getColumnIndex(colMaxHealth));
+					heroEnergy = c.getInt(c.getColumnIndex(colEnergy));
+					heroMaxEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
+					heroMana = c.getInt(c.getColumnIndex(colMana));
+					heroMaxMana = c.getInt(c.getColumnIndex(colMaxMana));
+					heroAttack = c.getInt(c.getColumnIndex(colAttack));
+					heroMagic = c.getInt(c.getColumnIndex(colMagic));
+					heroPhDefense = c.getInt(c.getColumnIndex(colPhDefense));
+					heroMgDefense = c.getInt(c.getColumnIndex(colMgDefense));
+					heroAgility = c.getInt(c.getColumnIndex(colAgility));
+					heroDexterity = c.getInt(c.getColumnIndex(colDexterity));
 
 				} while (c.moveToNext());
 
@@ -259,37 +259,37 @@ public class LevelUpWorker {
 
 		ContentValues cv = new ContentValues();
 
-		Hero_Exp = (Hero_Exp - Hero_MaxExp);
-		Hero_MaxExp = (Hero_MaxExp + (Hero_Level * 10));
-		Hero_MaxHealth = (Hero_MaxHealth + (Hero_Level * 3));
-		Hero_Health = Hero_MaxHealth;
-		Hero_MaxEnergy = (Hero_MaxEnergy + (Hero_Level * 3));
-		Hero_Energy = Hero_MaxEnergy;
-		Hero_MaxMana = (Hero_MaxMana + (Hero_Level + 1));
-		Hero_Mana = Hero_MaxMana;
-		Hero_Attack = (Hero_Attack + (Hero_Level + 1));
-		Hero_Magic = (Hero_Magic + (Hero_Level + 1));
-		Hero_PhDefense = (Hero_PhDefense + (Hero_Level + 1));
-		Hero_MgDefense = (Hero_MgDefense + (Hero_Level + 1));
-		Hero_Agility = (Hero_Agility + (Hero_Level + 1));
-		Hero_Dexterity = (Hero_Dexterity + (Hero_Level + 1));
+		heroExp = (heroExp - heroMaxExp);
+		heroMaxExp = (heroMaxExp + (heroLevel * 10));
+		heroMaxHealth = (heroMaxHealth + (heroLevel * 3));
+		heroHealth = heroMaxHealth;
+		heroMaxEnergy = (heroMaxEnergy + (heroLevel * 3));
+		heroEnergy = heroMaxEnergy;
+		heroMaxMana = (heroMaxMana + (heroLevel + 1));
+		heroMana = heroMaxMana;
+		heroAttack = (heroAttack + (heroLevel + 1));
+		heroMagic = (heroMagic + (heroLevel + 1));
+		heroPhDefense = (heroPhDefense + (heroLevel + 1));
+		heroMgDefense = (heroMgDefense + (heroLevel + 1));
+		heroAgility = (heroAgility + (heroLevel + 1));
+		heroDexterity = (heroDexterity + (heroLevel + 1));
 
 		cv.put(colID, "1");
-		cv.put(colLevel, Hero_Level + 1);
-		cv.put(colMaxExp, Hero_MaxExp);
-		cv.put(colExp, Hero_Exp);
-		cv.put(colMaxHealth, Hero_MaxHealth);
-		cv.put(colHealth, Hero_Health);
-		cv.put(colMaxEnergy, Hero_MaxEnergy);
-		cv.put(colEnergy, Hero_Energy);
-		cv.put(colMaxMana, Hero_MaxMana);
-		cv.put(colMana, Hero_Mana);
-		cv.put(colAttack, Hero_Attack);
-		cv.put(colMagic, Hero_Magic);
-		cv.put(colPhDefense, Hero_PhDefense);
-		cv.put(colMgDefense, Hero_MgDefense);
-		cv.put(colAgility, Hero_Agility);
-		cv.put(colDexterity, Hero_Dexterity);
+		cv.put(colLevel, heroLevel + 1);
+		cv.put(colMaxExp, heroMaxExp);
+		cv.put(colExp, heroExp);
+		cv.put(colMaxHealth, heroMaxHealth);
+		cv.put(colHealth, heroHealth);
+		cv.put(colMaxEnergy, heroMaxEnergy);
+		cv.put(colEnergy, heroEnergy);
+		cv.put(colMaxMana, heroMaxMana);
+		cv.put(colMana, heroMana);
+		cv.put(colAttack, heroAttack);
+		cv.put(colMagic, heroMagic);
+		cv.put(colPhDefense, heroPhDefense);
+		cv.put(colMgDefense, heroMgDefense);
+		cv.put(colAgility, heroAgility);
+		cv.put(colDexterity, heroDexterity);
 
 		db.update(statsTable, cv, colID, null);
 		db.close();

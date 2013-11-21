@@ -39,7 +39,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 	ProgressBar progbar;
 	ImageView loadingSprite;
 	TextView tvMainTitle;
-	Button bPlay, bStatus, bBattleLog, bInventory;
+	Button bPlay, bStatus, bBattleLog, bInventory, bBattle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,10 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 		if (v.getId() == R.id.bInventory) {
 			startActivity(new Intent(TitleScreen.this, Inventory.class));
+		}
+
+		if (v.getId() == R.id.bBattle) {
+			startActivity(new Intent(TitleScreen.this, Battle_Activity.class));
 		}
 
 	}
@@ -167,6 +171,9 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 			bInventory = (Button) findViewById(R.id.bInventory);
 			bInventory.setOnClickListener(TitleScreen.this);
+
+			bBattle = (Button) findViewById(R.id.bBattle);
+			bBattle.setOnClickListener(TitleScreen.this);
 		}
 	}
 

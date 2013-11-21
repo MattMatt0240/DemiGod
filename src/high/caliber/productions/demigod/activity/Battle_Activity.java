@@ -3,6 +3,7 @@ package high.caliber.productions.demigod.activity;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.DbHero;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
+import high.caliber.productions.demigod.utils.PrefsManager;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -20,30 +21,29 @@ import android.widget.Toast;
 
 public class Battle_Activity extends Activity implements OnClickListener {
 
-	static final String dbPath = "data/data/com.example.rpg/databases/Hero.db";
-	static final String dbName = "Hero.db";
-	static final String statsTable = "Stats";
-	static final String inventoryTable = "Inventory";
-	public static final int DATABASE_VERSION = 1;
+	static final String dbPath = DbHero.getPath();
+	static final String dbName = DbHero.getDbName();
+	static final String statsTable = DbHero.getTableStats();
+	static final String inventoryTable = DbHero.getTableInventory();
 
-	static final String colID = "_id";
-	static final String colClass = "Class";
-	static final String colName = "Name";
-	static final String colLevel = "Level";
-	static final String colExp = "Exp";
-	static final String colMaxExp = "MaxExp";
-	static final String colHealth = "Health";
-	static final String colMaxHealth = "MaxHealth";
-	static final String colEnergy = "Energy";
-	static final String colMaxEnergy = "MaxEnergy";
-	static final String colMana = "Mana";
-	static final String colMaxMana = "MaxMana";
-	static final String colAttack = "Attack";
-	static final String colMagic = "Magic";
-	static final String colPhDefense = "PhDefense";
-	static final String colMgDefense = "MgDefense";
-	static final String colAgility = "Agility";
-	static final String colDexterity = "Dexterity";
+	static final String colID = DbHero.COL_ID;
+	static final String colClass = DbHero.COL_CLASS;
+	static final String colName = DbHero.COL_NAME;
+	static final String colLevel = DbHero.COL_LVL;
+	static final String colExp = DbHero.COL_EXP;
+	static final String colMaxExp = DbHero.COL_MAX_EXP;
+	static final String colHealth = DbHero.COL_HEALTH;
+	static final String colMaxHealth = DbHero.COL_MAX_HEALTH;
+	static final String colEnergy = DbHero.COL_ENERGY;
+	static final String colMaxEnergy = DbHero.COL_MAX_ENERGY;
+	static final String colMana = DbHero.COL_MANA;
+	static final String colMaxMana = DbHero.COL_MAX_MANA;
+	static final String colAttack = DbHero.COL_ATTACK;
+	static final String colMagic = DbHero.COL_MAGIC;
+	static final String colPhDefense = DbHero.COL_PH_DEFENSE;
+	static final String colMgDefense = DbHero.COL_MG_DEFENSE;
+	static final String colAgility = DbHero.COL_AGILITY;
+	static final String colDexterity = DbHero.COL_DEXTERITY;
 
 	String heroName, heroClass;
 
@@ -52,21 +52,21 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	SQLiteDatabase db;
 	Cursor c;
 
-	int heroLevel;
-	int heroHealth;
-	int heroMaxHealth;
-	int heroExp;
-	int heroMaxExp;
-	int heroEnergy;
-	int heroMaxEnergy;
-	int heroMana;
-	int heroMaxMana;
-	int heroAttack;
-	int heroMagic;
-	int heroPhDefense;
-	int heroMgDefense;
-	int heroAgility;
-	int heroDexterity;
+	private int heroLevel;
+	private int heroHealth;
+	private int heroMaxHealth;
+	private int heroExp;
+	private int heroMaxExp;
+	private int heroEnergy;
+	private int heroMaxEnergy;
+	private int heroMana;
+	private int heroMaxMana;
+	private int heroAttack;
+	private int heroMagic;
+	private int heroPhDefense;
+	private int heroMgDefense;
+	private int heroAgility;
+	private int heroDexterity;
 
 	SharedPreferences battleLogPrefs;
 
@@ -91,7 +91,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	int enemySpeed = 10;
 	int enemyAgility = 6;
 	int enemyDexterity = 3;
-	int enemyExpValue = 101;
+	int enemyExpValue = 15;
 	int enemyMaxHealth = 10;
 	int enemyMaxEnergy = 4;
 
@@ -145,12 +145,15 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		lvlUp = new LevelUpWorker();
 
 		// Create BattleLog pref files if not exist
-		battleLogPrefs = getSharedPreferences("BattleLog", 0);
-		damageDealt = battleLogPrefs.getInt("DamageDealt", 0);
-		lifeTimeDamageDealt = battleLogPrefs.getInt("LifeTimeDamageDealt", 0);
-		damageRecieved = battleLogPrefs.getInt("DamageReceived", 0);
+		battleLogPrefs = getSharedPreferences(PrefsManager.getBattleLogPrefs(),
+				0);
+		damageDealt = battleLogPrefs.getInt(PrefsManager.getDamageDealt(), 0);
+		lifeTimeDamageDealt = battleLogPrefs.getInt(
+				PrefsManager.getLifeTimeDamageDealt(), 0);
+		damageRecieved = battleLogPrefs.getInt(
+				PrefsManager.getDamageRecieved(), 0);
 		lifeTimeDamageRecieved = battleLogPrefs.getInt(
-				"LifeTimeDamageRecieved", 0);
+				PrefsManager.getLifetimeDamageRecieved(), 0);
 
 		// Initialize variables (TextViews, Buttons, & ProgressBars)
 		hero_name = (TextView) findViewById(R.id.tvBattle_Hero_Name);
@@ -262,14 +265,17 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 			heroEnergy = heroEnergy - 1;
 
-			battleLogPrefs = getSharedPreferences("BattleLog", 0);
-			damageDealt = battleLogPrefs.getInt("DamageDealt", 0);
-			lifeTimeDamageDealt = battleLogPrefs.getInt("LifeTimeDamageDealt",
+			battleLogPrefs = getSharedPreferences(
+					PrefsManager.getBattleLogPrefs(), 0);
+			damageDealt = battleLogPrefs.getInt(PrefsManager.getDamageDealt(),
 					0);
+			lifeTimeDamageDealt = battleLogPrefs.getInt(
+					PrefsManager.getLifeTimeDamageDealt(), 0);
 
 			Editor editor = battleLogPrefs.edit();
-			editor.putInt("DamageDealt", damageDealt + Damage);
-			editor.putInt("LifeTimeDamageDealt", lifeTimeDamageDealt + Damage);
+			editor.putInt(PrefsManager.getDamageDealt(), damageDealt + Damage);
+			editor.putInt(PrefsManager.getLifeTimeDamageDealt(),
+					lifeTimeDamageDealt + Damage);
 			editor.commit();
 		}
 
@@ -315,15 +321,18 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 			heroHealth = heroHealth - Damage;
 
-			battleLogPrefs = getSharedPreferences("BattleLog", 0);
-			damageRecieved = battleLogPrefs.getInt("DamageRecieved", 0);
+			battleLogPrefs = getSharedPreferences(
+					PrefsManager.getBattleLogPrefs(), 0);
+			damageRecieved = battleLogPrefs.getInt(
+					PrefsManager.getDamageRecieved(), 0);
 			lifeTimeDamageRecieved = battleLogPrefs.getInt(
-					"LifeTimeDamageRecieved", 0);
+					PrefsManager.getLifetimeDamageRecieved(), 0);
 
 			Editor editor = battleLogPrefs.edit();
-			editor.putInt("DamageRecieved", damageRecieved + Damage);
-			editor.putInt("LifeTimeDamageRecieved", lifeTimeDamageRecieved
+			editor.putInt(PrefsManager.getDamageRecieved(), damageRecieved
 					+ Damage);
+			editor.putInt(PrefsManager.getLifetimeDamageRecieved(),
+					lifeTimeDamageRecieved + Damage);
 			editor.commit();
 		}
 
@@ -416,8 +425,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 			Victory();
 
-			Intent intent = new Intent("com.example.rpg.BATTLELOG");
-			startActivity(intent);
+			startActivity(new Intent(Battle_Activity.this, BattleLog.class));
 
 			finish();
 		}
@@ -431,8 +439,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 			Defeat();
 
-			Intent intent = new Intent("com.example.rpg.BATTLELOG");
-			startActivity(intent);
+			startActivity(new Intent(Battle_Activity.this, BattleLog.class));
 
 			finish();
 

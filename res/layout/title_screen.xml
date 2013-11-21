@@ -46,4 +46,13 @@
         android:layout_marginBottom="10dp"
         android:text="Inventory" />
 
+    <Button
+        android:id="@+id/bBattle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bInventory"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="Battle" />
+
 </RelativeLayout>
