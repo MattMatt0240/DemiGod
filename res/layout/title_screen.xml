@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/wood_bttn_bg"
         android:text="Play" />
 
     <Button
@@ -26,6 +27,7 @@
         android:layout_above="@+id/bMainPlay"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/wood_bttn_bg"
         android:text="Status" />
 
     <Button
@@ -35,6 +37,7 @@
         android:layout_above="@+id/bStatus"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/wood_bttn_bg"
         android:text="Battle Log" />
 
     <Button
@@ -44,6 +47,7 @@
         android:layout_above="@+id/bBattleLog"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/wood_bttn_bg"
         android:text="Inventory" />
 
     <Button
@@ -53,6 +57,7 @@
         android:layout_above="@+id/bInventory"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/wood_bttn_bg"
         android:text="Battle" />
 
 </RelativeLayout>

@@ -27,7 +27,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/tvStatus_TitleBanner"
             android:layout_margin="15dp"
-            android:src="@drawable/shadow_knight_front1" />
+            android:src="@drawable/knight_male_front1" />
 
         <TableLayout
             android:id="@+id/tlStatus_Class"
