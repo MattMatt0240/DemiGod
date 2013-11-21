@@ -4,6 +4,7 @@ import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.DbHero;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
 import high.caliber.productions.demigod.utils.PrefsManager;
+import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -68,8 +69,6 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	private int heroAgility;
 	private int heroDexterity;
 
-	SharedPreferences battleLogPrefs;
-
 	LevelUpWorker lvlUp;
 
 	TextView hero_name, hero_level, hero_health, hero_energy, hero_exp,
@@ -98,7 +97,10 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	int damageDealt, lifeTimeDamageDealt, damageRecieved,
 			lifeTimeDamageRecieved;
 
-	boolean PlayerTurn;
+	boolean playerTurn;
+
+	PrefsManager prefManager;
+	BattleLogPrefs battlePrefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -144,16 +146,13 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 		lvlUp = new LevelUpWorker();
 
-		// Create BattleLog pref files if not exist
-		battleLogPrefs = getSharedPreferences(PrefsManager.getBattleLogPrefs(),
-				0);
-		damageDealt = battleLogPrefs.getInt(PrefsManager.getDamageDealt(), 0);
-		lifeTimeDamageDealt = battleLogPrefs.getInt(
-				PrefsManager.getLifeTimeDamageDealt(), 0);
-		damageRecieved = battleLogPrefs.getInt(
-				PrefsManager.getDamageRecieved(), 0);
-		lifeTimeDamageRecieved = battleLogPrefs.getInt(
-				PrefsManager.getLifetimeDamageRecieved(), 0);
+		prefManager = new PrefsManager(this);
+		battlePrefs = prefManager.new BattleLogPrefs();
+
+		damageDealt = battlePrefs.getDamageDealt();
+		lifeTimeDamageDealt = battlePrefs.getLifetimeDamageDealt();
+		damageRecieved = battlePrefs.getDamageRecieved();
+		lifeTimeDamageRecieved = battlePrefs.getLifetimeDamageRecieved();
 
 		// Initialize variables (TextViews, Buttons, & ProgressBars)
 		hero_name = (TextView) findViewById(R.id.tvBattle_Hero_Name);
@@ -214,13 +213,13 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		bDefend.setOnClickListener(this);
 
 		if (heroAgility >= enemyAgility) {
-			PlayerTurn = true;
+			playerTurn = true;
 		} else {
-			PlayerTurn = false;
+			playerTurn = false;
 			bAttack.setText("Enemy's Turn");
 		}
 
-		if (PlayerTurn == true) {
+		if (playerTurn == true) {
 			Toast.makeText(getApplicationContext(), "Your turn",
 					Toast.LENGTH_SHORT).show();
 		} else {
@@ -265,18 +264,11 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 			heroEnergy = heroEnergy - 1;
 
-			battleLogPrefs = getSharedPreferences(
-					PrefsManager.getBattleLogPrefs(), 0);
-			damageDealt = battleLogPrefs.getInt(PrefsManager.getDamageDealt(),
-					0);
-			lifeTimeDamageDealt = battleLogPrefs.getInt(
-					PrefsManager.getLifeTimeDamageDealt(), 0);
+			damageDealt = battlePrefs.getDamageDealt();
+			lifeTimeDamageDealt = battlePrefs.getLifetimeDamageDealt();
 
-			Editor editor = battleLogPrefs.edit();
-			editor.putInt(PrefsManager.getDamageDealt(), damageDealt + Damage);
-			editor.putInt(PrefsManager.getLifeTimeDamageDealt(),
-					lifeTimeDamageDealt + Damage);
-			editor.commit();
+			battlePrefs.addDamageDealt(damageDealt + Damage);
+			battlePrefs.addLifetimeDamageDealt(lifeTimeDamageDealt + Damage);
 		}
 
 		progBarHealth.setProgress(0);
@@ -306,34 +298,27 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 		bAttack.setText("Enemy's Turn");
 
-		PlayerTurn = false;
+		playerTurn = false;
 	}
 
 	// AI Attack Formula
 	public void EnemyAttack() {
 
-		int Damage = ((enemyAttack / heroPhDefense) + 1);
+		int damage = ((enemyAttack / heroPhDefense) + 1);
 
 		if (enemyEnergy <= 0) {
-			Damage = 0;
+			damage = 0;
 			enemyEnergy = enemyEnergy + 2;
 		} else {
 
-			heroHealth = heroHealth - Damage;
+			heroHealth = heroHealth - damage;
 
-			battleLogPrefs = getSharedPreferences(
-					PrefsManager.getBattleLogPrefs(), 0);
-			damageRecieved = battleLogPrefs.getInt(
-					PrefsManager.getDamageRecieved(), 0);
-			lifeTimeDamageRecieved = battleLogPrefs.getInt(
-					PrefsManager.getLifetimeDamageRecieved(), 0);
+			damageRecieved = battlePrefs.getDamageRecieved();
+			lifeTimeDamageRecieved = battlePrefs.getLifetimeDamageRecieved();
 
-			Editor editor = battleLogPrefs.edit();
-			editor.putInt(PrefsManager.getDamageRecieved(), damageRecieved
-					+ Damage);
-			editor.putInt(PrefsManager.getLifetimeDamageRecieved(),
-					lifeTimeDamageRecieved + Damage);
-			editor.commit();
+			battlePrefs.addDamageRecieved(damageRecieved + damage);
+			battlePrefs.addLifetimeDamageRecieved(lifeTimeDamageRecieved
+					+ damage);
 		}
 
 		progBarHealth.setProgress(0);
@@ -364,7 +349,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 		bAttack.setText("Attack");
 
-		PlayerTurn = true;
+		playerTurn = true;
 	}
 
 	public void Defend() {
@@ -379,7 +364,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		hero_energy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
 		heroPhDefense = heroPhDefense + 2;
 
-		PlayerTurn = false;
+		playerTurn = false;
 
 		EnemyAttack();
 	}
@@ -390,7 +375,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		// ATTACK BUTTON
 		if (v.getId() == R.id.bBattle_Attack) {
 
-			if (PlayerTurn == true) {
+			if (playerTurn == true) {
 				Attack();
 
 			} else {
@@ -406,11 +391,11 @@ public class Battle_Activity extends Activity implements OnClickListener {
 					.setText("Health: " + heroHealth + " / " + heroMaxHealth);
 			hero_energy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
 
-			if (PlayerTurn == true) {
+			if (playerTurn == true) {
 				Defend();
 				heroPhDefense = heroPhDefense - 2;
 			}
-			if (PlayerTurn == false) {
+			if (playerTurn == false) {
 				EnemyAttack();
 			}
 		}

@@ -2,6 +2,7 @@ package high.caliber.productions.demigod.activity;
 
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.utils.PrefsManager;
+import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -13,7 +14,8 @@ import android.widget.TextView;
 
 public class BattleLog extends Activity implements OnClickListener {
 
-	SharedPreferences prefs;
+	PrefsManager prefManager;
+	BattleLogPrefs battlePrefs;
 
 	TextView tvDamageDealt, tvLifeTimeDamageDealt, tvDamageRecieved,
 			tvLifeTimeDamageRecieved;
@@ -28,14 +30,13 @@ public class BattleLog extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.battle_log);
 
-		prefs = getSharedPreferences(PrefsManager.getBattleLogPrefs(), 0);
+		prefManager = new PrefsManager(this);
+		battlePrefs = prefManager.new BattleLogPrefs();
 
-		damageDealt = prefs.getInt(PrefsManager.getDamageDealt(), 0);
-		lifeTimeDamageDealt = prefs.getInt(
-				PrefsManager.getLifeTimeDamageDealt(), 0);
-		damageRecieved = prefs.getInt(PrefsManager.getDamageRecieved(), 0);
-		lifeTimeDamageRecieved = prefs.getInt(
-				PrefsManager.getLifetimeDamageRecieved(), 0);
+		damageDealt = battlePrefs.getDamageDealt();
+		lifeTimeDamageDealt = battlePrefs.getLifetimeDamageDealt();
+		damageRecieved = battlePrefs.getDamageRecieved();
+		lifeTimeDamageRecieved = battlePrefs.getLifetimeDamageRecieved();
 
 		tvDamageDealt = (TextView) findViewById(R.id.tvBattleLog_DamageDealt);
 		tvDamageDealt.setText(String.valueOf(damageDealt));
@@ -69,12 +70,8 @@ public class BattleLog extends Activity implements OnClickListener {
 	protected void onDestroy() {
 		super.onDestroy();
 
-		prefs = getSharedPreferences(PrefsManager.getBattleLogPrefs(), 0);
-
-		Editor editor = prefs.edit();
-		editor.putInt(PrefsManager.getDamageDealt(), 0);
-		editor.putInt(PrefsManager.getDamageRecieved(), 0);
-		editor.commit();
+		battlePrefs.addDamageDealt(0);
+		battlePrefs.addDamageRecieved(0);
 	}
 
 }
