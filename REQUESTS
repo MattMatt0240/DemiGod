@@ -1,0 +1,17 @@
+This game will take place in ~ midevil era + mild fantasy included. There will be no "filters"
+for profanity, gore, or humor (Mature Audience).
+
+ The hero will roam the "world" as in game's like Final Fantasy, or pokemon, with a similar battle
+ system. The battles will occur randomly while roaming "dangerous" areas in the world.
+ 
+ I need help in the following aspects:
+
+ * Maps (world, towns, buildings) I need to know if my method of "tiling" is efficient/effective
+ 
+ * Shops/inventory: Exchanging of items between shop (Item Database) and hero (Inventory Database).
+   Also, equipping items, such as armor or weapons from inventory
+   
+ * The actual Turn-Based mechanics. (Array of methods possible?)
+ 
+ * Player's party (up to 3 playable characters on hero's team)
+        + turn order

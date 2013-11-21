@@ -1,38 +1,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:padding="20dp"
-	android:layout_height="match_parent"
-	android:keepScreenOn="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:padding="20dp" >
 
     <TextView
-		android:id="@+id/tvMainHeader"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:text="@string/app_name"/>
+        android:id="@+id/tvMainHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name" />
 
     <Button
-		android:id="@+id/bMainPlay"
-		android:text="Play"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_alignParentBottom="true"/>
+        android:id="@+id/bMainPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Play" />
 
-	<Button android:id="@+id/bStatus"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_above="@+id/bMainPlay"
-		android:text="Status"
-		android:layout_marginBottom="10dp"/>
-	
-	<Button android:id="@+id/bBattleLog"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_above="@+id/bStatus"
-		android:text="Battle Log"
-		android:layout_marginBottom="10dp"/>
+    <Button
+        android:id="@+id/bStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bMainPlay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="Status" />
+
+    <Button
+        android:id="@+id/bBattleLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bStatus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="Battle Log" />
+
+    <Button
+        android:id="@+id/bInventory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bBattleLog"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="Inventory" />
 
 </RelativeLayout>

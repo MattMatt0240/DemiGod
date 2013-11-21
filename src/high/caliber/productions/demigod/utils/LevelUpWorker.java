@@ -12,47 +12,47 @@ public class LevelUpWorker {
 
 	}
 
-	static final String dbName = "Hero.db";
-	static final String statsTable = "Stats";
-	static final String colID = "_id";
-	static final String colClass = "Class";
-	static final String colName = "Name";
-	static final String colLevel = "Level";
-	static final String colExp = "Exp";
-	static final String colMaxExp = "MaxExp";
-	static final String colHealth = "Health";
-	static final String colMaxHealth = "MaxHealth";
-	static final String colEnergy = "Energy";
-	static final String colMaxEnergy = "MaxEnergy";
-	static final String colMana = "Mana";
-	static final String colMaxMana = "MaxMana";
-	static final String colAttack = "Attack";
-	static final String colMagic = "Magic";
-	static final String colPhDefense = "PhDefense";
-	static final String colMgDefense = "MgDefense";
-	static final String colAgility = "Agility";
-	static final String colDexterity = "Dexterity";
+	static final String dbName = DbHero.getDbName();
+	static final String statsTable = DbHero.getTableStats();
+	static final String colID = DbHero.COL_ID;
+	static final String colClass = DbHero.COL_CLASS;
+	static final String colName = DbHero.COL_NAME;
+	static final String colLevel = DbHero.COL_LVL;
+	static final String colExp = DbHero.COL_LVL;
+	static final String colMaxExp = DbHero.COL_MAX_EXP;
+	static final String colHealth = DbHero.COL_HEALTH;
+	static final String colMaxHealth = DbHero.COL_MAX_HEALTH;
+	static final String colEnergy = DbHero.COL_ENERGY;
+	static final String colMaxEnergy = DbHero.COL_MAX_ENERGY;
+	static final String colMana = DbHero.COL_MANA;
+	static final String colMaxMana = DbHero.COL_MAX_MANA;
+	static final String colAttack = DbHero.COL_ATTACK;
+	static final String colMagic = DbHero.COL_MAGIC;
+	static final String colPhDefense = DbHero.COL_PH_DEFENSE;
+	static final String colMgDefense = DbHero.COL_MG_DEFENSE;
+	static final String colAgility = DbHero.COL_AGILITY;
+	static final String colDexterity = DbHero.COL_DEXTERITY;
 
 	String Hero_Name, Hero_Class;
 
 	SQLiteDatabase db;
 	Cursor c;
 
-	int Hero_Level;
-	int Hero_Health;
-	int Hero_MaxHealth;
-	int Hero_Exp;
-	int Hero_MaxExp;
-	int Hero_Energy;
-	int Hero_MaxEnergy;
-	int Hero_Mana;
-	int Hero_MaxMana;
-	int Hero_Attack;
-	int Hero_Magic;
-	int Hero_PhDefense;
-	int Hero_MgDefense;
-	int Hero_Agility;
-	int Hero_Dexterity;
+	private int Hero_Level;
+	private int Hero_Health;
+	private int Hero_MaxHealth;
+	private int Hero_Exp;
+	private int Hero_MaxExp;
+	private int Hero_Energy;
+	private int Hero_MaxEnergy;
+	private int Hero_Mana;
+	private int Hero_MaxMana;
+	private int Hero_Attack;
+	private int Hero_Magic;
+	private int Hero_PhDefense;
+	private int Hero_MgDefense;
+	private int Hero_Agility;
+	private int Hero_Dexterity;
 
 	// Warrior Level-Up Algorithm
 	public void Warrior() {

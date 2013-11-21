@@ -19,8 +19,11 @@
 
 package high.caliber.productions.demigod.database;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -30,53 +33,32 @@ public class DbHero extends SQLiteOpenHelper {
 
 	private static final String DB_PATH = "data/data/high.caliber.productions.demigod/databases/Hero.db";
 	private static final String DB_NAME = "Hero.db";
+
 	private static final String TABLE_STATS = "Stats";
 	private static final String TABLE_INVENTORY = "Inventory";
 	private static final int DB_VERSION = 1;
 
-	private static final String COL_ID = "_id";
-	private static final String COL_CLASS = "Class"; // The hero's class
-														// (warrior, mage, or
-														// mercenary)
-	private static final String COL_NAME = "Name"; // User's chosen name for
-													// hero
-	private static final String COL_LVL = "Level"; // Hero's experience level
-	private static final String COL_EXP = "Exp"; // Hero's current experience
-													// points
-	private static final String COL_MAX_EXP = "MaxExp"; // Experience needed for
-														// the Hero to level-up
-	private static final String COL_HEALTH = "Health"; // Hero's current Health
-														// (reaches 0 = dead)
-	private static final String COL_MAX_HEALTH = "MaxHealth"; // Hero's max
-																// health
-	private static final String COL_ENERGY = "Energy"; // Hero's energy, used
-														// for performing moves
-														// in battle
-	private static final String COL_MAX_ENERGY = "MaxEnergy";
-	private static final String COL_MANA = "Mana"; // Hero's magic pool, used
-													// for performing magic
-													// abilities in battle
-	private static final String COL_MAX_MANA = "MaxMana";
-	private static final String COL_ATTACK = "Attack"; // Dictating factor in
-														// melee attacks damage
-														// output
-	private static final String COL_MAGIC = "Magic"; // Dictating factor in
-														// Magical attacks
-														// damage output
-	private static final String COL_PH_DEFENSE = "PhDefense"; // Resistance to
-																// physical
-																// damage
-	private static final String COL_MG_DEFENSE = "MgDefense"; // Resistance to
-																// Magical
-																// damage
-	private static final String COL_AGILITY = "Agility"; // Dictating factor in
-															// turn order (who
-															// goes 1st)
-	private static final String COL_DEXTERITY = "Dexterity"; // Dictating factor
-																// in critical
-																// hits, and
-																// evading/dodging
-																// attacks
+	public static final String COL_ID = "_id";
+	public static final String COL_CLASS = "Class";
+	public static final String COL_NAME = "Name";
+	public static final String COL_LVL = "Level";
+	public static final String COL_EXP = "Exp";
+	public static final String COL_MAX_EXP = "MaxExp";
+	public static final String COL_HEALTH = "Health";
+	public static final String COL_MAX_HEALTH = "MaxHealth";
+	public static final String COL_ENERGY = "Energy";
+	public static final String COL_MAX_ENERGY = "MaxEnergy";
+	public static final String COL_MANA = "Mana";
+	public static final String COL_MAX_MANA = "MaxMana";
+	public static final String COL_ATTACK = "Attack";
+	public static final String COL_MAGIC = "Magic";
+	public static final String COL_PH_DEFENSE = "PhDefense";
+	public static final String COL_MG_DEFENSE = "MgDefense";
+	public static final String COL_AGILITY = "Agility";
+	public static final String COL_DEXTERITY = "Dexterity";
+
+	public static final String COL_ITEM = "Item";
+	public static final String COL_QTY = "Quantity";
 
 	private static final String STATS_CREATE = ("CREATE TABLE " + TABLE_STATS
 			+ " (" + COL_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -87,9 +69,6 @@ public class DbHero extends SQLiteOpenHelper {
 			+ COL_MAX_MANA + " TEXT, " + COL_ATTACK + " TEXT, " + COL_MAGIC
 			+ " TEXT, " + COL_PH_DEFENSE + " TEXT, " + COL_MG_DEFENSE
 			+ " TEXT," + COL_AGILITY + " TEXT, " + COL_DEXTERITY + " TEXT)");
-
-	private static final String COL_ITEM = "Item";
-	private static final String COL_QTY = "Quantity";
 
 	private static final String INVENTORY_CREATE = ("CREATE TABLE "
 			+ TABLE_INVENTORY + " (" + COL_ID
@@ -104,107 +83,10 @@ public class DbHero extends SQLiteOpenHelper {
 		this.context = context;
 	}
 
-	public static String getCOL_DEXTERITY ()
-	{
-		return COL_DEXTERITY;
-	}
-
-	public static String getCOL_AGILITY ()
-	{
-		return COL_AGILITY;
-	}
-
-	public static String getCOL_MG_DEFENSE ()
-	{
-		return COL_MG_DEFENSE;
-	}
-
-	public static String getCOL_PH_DEFENSE ()
-	{
-		return COL_PH_DEFENSE;
-	}
-
-	public static String getCOL_MAGIC ()
-	{
-		return COL_MAGIC;
-	}
-
-	public static String getCOL_ATTACK ()
-	{
-		return COL_ATTACK;
-	}
-
-	public static String getCOL_MAX_MANA ()
-	{
-		return COL_MAX_MANA;
-	}
-
-	public static String getCOL_MANA ()
-	{
-		return COL_MANA;
-	}
-
-	public static String getCOL_MAX_ENERGY ()
-	{
-		return COL_MAX_ENERGY;
-	}
-
-	public static String getCOL_ENERGY ()
-	{
-		return COL_ENERGY;
-	}
-
-	public static String getCOL_MAX_HEALTH ()
-	{
-		return COL_MAX_HEALTH;
-	}
-
-	public static String getCOL_HEALTH ()
-	{
-		return COL_HEALTH;
-	}
-
-	public static String getCOL_MAX_EXP ()
-	{
-		return COL_MAX_EXP;
-	}
-
-	public static String getCOL_EXP ()
-	{
-		return COL_EXP;
-	}
-
-	public static String getCOL_LVL ()
-	{
-		return COL_LVL;
-	}
-
-	public static String getCOL_NAME ()
-	{
-		return COL_NAME;
-	}
-
-	public static String getCOL_CLASS ()
-	{
-		return COL_CLASS;
-	}
-
-	public static String getCOL_ID ()
-	{
-		return COL_ID;
-	}
-
-	
-
-	
-
-	
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(STATS_CREATE);
 		db.execSQL(INVENTORY_CREATE);
-
 	}
 
 	/**
@@ -249,22 +131,21 @@ public class DbHero extends SQLiteOpenHelper {
 		Log.d("Inventory Table", "Values Successfully Inserted Into Table");
 
 	}
-	
+
 	public void putTempHeroStats() {
 
 		try {
 
 			db = SQLiteDatabase.openDatabase(DB_PATH, null,
-											 SQLiteDatabase.OPEN_READWRITE);
+					SQLiteDatabase.OPEN_READWRITE);
 
-			Log.d("Stats Table",
-				  "Inserting Initial Hero Stats into Table");
+			Log.d("Stats Table", "Inserting Initial Hero Stats into Table");
 
 			ContentValues cv = new ContentValues();
 
 			cv.put(COL_ID, "1");
-			cv.put(COL_CLASS,"Mercenary");
-			cv.put(COL_NAME,"User");
+			cv.put(COL_CLASS, "Mercenary");
+			cv.put(COL_NAME, "User");
 			cv.put(COL_LVL, 1);
 			cv.put(COL_MAX_EXP, 100);
 			cv.put(COL_EXP, 15);
@@ -335,24 +216,42 @@ public class DbHero extends SQLiteOpenHelper {
 		return isCreated;
 
 	}
-	
-	public static String getPath()
-	{
+
+	public ArrayList<String> getInventory() {
+
+		db = SQLiteDatabase.openDatabase(DB_PATH, null,
+				SQLiteDatabase.OPEN_READWRITE);
+
+		Cursor c = db
+				.query(TABLE_INVENTORY, null, null, null, null, null, null);
+
+		ArrayList<String> item = new ArrayList<String>();
+		int rowItem = c.getColumnIndex(COL_ITEM);
+		int rowQty = c.getColumnIndex(COL_QTY);
+
+		item.add("Item" + "           " + "Qty");
+		item.trimToSize();
+
+		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+			item.add(c.getString(rowItem) + " " + c.getString(rowQty));
+		}
+		return item;
+	}
+
+	public static String getPath() {
 		return DB_PATH;
 	}
-	
-	public static String getDB_NAME ()
-	{
+
+	public static String getDbName() {
 		return DB_NAME;
 	}
-	
-	public static String getTABLE_STATS ()
-	{
+
+	public static String getTableStats() {
 		return TABLE_STATS;
 	}
-	
-	public static String getTABLE_INVENTORY ()
-	{
+
+	public static String getTableInventory() {
 		return TABLE_INVENTORY;
 	}
+
 }
