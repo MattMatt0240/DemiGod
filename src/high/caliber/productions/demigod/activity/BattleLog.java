@@ -4,8 +4,6 @@ import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.utils.PrefsManager;
 import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,9 +57,7 @@ public class BattleLog extends Activity implements OnClickListener {
 	public void onClick(View v) {
 
 		if (v.getId() == R.id.bBattleLog_Continue) {
-
 			finish();
-
 		}
 
 	}

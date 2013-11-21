@@ -8,8 +8,13 @@ for profanity, gore, or humor (Mature Audience).
 
  * Maps (world, towns, buildings) I need to know if my method of "tiling" is efficient/effective
  
+ * User interaction with NPC/AI characters (Dialog, recieving quests, etc...)
+ 
  * Shops/inventory: Exchanging of items between shop (Item Database) and hero (Inventory Database).
-   Also, equipping items, such as armor or weapons from inventory
+   
+    + equipping items, such as armor or weapons from inventory
+   
+    + "Inventory slots"
    
  * The actual Turn-Based mechanics. (Array of methods possible?)
  

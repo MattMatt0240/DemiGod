@@ -24,9 +24,10 @@
             android:id="@+id/ivStatus"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
             android:layout_below="@+id/tvStatus_TitleBanner"
+            android:layout_centerHorizontal="true"
             android:layout_margin="15dp"
+            android:adjustViewBounds="true"
             android:src="@drawable/knight_male_front1" />
 
         <TableLayout
@@ -34,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/ivStatus"
+            android:layout_below="@+id/tvStatus_TitleBanner"
             android:layout_marginBottom="5dp" >
 
             <TableRow
@@ -82,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
-                    android:text="gangsta"
+                    android:text="Player"
                     android:textColor="@color/white" />
             </TableRow>
         </TableLayout>

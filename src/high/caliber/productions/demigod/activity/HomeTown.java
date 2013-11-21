@@ -165,9 +165,9 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 	public void updateCoords() {
 		coordsWallVert = new int[][] {
 				{ xAnchor + (tileDimen * 2), yAnchor + (tileDimen * 3) },
-				{ xAnchor + (tileDimen * 4), yAnchor + (tileDimen * 3) },
+				{ xAnchor + (tileDimen * 3), yAnchor + (tileDimen * 3) },
 				{ xAnchor + (tileDimen * 5), yAnchor + (tileDimen * 3) } };
-		coordsDoor = new int[][] { { xAnchor + (tileDimen * 3),
+		coordsDoor = new int[][] { { xAnchor + (tileDimen * 4),
 				yAnchor + (tileDimen * 3) } };
 	}
 
@@ -376,8 +376,8 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					bLeftRect = new Rect(0, screenHeight - (buttonDimen * 2),
 							buttonDimen, screenHeight - buttonDimen);
 
-					Bitmap bUpTemp = getBitmapFromAssets(
-							"views/up_key.png", opts);
+					Bitmap bUpTemp = getBitmapFromAssets("views/up_key.png",
+							opts);
 					bUp = Bitmap.createScaledBitmap(bUpTemp, buttonDimen,
 							buttonDimen, true);
 					bUpTemp.recycle();
@@ -433,7 +433,6 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 
 					// Load memory-efficient Bitmaps
 					// grass
-
 					Bitmap tempGrass1 = getBitmapFromAssets(
 							"drawables/x32/tiles/grass1.png", opts);
 					grass1 = Bitmap.createScaledBitmap(tempGrass1, tileDimen,
@@ -442,7 +441,8 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					tempGrass1 = null;
 
 					Bitmap tempWallVert = getBitmapFromAssets(
-							"drawables/x32/objects/floor_wood_vertical.png", opts);
+							"drawables/x32/objects/floor_wood_vertical.png",
+							opts);
 					wallVert = Bitmap.createScaledBitmap(tempWallVert,
 							tileDimen, tileDimen, true);
 					tempWallVert.recycle();
@@ -468,11 +468,11 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					coordsWallVert = new int[][] {
 							{ xAnchor + (tileDimen * 2),
 									yAnchor + (tileDimen * 3) },
-							{ xAnchor + (tileDimen * 4),
+							{ xAnchor + (tileDimen * 3),
 									yAnchor + (tileDimen * 3) },
 							{ xAnchor + (tileDimen * 5),
 									yAnchor + (tileDimen * 3) } };
-					coordsDoor = new int[][] { { xAnchor + (tileDimen * 3),
+					coordsDoor = new int[][] { { xAnchor + (tileDimen * 4),
 							yAnchor + (tileDimen * 3) } };
 
 					hero = new Sprite(getBaseContext(), spriteHero,
