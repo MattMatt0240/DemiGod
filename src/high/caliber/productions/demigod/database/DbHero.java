@@ -19,6 +19,8 @@
 
 package high.caliber.productions.demigod.database;
 
+import high.caliber.productions.demigod.utils.InventoryData;
+
 import java.util.ArrayList;
 
 import android.content.ContentValues;
@@ -175,7 +177,12 @@ public class DbHero extends SQLiteOpenHelper {
 
 	}
 
-	public ArrayList<String> getInventory() {
+	/**
+	 * Retrieves all inventory items, and adds them to custom ListAdapter
+	 * 
+	 * @return InventoryData ArrayList
+	 */
+	public ArrayList<InventoryData> getInventory() {
 
 		db = SQLiteDatabase.openDatabase(DB_PATH, null,
 				SQLiteDatabase.OPEN_READWRITE);
@@ -183,17 +190,19 @@ public class DbHero extends SQLiteOpenHelper {
 		Cursor c = db
 				.query(TABLE_INVENTORY, null, null, null, null, null, null);
 
-		ArrayList<String> item = new ArrayList<String>();
+		ArrayList<InventoryData> data = new ArrayList<InventoryData>();
 		int rowItem = c.getColumnIndex(COL_ITEM);
 		int rowQty = c.getColumnIndex(COL_QTY);
 
-		item.add("Item" + "           " + "Qty");
-		item.trimToSize();
-
+		data = new ArrayList<InventoryData>();
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-			item.add(c.getString(rowItem) + " " + c.getString(rowQty));
+			InventoryData datas = new InventoryData();
+			datas.item = c.getString(rowItem);
+			datas.quantity = c.getString(rowQty);
+			data.add(datas);
+
 		}
-		return item;
+		return data;
 	}
 
 	public static String getPath() {
