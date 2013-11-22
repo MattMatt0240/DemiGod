@@ -28,15 +28,19 @@ true origins...
  
  WORKING SO FAR:
  
- * Database initialization
- 
- * Character creation in the works (Name hero, choose class)
+ * Stats and Inventory Databases
+ * Character creation (Choose name and class)
+ * Simple Battle mechanics
+ * Level-ups
+ * Status Screen
  
  IDEAS:
- 
- * Xml-based index of all items
- 
- * String resource vs. xml files for diologue
+
+ * Shops
+ * 3 members in the party
+ * Loot chest in Hero's home
+
+ Also look at REQUESTS file for further information
  
  
  
