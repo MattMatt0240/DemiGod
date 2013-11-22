@@ -81,10 +81,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 		}
 
 		if (v.getId() == R.id.bDeleteGame) {
-			SQLiteDatabase db = SQLiteDatabase.openDatabase(DbHero.getPath(),
-					null, SQLiteDatabase.OPEN_READWRITE);
-			db.delete(DbHero.getTableStats(), null, null);
-			db.close();
+			deleteDatabase(DbHero.getDbName());
 
 			SharedPreferences prefs = getSharedPreferences(
 					BattleLogPrefs.BATTLE_LOG, 0);
@@ -145,7 +142,6 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 					if (heroDbHelper.isCreated() == false) {
 						SQLiteDatabase db = heroDbHelper.getWritableDatabase();
-						heroDbHelper.PopulateInventoryFields();
 						heroDbHelper.close();
 						db.close();
 					}

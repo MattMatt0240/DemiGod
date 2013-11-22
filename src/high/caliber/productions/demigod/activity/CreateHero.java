@@ -22,6 +22,9 @@ public class CreateHero extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_hero);
 
+		final DbHero helper = new DbHero(CreateHero.this);
+		final SQLiteDatabase db = helper.getWritableDatabase();
+
 		final EditText editTxtName = (EditText) findViewById(R.id.etCreateHeroName);
 
 		final Spinner listClasses = (Spinner) findViewById(R.id.spinnerCreateHeroClasses);
@@ -39,12 +42,10 @@ public class CreateHero extends Activity {
 
 				String name = editTxtName.getText().toString();
 
-				if (name == null) {
+				if (name.isEmpty()) {
 					Toast.makeText(CreateHero.this, "Surely you have a name?",
 							Toast.LENGTH_SHORT).show();
 				} else {
-					SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(
-							DbHero.getPath(), null);
 					ContentValues cv = new ContentValues();
 
 					cv.put(DbHero.COL_ID, "1");
@@ -120,6 +121,10 @@ public class CreateHero extends Activity {
 						db.close();
 
 					}
+
+					helper.PopulateInventoryFields();
+					helper.close();
+					db.close();
 					startActivity(new Intent(CreateHero.this,
 							Battle_Activity.class));
 					finish();
