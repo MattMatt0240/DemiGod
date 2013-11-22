@@ -12,26 +12,26 @@ public class LevelUpWorker {
 
 	}
 
-	static final String dbName = DbHero.getDbName();
-	static final String statsTable = DbHero.getTableStats();
-	static final String colID = DbHero.COL_ID;
-	static final String colClass = DbHero.COL_CLASS;
-	static final String colName = DbHero.COL_NAME;
-	static final String colLevel = DbHero.COL_LVL;
-	static final String colExp = DbHero.COL_EXP;
-	static final String colMaxExp = DbHero.COL_MAX_EXP;
-	static final String colHealth = DbHero.COL_HEALTH;
-	static final String colMaxHealth = DbHero.COL_MAX_HEALTH;
-	static final String colEnergy = DbHero.COL_ENERGY;
-	static final String colMaxEnergy = DbHero.COL_MAX_ENERGY;
-	static final String colMana = DbHero.COL_MANA;
-	static final String colMaxMana = DbHero.COL_MAX_MANA;
-	static final String colAttack = DbHero.COL_ATTACK;
-	static final String colMagic = DbHero.COL_MAGIC;
-	static final String colPhDefense = DbHero.COL_PH_DEFENSE;
-	static final String colMgDefense = DbHero.COL_MG_DEFENSE;
-	static final String colAgility = DbHero.COL_AGILITY;
-	static final String colDexterity = DbHero.COL_DEXTERITY;
+	static final String dbName = HeroDb.getDbName();
+	static final String statsTable = HeroDb.getTableStats();
+	static final String colID = HeroDb.COL_ID;
+	static final String colClass = HeroDb.COL_CLASS;
+	static final String colName = HeroDb.COL_NAME;
+	static final String colLevel = HeroDb.COL_LVL;
+	static final String colExp = HeroDb.COL_EXP;
+	static final String colMaxExp = HeroDb.COL_MAX_EXP;
+	static final String colHealth = HeroDb.COL_HEALTH;
+	static final String colMaxHealth = HeroDb.COL_MAX_HEALTH;
+	static final String colEnergy = HeroDb.COL_ENERGY;
+	static final String colMaxEnergy = HeroDb.COL_MAX_ENERGY;
+	static final String colMana = HeroDb.COL_MANA;
+	static final String colMaxMana = HeroDb.COL_MAX_MANA;
+	static final String colAttack = HeroDb.COL_ATTACK;
+	static final String colMagic = HeroDb.COL_MAGIC;
+	static final String colPhDefense = HeroDb.COL_PH_DEFENSE;
+	static final String colMgDefense = HeroDb.COL_MG_DEFENSE;
+	static final String colAgility = HeroDb.COL_AGILITY;
+	static final String colDexterity = HeroDb.COL_DEXTERITY;
 
 	String heroName, heroClass;
 
@@ -57,7 +57,7 @@ public class LevelUpWorker {
 	// Warrior Level-Up Algorithm
 	public void Warrior() {
 
-		db = SQLiteDatabase.openDatabase(DbHero.getPath(), null,
+		db = SQLiteDatabase.openDatabase(HeroDb.getPath(), null,
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(
@@ -138,7 +138,7 @@ public class LevelUpWorker {
 	// Mage Level-Up Algorithm
 	public void Mage() {
 
-		db = SQLiteDatabase.openDatabase(DbHero.getPath(), null,
+		db = SQLiteDatabase.openDatabase(HeroDb.getPath(), null,
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(
@@ -218,7 +218,7 @@ public class LevelUpWorker {
 	// Mercenary Level-Up Algorithm
 	public void Mercenary() {
 
-		db = SQLiteDatabase.openDatabase(DbHero.getPath(), null,
+		db = SQLiteDatabase.openDatabase(HeroDb.getPath(), null,
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(

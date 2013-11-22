@@ -1,7 +1,7 @@
 package high.caliber.productions.demigod.activity;
 
 import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.database.DbHero;
+import high.caliber.productions.demigod.database.HeroDb;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,30 +11,30 @@ import android.widget.TextView;
 
 public class Status extends Activity {
 
-	static final String dbName = DbHero.getDbName();
-	static final String statsTable = DbHero.getTableStats();
-	static final String colID = DbHero.COL_ID;
-	static final String colClass = DbHero.COL_CLASS;
-	static final String colName = DbHero.COL_NAME;
-	static final String colLevel = DbHero.COL_LVL;
-	static final String colExp = DbHero.COL_EXP;
-	static final String colMaxExp = DbHero.COL_MAX_EXP;
-	static final String colHealth = DbHero.COL_HEALTH;
-	static final String colMaxHealth = DbHero.COL_MAX_HEALTH;
-	static final String colEnergy = DbHero.COL_ENERGY;
-	static final String colMaxEnergy = DbHero.COL_MAX_ENERGY;
-	static final String colMana = DbHero.COL_MANA;
-	static final String colMaxMana = DbHero.COL_MAX_MANA;
-	static final String colAttack = DbHero.COL_ATTACK;
-	static final String colMagic = DbHero.COL_MAGIC;
-	static final String colPhDefense = DbHero.COL_PH_DEFENSE;
-	static final String colMgDefense = DbHero.COL_MG_DEFENSE;
-	static final String colAgility = DbHero.COL_AGILITY;
-	static final String colDexterity = DbHero.COL_DEXTERITY;
+	static final String dbName = HeroDb.getDbName();
+	static final String statsTable = HeroDb.getTableStats();
+	static final String colID = HeroDb.COL_ID;
+	static final String colClass = HeroDb.COL_CLASS;
+	static final String colName = HeroDb.COL_NAME;
+	static final String colLevel = HeroDb.COL_LVL;
+	static final String colExp = HeroDb.COL_EXP;
+	static final String colMaxExp = HeroDb.COL_MAX_EXP;
+	static final String colHealth = HeroDb.COL_HEALTH;
+	static final String colMaxHealth = HeroDb.COL_MAX_HEALTH;
+	static final String colEnergy = HeroDb.COL_ENERGY;
+	static final String colMaxEnergy = HeroDb.COL_MAX_ENERGY;
+	static final String colMana = HeroDb.COL_MANA;
+	static final String colMaxMana = HeroDb.COL_MAX_MANA;
+	static final String colAttack = HeroDb.COL_ATTACK;
+	static final String colMagic = HeroDb.COL_MAGIC;
+	static final String colPhDefense = HeroDb.COL_PH_DEFENSE;
+	static final String colMgDefense = HeroDb.COL_MG_DEFENSE;
+	static final String colAgility = HeroDb.COL_AGILITY;
+	static final String colDexterity = HeroDb.COL_DEXTERITY;
 
 	String heroName, heroClass;
 
-	DbHero heroDbHelper;
+	HeroDb heroDbHelper;
 	SQLiteDatabase db;
 	Cursor c;
 
@@ -64,7 +64,7 @@ public class Status extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.status_screen);
 
-		heroDbHelper = new DbHero(this);
+		heroDbHelper = new HeroDb(this);
 		db = heroDbHelper.getWritableDatabase();
 
 		c = db.rawQuery(

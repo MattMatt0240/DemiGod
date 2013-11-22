@@ -19,10 +19,15 @@
 
 package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.database.EnemyDB;
+import high.caliber.productions.demigod.database.HeroDb;
+import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
@@ -33,10 +38,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.database.DbHero;
-import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 
 public class TitleScreen extends Activity implements View.OnClickListener {
 
@@ -81,7 +82,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 		}
 
 		if (v.getId() == R.id.bDeleteGame) {
-			deleteDatabase(DbHero.getDbName());
+			deleteDatabase(HeroDb.getDbName());
 
 			SharedPreferences prefs = getSharedPreferences(
 					BattleLogPrefs.BATTLE_LOG, 0);
@@ -138,20 +139,23 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 				while (progressCounter < 100) {
 
-					DbHero heroDbHelper = new DbHero(getApplicationContext());
+					EnemyDB enemyDbHelper = new EnemyDB(TitleScreen.this);
 
-					if (heroDbHelper.isCreated() == false) {
-						SQLiteDatabase db = heroDbHelper.getWritableDatabase();
-						heroDbHelper.close();
-						db.close();
+					if (!(enemyDbHelper.isCreated())) {
+						SQLiteDatabase enemyDb = enemyDbHelper
+								.getWritableDatabase();
+
+						enemyDbHelper.PopulateCommonTable(enemyDb);
+
+						enemyDbHelper.close();
+						enemyDb.close();
 					}
 
 					progressCounter = 50;
-
 					publishProgress(progressCounter);
 
 					try {
-						wait(1000);
+						wait(800);
 						progressCounter = 100;
 						publishProgress(progressCounter);
 					} catch (InterruptedException e) {
@@ -200,6 +204,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 			bDeleteGame = (Button) findViewById(R.id.bDeleteGame);
 			bDeleteGame.setOnClickListener(TitleScreen.this);
+
 		}
 	}
 

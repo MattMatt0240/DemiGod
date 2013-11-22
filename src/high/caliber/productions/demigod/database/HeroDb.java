@@ -31,7 +31,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DbHero extends SQLiteOpenHelper {
+public class HeroDb extends SQLiteOpenHelper {
 
 	private static final String DB_PATH = "data/data/high.caliber.productions.demigod/databases/Hero.db";
 	private static final String DB_NAME = "Hero.db";
@@ -80,7 +80,7 @@ public class DbHero extends SQLiteOpenHelper {
 	private static SQLiteDatabase db;
 	Context context;
 
-	public DbHero(Context context) {
+	public HeroDb(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.context = context;
 	}
@@ -136,7 +136,7 @@ public class DbHero extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.w(DbHero.class.getName(), "Upgrading database from version "
+		Log.w(HeroDb.class.getName(), "Upgrading database from version "
 				+ oldVersion + " to " + newVersion
 				+ ", which will destroy all old data");
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATS);

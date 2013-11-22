@@ -1,7 +1,7 @@
 package high.caliber.productions.demigod.activity;
 
 import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.database.DbHero;
+import high.caliber.productions.demigod.database.HeroDb;
 import high.caliber.productions.demigod.utils.InventoryAdapter;
 import high.caliber.productions.demigod.utils.InventoryData;
 
@@ -16,10 +16,10 @@ public class Inventory extends Activity {
 
 	SQLiteDatabase heroDb;
 
-	DbHero heroDbHelper;
+	HeroDb heroDbHelper;
 
-	static final String colItem = DbHero.COL_ITEM;
-	static final String colQty = DbHero.COL_QTY;
+	static final String colItem = HeroDb.COL_ITEM;
+	static final String colQty = HeroDb.COL_QTY;
 
 	private ArrayList<InventoryData> listData;
 	private InventoryAdapter inventoryAdapter;
@@ -30,7 +30,7 @@ public class Inventory extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.inventory);
 
-		heroDbHelper = new DbHero(this);
+		heroDbHelper = new HeroDb(this);
 		heroDb = heroDbHelper.getWritableDatabase();
 
 		listData = heroDbHelper.getInventory();
