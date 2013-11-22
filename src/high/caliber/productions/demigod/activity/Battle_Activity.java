@@ -98,7 +98,6 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.battle);
 
-		enemy = new Enemy();
 		EnemyDB enemyDbHelper = new EnemyDB(this);
 		enemyDb = enemyDbHelper.getWritableDatabase();
 		Random rand = new Random();
@@ -107,6 +106,8 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		int enemyIndex = rand.nextInt(3) + 1;
 
 		Cursor c = enemyDbHelper.getCommonEnemy(enemyIndex);
+
+		enemy = new Enemy();
 
 		enemy._class = c.getString(Enemy.CLASS_INDEX);
 		enemy.name = c.getString(Enemy.NAME_INDEX);
@@ -233,9 +234,12 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 		if (heroAgility >= enemy.agility) {
 			playerTurn = true;
+			enemy.isEnemyTurn = false;
 		} else {
 			playerTurn = false;
 			bAttack.setText("Enemy's Turn");
+			enemy.isEnemyTurn = true;
+			// enemy.chooseAction();
 		}
 
 		if (playerTurn == true) {

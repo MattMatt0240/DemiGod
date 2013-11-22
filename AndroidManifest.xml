@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="high.caliber.productions.demigod.activity.HeroHome"
+            android:name="high.caliber.productions.demigod.activity.Home"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity

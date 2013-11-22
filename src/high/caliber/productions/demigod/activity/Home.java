@@ -52,7 +52,7 @@ import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.drawing.Sprite;
 import high.caliber.productions.demigod.drawing.Tile;
  
-public class HeroHome extends Activity implements View.OnTouchListener {
+public class Home extends Activity implements View.OnTouchListener {
 
 	private static int tileDimen;
 	private WorldCanvas worldCanvas;
@@ -182,7 +182,7 @@ public class HeroHome extends Activity implements View.OnTouchListener {
 				if (!(perimeterRect.contains(heroRect))) {
 					if (hero.getX() == tileDimen * 4
 							&& hero.getY() == tileDimen * 7) {
-						startActivity(new Intent(HeroHome.this, HomeTown.class));
+						startActivity(new Intent(Home.this, HomeTown.class));
 						finish();
 					} else {
 						hero.setY(hero.getY() - tileDimen);

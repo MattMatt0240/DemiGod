@@ -32,4 +32,40 @@ public class Enemy {
 	public int agility;
 	public int dexterity;
 
+	public boolean isEnemyTurn = false;
+
+	/**
+	 * Simple melee attack
+	 * 
+	 * @return Enemy's Attack value
+	 */
+	public int Attack() {
+		return this.attack;
+	}
+
+	/**
+	 * Simple defend option that boosts enemy's physical defense +2 for a turn
+	 */
+	public void Defend() {
+
+		if (this.isEnemyTurn) {
+			this.phDefense += 2;
+		}
+
+	}
+
+	/**
+	 * Simple AI mechanics, needs much more attention on return values/detailed
+	 * "thought" for AI
+	 */
+	public void chooseAction() {
+		if (this.health > 5) {
+			Attack();
+
+		} else {
+			Defend();
+		}
+
+	}
+
 }

@@ -58,7 +58,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 	public void onClick(View v) {
 
 		if (v.getId() == R.id.bMainPlay) {
-			startActivity(new Intent(TitleScreen.this, HeroHome.class));
+			startActivity(new Intent(TitleScreen.this, Home.class));
 		}
 
 		if (v.getId() == R.id.bStatus) {
