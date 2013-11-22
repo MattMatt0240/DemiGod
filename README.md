@@ -31,8 +31,11 @@ true origins...
  * Stats and Inventory Databases
  * Character creation (Choose name and class)
  * Simple Battle mechanics
+ * Enemy Database
+ * Random enemy from database used in battles
  * Level-ups
  * Status Screen
+ * Viewing pre-populated Inventory (No using/exchanging items yet)
  
  IDEAS:
 
