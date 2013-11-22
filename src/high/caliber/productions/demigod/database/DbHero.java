@@ -132,48 +132,6 @@ public class DbHero extends SQLiteOpenHelper {
 
 	}
 
-	public void putTempHeroStats() {
-
-		try {
-
-			db = SQLiteDatabase.openDatabase(DB_PATH, null,
-					SQLiteDatabase.OPEN_READWRITE);
-
-			Log.d("Stats Table", "Inserting Initial Hero Stats into Table");
-
-			ContentValues cv = new ContentValues();
-
-			cv.put(COL_ID, "1");
-			cv.put(COL_CLASS, "Mercenary");
-			cv.put(COL_NAME, "User");
-			cv.put(COL_LVL, 1);
-			cv.put(COL_MAX_EXP, 100);
-			cv.put(COL_EXP, 15);
-			cv.put(COL_MAX_HEALTH, 120);
-			cv.put(COL_HEALTH, 110);
-			cv.put(COL_MAX_ENERGY, 25);
-			cv.put(COL_ENERGY, 20);
-			cv.put(COL_MAX_MANA, 10);
-			cv.put(COL_MANA, 8);
-			cv.put(COL_ATTACK, 6);
-			cv.put(COL_MAGIC, 2);
-			cv.put(COL_PH_DEFENSE, 5);
-			cv.put(COL_MG_DEFENSE, 3);
-			cv.put(COL_AGILITY, 5);
-			cv.put(COL_DEXTERITY, 3);
-
-			db.insert(TABLE_STATS, COL_ID, cv);
-			db.close();
-		} catch (SQLiteException e) {
-			Log.d("Stats Table", "Error Inserting Values");
-
-		}
-
-		db.close();
-		Log.d("Stats Table", "Values Successfully Inserted Into Table");
-
-	}
-
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.w(DbHero.class.getName(), "Upgrading database from version "

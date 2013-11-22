@@ -60,4 +60,24 @@
         android:background="@drawable/wood_bttn_bg"
         android:text="Battle" />
 
+    <Button
+        android:id="@+id/bCreateHero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/wood_bttn_bg"
+        android:text="Create Hero" />
+
+    <Button
+        android:id="@+id/bDeleteGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bCreateHero"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/wood_bttn_bg"
+        android:text="Delete Game" />
+
 </RelativeLayout>

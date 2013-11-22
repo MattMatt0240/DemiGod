@@ -21,6 +21,8 @@ package high.caliber.productions.demigod.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
@@ -30,16 +32,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.DbHero;
+import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 
 public class TitleScreen extends Activity implements View.OnClickListener {
 
 	ProgressBar progbar;
 	ImageView loadingSprite;
 	TextView tvMainTitle;
-	Button bPlay, bStatus, bBattleLog, bInventory, bBattle;
+	Button bPlay, bStatus, bBattleLog, bInventory, bBattle, bCreateHero,
+			bDeleteGame;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,26 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 		if (v.getId() == R.id.bBattle) {
 			startActivity(new Intent(TitleScreen.this, Battle_Activity.class));
+		}
+
+		if (v.getId() == R.id.bCreateHero) {
+			startActivity(new Intent(TitleScreen.this, CreateHero.class));
+		}
+
+		if (v.getId() == R.id.bDeleteGame) {
+			SQLiteDatabase db = SQLiteDatabase.openDatabase(DbHero.getPath(),
+					null, SQLiteDatabase.OPEN_READWRITE);
+			db.delete(DbHero.getTableStats(), null, null);
+			db.close();
+
+			SharedPreferences prefs = getSharedPreferences(
+					BattleLogPrefs.BATTLE_LOG, 0);
+			Editor editor = prefs.edit();
+			editor.clear();
+			editor.commit();
+
+			Toast.makeText(this, "Succesfully deleted game data",
+					Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -121,7 +146,6 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 					if (heroDbHelper.isCreated() == false) {
 						SQLiteDatabase db = heroDbHelper.getWritableDatabase();
 						heroDbHelper.PopulateInventoryFields();
-						heroDbHelper.putTempHeroStats();
 						heroDbHelper.close();
 						db.close();
 					}
@@ -174,6 +198,12 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 			bBattle = (Button) findViewById(R.id.bBattle);
 			bBattle.setOnClickListener(TitleScreen.this);
+
+			bCreateHero = (Button) findViewById(R.id.bCreateHero);
+			bCreateHero.setOnClickListener(TitleScreen.this);
+
+			bDeleteGame = (Button) findViewById(R.id.bDeleteGame);
+			bDeleteGame.setOnClickListener(TitleScreen.this);
 		}
 	}
 
