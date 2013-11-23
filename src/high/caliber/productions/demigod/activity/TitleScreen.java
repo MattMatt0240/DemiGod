@@ -23,6 +23,7 @@ import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.database.ItemDB;
+import high.caliber.productions.demigod.settings.SettingsMain;
 import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 import android.app.Activity;
 import android.content.Intent;
@@ -32,6 +33,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -52,6 +56,25 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 
 		new DatabaseCreator().execute();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.titlescreen_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.menu_title_settings:
+			startActivity(new Intent(TitleScreen.this, SettingsMain.class));
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override

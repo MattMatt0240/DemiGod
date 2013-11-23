@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:persistent="true"
+    android:title="Settings" >
+
+    <PreferenceCategory android:title="Virtual D-Pad" >
+        <Preference
+            android:key="dPadSize"
+            android:title="D-Pad Size" />
+        <Preference
+            android:key="dPadPosition"
+            android:title="D-Pad Position" >
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
