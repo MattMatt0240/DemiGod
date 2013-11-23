@@ -20,17 +20,14 @@
 package high.caliber.productions.demigod.activity;
 
 import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.R.drawable;
-import high.caliber.productions.demigod.R.id;
-import high.caliber.productions.demigod.R.layout;
 import high.caliber.productions.demigod.database.EnemyDB;
-import high.caliber.productions.demigod.database.HeroDb;
+import high.caliber.productions.demigod.database.HeroDB;
+import high.caliber.productions.demigod.database.ItemDB;
 import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
@@ -85,7 +82,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 		}
 
 		if (v.getId() == R.id.bDeleteGame) {
-			deleteDatabase(HeroDb.getDbName());
+			deleteDatabase(HeroDB.getDbName());
 
 			SharedPreferences prefs = getSharedPreferences(
 					BattleLogPrefs.BATTLE_LOG, 0);
@@ -148,14 +145,34 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 						SQLiteDatabase enemyDb = enemyDbHelper
 								.getWritableDatabase();
 
+						progressCounter = 15;
+						publishProgress(progressCounter);
+
 						enemyDbHelper.PopulateCommonTable(enemyDb);
 
 						enemyDbHelper.close();
 						enemyDb.close();
 					}
-
-					progressCounter = 50;
+					progressCounter = 15;
 					publishProgress(progressCounter);
+
+					ItemDB itemDbHelper = new ItemDB(TitleScreen.this);
+					if (!(itemDbHelper.isCreated())) {
+						SQLiteDatabase itemDb = itemDbHelper
+								.getWritableDatabase();
+
+						itemDbHelper.PopulateArmorTable();
+						progressCounter = 25;
+						publishProgress(progressCounter);
+
+						itemDbHelper.PopulateWeaponsTable();
+						progressCounter = 35;
+						publishProgress(progressCounter);
+
+						itemDbHelper.PopulateConsumablesTable();
+						progressCounter = 45;
+						publishProgress(progressCounter);
+					}
 
 					try {
 						wait(800);

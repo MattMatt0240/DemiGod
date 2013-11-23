@@ -5,7 +5,7 @@ import java.util.Random;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.characters.Enemy;
 import high.caliber.productions.demigod.database.EnemyDB;
-import high.caliber.productions.demigod.database.HeroDb;
+import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
 import high.caliber.productions.demigod.utils.PrefsManager;
 import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
@@ -24,33 +24,33 @@ import android.widget.Toast;
 
 public class Battle_Activity extends Activity implements OnClickListener {
 
-	static final String dbPath = HeroDb.getPath();
-	static final String dbName = HeroDb.getDbName();
-	static final String statsTable = HeroDb.getTableStats();
-	static final String inventoryTable = HeroDb.getTableInventory();
+	static final String dbPath = HeroDB.getPath();
+	static final String dbName = HeroDB.getDbName();
+	static final String statsTable = HeroDB.getTableStats();
+	static final String inventoryTable = HeroDB.getTableInventory();
 
-	static final String colID = HeroDb.COL_ID;
-	static final String colClass = HeroDb.COL_CLASS;
-	static final String colName = HeroDb.COL_NAME;
-	static final String colLevel = HeroDb.COL_LVL;
-	static final String colExp = HeroDb.COL_EXP;
-	static final String colMaxExp = HeroDb.COL_MAX_EXP;
-	static final String colHealth = HeroDb.COL_HEALTH;
-	static final String colMaxHealth = HeroDb.COL_MAX_HEALTH;
-	static final String colEnergy = HeroDb.COL_ENERGY;
-	static final String colMaxEnergy = HeroDb.COL_MAX_ENERGY;
-	static final String colMana = HeroDb.COL_MANA;
-	static final String colMaxMana = HeroDb.COL_MAX_MANA;
-	static final String colAttack = HeroDb.COL_ATTACK;
-	static final String colMagic = HeroDb.COL_MAGIC;
-	static final String colPhDefense = HeroDb.COL_PH_DEFENSE;
-	static final String colMgDefense = HeroDb.COL_MG_DEFENSE;
-	static final String colAgility = HeroDb.COL_AGILITY;
-	static final String colDexterity = HeroDb.COL_DEXTERITY;
+	static final String colID = HeroDB.COL_ID;
+	static final String colClass = HeroDB.COL_CLASS;
+	static final String colName = HeroDB.COL_NAME;
+	static final String colLevel = HeroDB.COL_LVL;
+	static final String colExp = HeroDB.COL_EXP;
+	static final String colMaxExp = HeroDB.COL_MAX_EXP;
+	static final String colHealth = HeroDB.COL_HEALTH;
+	static final String colMaxHealth = HeroDB.COL_MAX_HEALTH;
+	static final String colEnergy = HeroDB.COL_ENERGY;
+	static final String colMaxEnergy = HeroDB.COL_MAX_ENERGY;
+	static final String colMana = HeroDB.COL_MANA;
+	static final String colMaxMana = HeroDB.COL_MAX_MANA;
+	static final String colAttack = HeroDB.COL_ATTACK;
+	static final String colMagic = HeroDB.COL_MAGIC;
+	static final String colPhDefense = HeroDB.COL_PH_DEFENSE;
+	static final String colMgDefense = HeroDB.COL_MG_DEFENSE;
+	static final String colAgility = HeroDB.COL_AGILITY;
+	static final String colDexterity = HeroDB.COL_DEXTERITY;
 
 	String heroName, heroClass;
 
-	HeroDb heroDbHelper;
+	HeroDB heroDbHelper;
 
 	SQLiteDatabase heroDb, enemyDb;
 	Cursor c;
@@ -126,7 +126,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		enemyMaxHealth = enemy.health;
 		enemyMaxEnergy = enemy.energy;
 
-		heroDbHelper = new HeroDb(this);
+		heroDbHelper = new HeroDB(this);
 		heroDb = heroDbHelper.getWritableDatabase();
 
 		c = heroDb
