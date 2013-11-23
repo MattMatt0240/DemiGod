@@ -110,6 +110,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 
 				// If move won't put hero out of bounds
 				if (hero.getX() - (tileDimen * 2) >= 0) {
+
 					hero.setX(hero.getX() - tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
 							+ tileDimen, hero.getY() + tileDimen);
@@ -125,13 +126,16 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					&& y >= bUpRect.top && y <= bUpRect.bottom) {
 
 				// If move won't put hero out of bounds
-				if (hero.getY() - (tileDimen * 2) >= 0) {
+				if (hero.getY() - (tileDimen * 2) >= 0
+						&& perimeterRect.contains(heroRect)) {
+
 					hero.setY(hero.getY() - tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
 							+ tileDimen, hero.getY() + tileDimen);
 				} else {
 					yAnchor += tileDimen;
 				}
+
 				updateCoords();
 
 				// Right Key Touched
@@ -139,29 +143,35 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					&& y >= bRightRect.top && y <= bRightRect.bottom) {
 
 				// If move won't put hero out of bounds
-				if (hero.getX() + (tileDimen * 2) <= screenWidth) {
+				if (hero.getX() + (tileDimen * 2) <= screenWidth
+						&& perimeterRect.contains(heroRect)) {
+
 					hero.setX(hero.getX() + tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
 							+ tileDimen, hero.getY() + tileDimen);
 				} else {
 					xAnchor -= tileDimen;
-					updateCoords();
 				}
+
+				updateCoords();
 
 				// Down Key Touched
 			} else if (x <= bDownRect.right && x >= bDownRect.left
 					&& y >= bDownRect.top && y <= bDownRect.bottom) {
 
 				// If move won't put hero out of bounds
-				if (hero.getY() + (tileDimen * 2) <= screenHeight) {
+				if (hero.getY() + (tileDimen * 2) <= screenHeight
+						&& perimeterRect.contains(heroRect)) {
+
 					hero.setY(hero.getY() + tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
 							+ tileDimen, hero.getY() + tileDimen);
 
 				} else {
 					yAnchor -= tileDimen;
-					updateCoords();
 				}
+
+				updateCoords();
 			}
 
 			break;
@@ -193,8 +203,15 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 				{ xAnchor + (tileDimen * 7), yAnchor + (tileDimen * 3) } };
 		coordsDoor = new int[][] { { xAnchor + (tileDimen * 4),
 				yAnchor + (tileDimen * 3) } };
+
+		perimeterRect.set(xAnchor - tileDimen, yAnchor - tileDimen, xAnchor
+				+ (tileDimen * 50), yAnchor + (tileDimen * 50));
 	}
 
+	/**
+	 * Does the drawing of HomeTown
+	 * 
+	 */
 	private class HomeTownCanvas extends SurfaceView implements
 			SurfaceHolder.Callback, Runnable {
 
@@ -246,8 +263,8 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 				int x = 0;
 
 				// Tile grass
-				for (x = 0; x < tileDimen * 50; x += tileDimen) {
-					for (int y = 0; y < tileDimen * 50; y += tileDimen) {
+				for (x = perimeterRect.left; x < perimeterRect.right; x += tileDimen) {
+					for (int y = perimeterRect.top; y < perimeterRect.bottom; y += tileDimen) {
 						c.drawBitmap(grass1, x, y, null);
 					}
 				}
@@ -460,6 +477,11 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 							screenHeight - (buttonDimen * 2), screenWidth
 									- (buttonDimen * 3), screenHeight
 									- (buttonDimen));
+
+					// HomeTown map Rect
+					perimeterRect = new Rect(xAnchor - tileDimen, yAnchor
+							- tileDimen, xAnchor + (tileDimen * 50), yAnchor
+							+ (tileDimen * 50));
 
 					// Load memory-efficient Bitmaps
 					// grass
