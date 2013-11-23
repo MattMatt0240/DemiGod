@@ -22,6 +22,7 @@ package high.caliber.productions.demigod.activity;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.characters.Hero;
 import high.caliber.productions.demigod.drawing.Tile;
+import high.caliber.productions.demigod.settings.SettingsMain;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +30,8 @@ import java.io.InputStream;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -66,6 +69,8 @@ public class Home extends Activity implements View.OnTouchListener {
 			bButtonRect; // Buttons
 	private Rect heroRect, perimeterRect, wallRect, tableRect, bedRect; // Collision
 																		// Rects
+
+	private Rect dPadRect;
 	private int screenWidth, screenHeight;
 	private Tile bedTile;
 	private int heroDirection;
@@ -152,10 +157,11 @@ public class Home extends Activity implements View.OnTouchListener {
 					&& y >= bRightRect.top && y <= bRightRect.bottom) {
 
 				// Set hero animation if not already right
-				if (!(hero.getDirection() == Hero.DIRECTION_RIGHT)) {
-					hero.setDirection(Hero.DIRECTION_RIGHT);
-					hero.setAnimBitmap(spriteHeroRight);
-				}
+				//
+				// if (!(hero.getDirection() == Hero.DIRECTION_RIGHT)) {
+				// hero.setDirection(Hero.DIRECTION_RIGHT);
+				// hero.setAnimBitmap(spriteHeroRight);
+				// }
 
 				hero.setX(hero.getX() + tileDimen);
 				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
@@ -426,26 +432,25 @@ public class Home extends Activity implements View.OnTouchListener {
 
 				while (progressCounter < 100) {
 
+					SharedPreferences prefs = getSharedPreferences(
+							SettingsMain.SETTINGS_SHARED_PREFS, MODE_PRIVATE);
+
 					tileDimen = (int) getResources().getDimension(
 							R.dimen.tile_dimen);
 
-					int buttonDimen = (int) getResources().getDimension(
-							R.dimen.button_size);
+					int buttonDimen = prefs.getInt(
+							SettingsMain.KEY_DPAD_SIZE,
+							(int) getResources().getDimension(
+									R.dimen.button_size));
 
 					Point size = new Point();
 					WindowManager w;
 					w = getWindowManager();
 
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-						w.getDefaultDisplay().getSize(size);
+					w.getDefaultDisplay().getSize(size);
 
-						screenWidth = size.x;
-						screenHeight = size.y;
-					} else {
-						Display d = w.getDefaultDisplay();
-						screenWidth = d.getWidth();
-						screenHeight = d.getHeight();
-					}
+					screenWidth = size.x;
+					screenHeight = size.y;
 
 					BitmapFactory.Options opts = new BitmapFactory.Options();
 					opts.inDither = true;
@@ -459,19 +464,12 @@ public class Home extends Activity implements View.OnTouchListener {
 					bLeftTemp.recycle();
 					bLeftTemp = null;
 
-					bLeftRect = new Rect(0, screenHeight - (buttonDimen * 2),
-							buttonDimen, screenHeight - buttonDimen);
-
 					Bitmap bUpTemp = getBitmapFromAssets("views/up_key.png",
 							opts);
 					bUp = Bitmap.createScaledBitmap(bUpTemp, buttonDimen,
 							buttonDimen, true);
 					bUpTemp.recycle();
 					bUpTemp = null;
-
-					bUpRect = new Rect(buttonDimen, screenHeight
-							- (buttonDimen * 3), buttonDimen * 2, screenHeight
-							- (buttonDimen * 2));
 
 					Bitmap bRightTemp = getBitmapFromAssets(
 							"views/right_key.png", opts);
@@ -480,19 +478,12 @@ public class Home extends Activity implements View.OnTouchListener {
 					bRightTemp.recycle();
 					bRightTemp = null;
 
-					bRightRect = new Rect(buttonDimen * 2, screenHeight
-							- (buttonDimen * 2), buttonDimen * 3, screenHeight
-							- buttonDimen);
-
 					Bitmap bDownTemp = getBitmapFromAssets(
 							"views/down_key.png", opts);
 					bDown = Bitmap.createScaledBitmap(bDownTemp, buttonDimen,
 							buttonDimen, true);
 					bDownTemp.recycle();
 					bDownTemp = null;
-
-					bDownRect = new Rect(buttonDimen, screenHeight
-							- buttonDimen, buttonDimen * 2, screenHeight);
 
 					Bitmap aButtonTemp = getBitmapFromAssets(
 							"views/a_button.png", opts);
@@ -654,6 +645,34 @@ public class Home extends Activity implements View.OnTouchListener {
 							tileDimen * 10, tileDimen * 4);
 					tableRect = new Rect(tileDimen * 8, tileDimen * 2,
 							tileDimen * 9, tileDimen * 3);
+
+					int dPadX = prefs.getInt(SettingsMain.KEY_DPAD_POS_X, 0);
+					int dPadY = prefs.getInt(
+							SettingsMain.KEY_DPAD_POS_Y,
+							screenHeight
+									- (prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
+											buttonDimen)));
+
+					dPadRect = new Rect(dPadX, dPadY,
+							dPadX + (buttonDimen * 3), dPadY
+									+ (buttonDimen * 3));
+
+					bLeftRect = new Rect(dPadRect.left, dPadRect.top
+							+ (buttonDimen),
+							dPadRect.right - (buttonDimen * 2), dPadRect.bottom
+									- buttonDimen);
+
+					bUpRect = new Rect(dPadRect.left + buttonDimen,
+							dPadRect.top, dPadRect.right - buttonDimen,
+							dPadRect.bottom - (buttonDimen * 2));
+
+					bRightRect = new Rect(dPadRect.left + (buttonDimen * 2),
+							dPadRect.top + buttonDimen, dPadRect.right,
+							dPadRect.bottom - buttonDimen);
+
+					bDownRect = new Rect(dPadRect.left + buttonDimen,
+							dPadRect.top + (buttonDimen * 2), dPadRect.right
+									- buttonDimen, dPadRect.bottom);
 
 					progressCounter = 100;
 					publishProgress(progressCounter);

@@ -19,6 +19,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -54,22 +55,9 @@ public class DpadPosition extends Activity implements OnTouchListener {
 		screenWidth = size.x;
 		screenHeight = size.y;
 
-		prefs = getSharedPreferences(SettingsMain.SETTINGS_SHARED_PREFS,
-				MODE_PRIVATE);
-		editor = prefs.edit();
-
-		int tempSize = (int) getResources().getDimension(R.dimen.button_size);
-
-		buttonDimen = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, tempSize);
-
-		containerX = prefs.getInt(SettingsMain.KEY_DPAD_POS_X, 0);
-		containerY = prefs.getInt(SettingsMain.KEY_DPAD_POS_Y, screenHeight
-				- (buttonDimen * 3));
+		getPosition();
 
 		initBitmaps(buttonDimen);
-
-		containerX = 0;
-		containerY = screenHeight - (buttonDimen * 3);
 
 		dPadContainer = new Rect(containerX, containerY, containerX
 				+ (buttonDimen * 3), containerY + (buttonDimen * 3));
@@ -87,12 +75,54 @@ public class DpadPosition extends Activity implements OnTouchListener {
 	protected void onPause() {
 		super.onPause();
 		surface.pause();
+
+		savePosition();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		surface.resume();
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		savePosition();
+	}
+
+	/**
+	 * Save D-Pad X and Y values to Shared Preferences
+	 */
+	public void savePosition() {
+
+		prefs = getSharedPreferences(SettingsMain.SETTINGS_SHARED_PREFS,
+				MODE_PRIVATE);
+		editor = prefs.edit();
+		editor.putInt(SettingsMain.KEY_DPAD_POS_X, (int) dPadContainer.left);
+		editor.putInt(SettingsMain.KEY_DPAD_POS_Y, (int) dPadContainer.top);
+
+		editor.commit();
+	}
+
+	/**
+	 * Get D-Pad X and Y values from SharedPreferences
+	 */
+	private void getPosition() {
+
+		prefs = getSharedPreferences(SettingsMain.SETTINGS_SHARED_PREFS,
+				MODE_PRIVATE);
+		editor = prefs.edit();
+
+		int tempSize = (int) getResources().getDimension(R.dimen.button_size);
+
+		buttonDimen = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, tempSize);
+
+		containerX = prefs.getInt(SettingsMain.KEY_DPAD_POS_X, 0);
+		containerY = prefs.getInt(SettingsMain.KEY_DPAD_POS_Y, screenHeight
+				- (buttonDimen * 3));
 	}
 
 	/**
@@ -151,7 +181,45 @@ public class DpadPosition extends Activity implements OnTouchListener {
 
 		switch (event.getAction()) {
 
+		case MotionEvent.ACTION_DOWN:
+
+			containerX = (int) (x - (buttonDimen * 1.5));
+			containerY = (int) (y - (buttonDimen * 1.5));
+
+			if (containerX < 0) {
+				containerX = 0;
+			}
+			if (containerX + (buttonDimen * 3) > screenWidth) {
+				containerX = screenWidth - (buttonDimen * 3);
+			}
+			if (containerY < 0) {
+				containerY = 0;
+			}
+			if (containerY + (buttonDimen * 3) > screenHeight) {
+				containerY = screenHeight - (buttonDimen * 3);
+			}
+			break;
+
 		case MotionEvent.ACTION_MOVE:
+
+			containerX = (int) (x - (buttonDimen * 1.5));
+			containerY = (int) (y - (buttonDimen * 1.5));
+
+			if (containerX < 0) {
+				containerX = 0;
+			}
+			if (containerX + (buttonDimen * 3) > screenWidth) {
+				containerX = screenWidth - (buttonDimen * 3);
+			}
+			if (containerY < 0) {
+				containerY = 0;
+			}
+			if (containerY + (buttonDimen * 3) > screenHeight) {
+				containerY = screenHeight - (buttonDimen * 3);
+			}
+			break;
+
+		case MotionEvent.ACTION_UP:
 
 			containerX = (int) (x - (buttonDimen * 1.5));
 			containerY = (int) (y - (buttonDimen * 1.5));
@@ -275,7 +343,8 @@ public class DpadPosition extends Activity implements OnTouchListener {
 
 			paint = new Paint();
 			paint.setDither(false);
-			paint.setColor(Color.LTGRAY);
+			paint.setStrokeWidth(2);
+			paint.setColor(Color.CYAN);
 
 			setWillNotDraw(false);
 		}
