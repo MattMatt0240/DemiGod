@@ -4,9 +4,12 @@
     android:title="Settings" >
 
     <PreferenceCategory android:title="Virtual D-Pad" >
-        <Preference
+        <SeekBarPreference
+            android:id="@+id/sbDpadSize"
+            android:defaultValue="35"
             android:key="dPadSize"
-            android:title="D-Pad Size" />
+            android:title="Resize the Virtual D-Pad with seekbar" >
+        </SeekBarPreference>
         <Preference
             android:key="dPadPosition"
             android:title="D-Pad Position" >
