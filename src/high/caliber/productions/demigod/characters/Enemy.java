@@ -1,4 +1,4 @@
-package high.caliber.productions.demigod.utils;
+package high.caliber.productions.demigod.characters;
 
 public class Enemy {
 

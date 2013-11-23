@@ -3,9 +3,9 @@ package high.caliber.productions.demigod.activity;
 import java.util.Random;
 
 import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.characters.Enemy;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDb;
-import high.caliber.productions.demigod.utils.Enemy;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
 import high.caliber.productions.demigod.utils.PrefsManager;
 import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;

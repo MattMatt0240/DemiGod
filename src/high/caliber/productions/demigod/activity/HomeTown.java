@@ -19,6 +19,9 @@
 
 package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.characters.Hero;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -45,21 +48,23 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.drawing.Sprite;
-
 public class HomeTown extends Activity implements View.OnTouchListener {
 
 	private static int tileDimen;
 	private int xAnchor, yAnchor;
-	private Sprite hero;
+	private Hero hero;
 	private Bitmap spriteHero, wallHoriz, wallVert, doorWood, roofVert,
 			roofHoriz, grass1;
 	private int[][] coordsWallHoriz, coordsWallVert, coordsDoor;
 	private Bitmap bLeft, bUp, bRight, bDown, aButton, bButton;
-	private Rect heroRect, perimeterRect; // Collision Rects
+
+	// Collision Rects
+	private Rect heroRect, perimeterRect;
+
+	// Button Rects
 	private Rect bLeftRect, bUpRect, bRightRect, bDownRect, aButtonRect,
-			bButtonRect; // Buttons
+			bButtonRect;
+
 	private int screenWidth, screenHeight;
 	private HomeTownCanvas homeTownCanvas;
 	private SurfaceHolder townHolder;
@@ -103,44 +108,60 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 			if (x <= bLeftRect.right && x >= bLeftRect.left
 					&& y >= bLeftRect.top && y <= bLeftRect.bottom) {
 
-				hero.setX(hero.getX() - tileDimen);
-				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
-						hero.getY() + tileDimen);
-
-				if (hero.getX() - tileDimen <= 0) {
-					hero.setX(hero.getX() + tileDimen);
+				// If move won't put hero out of bounds
+				if (hero.getX() - (tileDimen * 2) >= 0) {
+					hero.setX(hero.getX() - tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
 							+ tileDimen, hero.getY() + tileDimen);
+
+				} else {
 					xAnchor += tileDimen;
-					updateCoords();
 				}
+
+				updateCoords();
 
 				// Up Key Touched
 			} else if (x <= bUpRect.right && x >= bUpRect.left
 					&& y >= bUpRect.top && y <= bUpRect.bottom) {
 
-				hero.setY(hero.getY() - tileDimen);
-				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
-						hero.getY() + tileDimen);
+				// If move won't put hero out of bounds
+				if (hero.getY() - (tileDimen * 2) >= 0) {
+					hero.setY(hero.getY() - tileDimen);
+					heroRect.set(hero.getX(), hero.getY(), hero.getX()
+							+ tileDimen, hero.getY() + tileDimen);
+				} else {
+					yAnchor += tileDimen;
+				}
+				updateCoords();
 
 				// Right Key Touched
 			} else if (x <= bRightRect.right && x >= bRightRect.left
 					&& y >= bRightRect.top && y <= bRightRect.bottom) {
 
-				hero.setX(hero.getX() + tileDimen);
-				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
-						hero.getY() + tileDimen);
+				// If move won't put hero out of bounds
+				if (hero.getX() + (tileDimen * 2) <= screenWidth) {
+					hero.setX(hero.getX() + tileDimen);
+					heroRect.set(hero.getX(), hero.getY(), hero.getX()
+							+ tileDimen, hero.getY() + tileDimen);
+				} else {
+					xAnchor -= tileDimen;
+					updateCoords();
+				}
 
 				// Down Key Touched
 			} else if (x <= bDownRect.right && x >= bDownRect.left
 					&& y >= bDownRect.top && y <= bDownRect.bottom) {
 
-				hero.setY(hero.getY() + tileDimen);
-				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
-						hero.getY() + tileDimen);
+				// If move won't put hero out of bounds
+				if (hero.getY() + (tileDimen * 2) <= screenHeight) {
+					hero.setY(hero.getY() + tileDimen);
+					heroRect.set(hero.getX(), hero.getY(), hero.getX()
+							+ tileDimen, hero.getY() + tileDimen);
 
-			} else {
-				// button was not pressed, do nothing
+				} else {
+					yAnchor -= tileDimen;
+					updateCoords();
+				}
 			}
 
 			break;
@@ -163,10 +184,13 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 	}
 
 	public void updateCoords() {
+
 		coordsWallVert = new int[][] {
 				{ xAnchor + (tileDimen * 2), yAnchor + (tileDimen * 3) },
 				{ xAnchor + (tileDimen * 3), yAnchor + (tileDimen * 3) },
-				{ xAnchor + (tileDimen * 5), yAnchor + (tileDimen * 3) } };
+				{ xAnchor + (tileDimen * 5), yAnchor + (tileDimen * 3) },
+				{ xAnchor + (tileDimen * 6), yAnchor + (tileDimen * 3) },
+				{ xAnchor + (tileDimen * 7), yAnchor + (tileDimen * 3) } };
 		coordsDoor = new int[][] { { xAnchor + (tileDimen * 4),
 				yAnchor + (tileDimen * 3) } };
 	}
@@ -219,15 +243,21 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 
 				c.drawColor(getResources().getColor(R.color.dark_grey));
 
-				c.drawBitmap(grass1, xAnchor + (tileDimen * 3), yAnchor
-						+ (tileDimen * 4), null);
-
 				int x = 0;
+
+				// Tile grass
+				for (x = 0; x < tileDimen * 50; x += tileDimen) {
+					for (int y = 0; y < tileDimen * 50; y += tileDimen) {
+						c.drawBitmap(grass1, x, y, null);
+					}
+				}
+				// Draw vertical walls
 				for (x = 0; x < coordsWallVert.length; x++) {
 					c.drawBitmap(wallVert, coordsWallVert[x][0],
 							coordsWallVert[x][1], null);
 				}
 
+				// Draw Door
 				for (x = 0; x < coordsDoor.length; x++) {
 					c.drawBitmap(doorWood, coordsDoor[x][0], coordsDoor[x][1],
 							null);
@@ -471,11 +501,15 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 							{ xAnchor + (tileDimen * 3),
 									yAnchor + (tileDimen * 3) },
 							{ xAnchor + (tileDimen * 5),
+									yAnchor + (tileDimen * 3) },
+							{ xAnchor + (tileDimen * 6),
+									yAnchor + (tileDimen * 3) },
+							{ xAnchor + (tileDimen * 7),
 									yAnchor + (tileDimen * 3) } };
 					coordsDoor = new int[][] { { xAnchor + (tileDimen * 4),
 							yAnchor + (tileDimen * 3) } };
 
-					hero = new Sprite(getBaseContext(), spriteHero,
+					hero = new Hero(getBaseContext(), spriteHero,
 							tileDimen * 5, tileDimen * 5, 4, 4);
 					heroRect = hero.getCollisionRect();
 

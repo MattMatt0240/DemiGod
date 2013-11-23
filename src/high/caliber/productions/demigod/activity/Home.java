@@ -19,6 +19,10 @@
 
 package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.characters.Hero;
+import high.caliber.productions.demigod.drawing.Tile;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -48,15 +52,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.drawing.Sprite;
-import high.caliber.productions.demigod.drawing.Tile;
- 
 public class Home extends Activity implements View.OnTouchListener {
 
 	private static int tileDimen;
 	private WorldCanvas worldCanvas;
-	private Sprite hero;
+	private Hero hero;
 	private Bitmap spriteHeroFront, spriteHeroRight, wallHoriz, wallVert,
 			floorHoriz, doorWood, chairBlue, tableWood, bedWood, shield;
 	private Bitmap bLeft, bUp, bRight, bDown, aButton, bButton;
@@ -112,6 +112,7 @@ public class Home extends Activity implements View.OnTouchListener {
 				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
 						hero.getY() + tileDimen);
 
+				// If hero is not outside of bounds
 				if (!(perimeterRect.contains(heroRect))) {
 					hero.setX(hero.getX() + tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
@@ -132,6 +133,7 @@ public class Home extends Activity implements View.OnTouchListener {
 				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
 						hero.getY() + tileDimen);
 
+				// If hero is not outside of bounds
 				if (!(perimeterRect.contains(heroRect))) {
 					hero.setY(hero.getY() + tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
@@ -149,13 +151,17 @@ public class Home extends Activity implements View.OnTouchListener {
 			} else if (x <= bRightRect.right && x >= bRightRect.left
 					&& y >= bRightRect.top && y <= bRightRect.bottom) {
 
-				hero = new Sprite(getBaseContext(), spriteHeroRight,
-						hero.getX(), hero.getY(), 1, 1);
+				// Set hero animation if not already right
+				if (!(hero.getDirection() == Hero.DIRECTION_RIGHT)) {
+					hero.setDirection(Hero.DIRECTION_RIGHT);
+					hero.setAnimBitmap(spriteHeroRight);
+				}
 
 				hero.setX(hero.getX() + tileDimen);
 				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
 						hero.getY() + tileDimen);
 
+				// If hero is not outside of bounds
 				if (!(perimeterRect.contains(heroRect))) {
 					hero.setX(hero.getX() - tileDimen);
 					heroRect.set(hero.getX(), hero.getY(), hero.getX()
@@ -172,13 +178,17 @@ public class Home extends Activity implements View.OnTouchListener {
 			} else if (x <= bDownRect.right && x >= bDownRect.left
 					&& y >= bDownRect.top && y <= bDownRect.bottom) {
 
-				hero = new Sprite(getBaseContext(), spriteHeroFront,
-						hero.getX(), hero.getY(), 4, 4);
+				// Set hero animation if not already down
+				if (!(hero.getDirection() == Hero.DIRECTION_DOWN)) {
+					hero.setDirection(Hero.DIRECTION_DOWN);
+					hero.setAnimBitmap(spriteHeroFront);
+				}
 
 				hero.setY(hero.getY() + tileDimen);
 				heroRect.set(hero.getX(), hero.getY(), hero.getX() + tileDimen,
 						hero.getY() + tileDimen);
 
+				// If hero is not outside of bounds
 				if (!(perimeterRect.contains(heroRect))) {
 					if (hero.getX() == tileDimen * 4
 							&& hero.getY() == tileDimen * 7) {
@@ -441,8 +451,7 @@ public class Home extends Activity implements View.OnTouchListener {
 					opts.inDither = true;
 					opts.inPreferQualityOverSpeed = true;
 
-					
-					//buttons
+					// buttons
 					Bitmap bLeftTemp = getBitmapFromAssets(
 							"views/left_key.png", opts);
 					bLeft = Bitmap.createScaledBitmap(bLeftTemp, buttonDimen,
@@ -453,8 +462,8 @@ public class Home extends Activity implements View.OnTouchListener {
 					bLeftRect = new Rect(0, screenHeight - (buttonDimen * 2),
 							buttonDimen, screenHeight - buttonDimen);
 
-					Bitmap bUpTemp = getBitmapFromAssets(
-							"views/up_key.png", opts);
+					Bitmap bUpTemp = getBitmapFromAssets("views/up_key.png",
+							opts);
 					bUp = Bitmap.createScaledBitmap(bUpTemp, buttonDimen,
 							buttonDimen, true);
 					bUpTemp.recycle();
@@ -508,7 +517,6 @@ public class Home extends Activity implements View.OnTouchListener {
 									- (buttonDimen * 3), screenHeight
 									- (buttonDimen));
 
-									
 					// objects
 					Bitmap tempWallHoriz = getBitmapFromAssets(
 							"drawables/x32/objects/wall_wood_top_horizontal.png",
@@ -531,7 +539,8 @@ public class Home extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap tempFloorHoriz = getBitmapFromAssets(
-							"drawables/x32/objects/floor_wood_horizontal.png", opts);
+							"drawables/x32/objects/floor_wood_horizontal.png",
+							opts);
 					floorHoriz = Bitmap.createScaledBitmap(tempFloorHoriz,
 							tileDimen, tileDimen, true);
 					tempFloorHoriz.recycle();
@@ -578,8 +587,8 @@ public class Home extends Activity implements View.OnTouchListener {
 					tempHeroRight.recycle();
 					tempHeroRight = null;
 
-					hero = new Sprite(getBaseContext(), spriteHeroFront,
-							tileDimen * 5, tileDimen * 5, 4, 4);
+					hero = new Hero(Home.this, spriteHeroFront, tileDimen * 5,
+							tileDimen * 5, 4, 4);
 					heroRect = hero.getCollisionRect();
 
 					progressCounter = 45;

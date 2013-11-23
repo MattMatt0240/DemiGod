@@ -20,6 +20,9 @@
 package high.caliber.productions.demigod.activity;
 
 import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.R.drawable;
+import high.caliber.productions.demigod.R.id;
+import high.caliber.productions.demigod.R.layout;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDb;
 import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
