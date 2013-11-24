@@ -43,7 +43,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -57,6 +57,7 @@ import android.widget.Toast;
 public class Home extends Activity implements View.OnTouchListener {
 
 	private static int tileDimen;
+	private int buttonDimen;
 	private WorldCanvas worldCanvas;
 	private Hero hero;
 	private Bitmap spriteHeroFront, spriteHeroRight, wallHoriz, wallVert,
@@ -436,9 +437,10 @@ public class Home extends Activity implements View.OnTouchListener {
 
 					PixelUnitConverter converter = new PixelUnitConverter(
 							Home.this);
+					int defaultSize = prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
+							35);
 
-					int buttonDimen = prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
-							converter.dpToPx(35));
+					buttonDimen = converter.dpToPx(defaultSize);
 
 					tileDimen = (int) getResources().getDimension(
 							R.dimen.tile_dimen);

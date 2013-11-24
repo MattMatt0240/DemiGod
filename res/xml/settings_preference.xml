@@ -6,12 +6,12 @@
     <PreferenceCategory android:title="Virtual D-Pad" >
         <Preference
             android:key="dPadPosition"
-            android:title="Virtual D-Pad Position" >
+            android:title="D-Pad Position" >
         </Preference>
 
         <high.caliber.productions.demigod.settings.DpadSizePref
-            android:defaultValue="35"
-            android:key="dPadSize" />
+            android:key="dPadSize"
+            android:title="D-Pad Size" />
     </PreferenceCategory>
 
 </PreferenceScreen>

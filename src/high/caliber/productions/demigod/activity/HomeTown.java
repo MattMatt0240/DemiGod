@@ -39,9 +39,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -54,6 +52,7 @@ import android.widget.TextView;
 public class HomeTown extends Activity implements View.OnTouchListener {
 
 	private static int tileDimen;
+	private int buttonDimen;
 	private int xAnchor, yAnchor;
 	private Hero hero;
 	private Bitmap spriteHero, wallHoriz, wallVert, doorWood, roofVert,
@@ -393,15 +392,15 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					SharedPreferences prefs = getSharedPreferences(
 							SettingsMain.SETTINGS_SHARED_PREFS, MODE_PRIVATE);
 
-					tileDimen = (int) getResources().getDimension(
-							R.dimen.tile_dimen);
-
 					PixelUnitConverter converter = new PixelUnitConverter(
 							HomeTown.this);
+					int defaultSize = prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
+							35);
 
-					int buttonDimen = prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
-							converter.dpToPx(35));
+					buttonDimen = converter.dpToPx(defaultSize);
 
+					tileDimen = (int) getResources().getDimension(
+							R.dimen.tile_dimen);
 					xAnchor = tileDimen;
 					yAnchor = tileDimen;
 

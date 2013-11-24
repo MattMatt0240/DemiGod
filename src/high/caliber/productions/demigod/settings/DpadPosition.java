@@ -1,6 +1,6 @@
 package high.caliber.productions.demigod.settings;
 
-import high.caliber.productions.demigod.R;
+import high.caliber.productions.demigod.utils.PixelUnitConverter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -113,9 +114,10 @@ public class DpadPosition extends Activity implements OnTouchListener {
 				MODE_PRIVATE);
 		editor = prefs.edit();
 
-		int tempSize = (int) getResources().getDimension(R.dimen.button_size);
+		PixelUnitConverter converter = new PixelUnitConverter(DpadPosition.this);
+		int defaultSize = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, 35);
 
-		buttonDimen = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, tempSize);
+		buttonDimen = converter.dpToPx(defaultSize);
 
 		containerX = prefs.getInt(SettingsMain.KEY_DPAD_POS_X, 0);
 		containerY = prefs.getInt(SettingsMain.KEY_DPAD_POS_Y, screenHeight
@@ -340,6 +342,7 @@ public class DpadPosition extends Activity implements OnTouchListener {
 
 			paint = new Paint();
 			paint.setDither(false);
+			paint.setStyle(Style.STROKE);
 			paint.setStrokeWidth(2);
 			paint.setColor(Color.CYAN);
 
