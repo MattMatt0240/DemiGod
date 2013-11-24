@@ -19,19 +19,34 @@ public class DpadSizePref extends Preference implements OnSeekBarChangeListener 
 	public static int MAXIMUM = 80;
 	public static int INTERVAL = 1;
 
-	private float oldValue = 50;
+	private int oldValue;
 	private TextView monitorBox;
 
 	public DpadSizePref(Context context) {
 		super(context);
+
+		SharedPreferences prefs = getContext().getSharedPreferences(
+				SettingsMain.SETTINGS_SHARED_PREFS, 0);
+
+		this.oldValue = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, 35);
 	}
 
 	public DpadSizePref(Context context, AttributeSet attrs) {
 		super(context, attrs);
+
+		SharedPreferences prefs = getContext().getSharedPreferences(
+				SettingsMain.SETTINGS_SHARED_PREFS, 0);
+
+		this.oldValue = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, 35);
 	}
 
 	public DpadSizePref(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+
+		SharedPreferences prefs = getContext().getSharedPreferences(
+				SettingsMain.SETTINGS_SHARED_PREFS, 0);
+
+		this.oldValue = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, 35);
 	}
 
 	@Override
@@ -121,20 +136,6 @@ public class DpadSizePref extends Preference implements OnSeekBarChangeListener 
 		int defaultValue = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, 35);
 
 		return validateValue(defaultValue);
-	}
-
-	@Override
-	protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-
-		SharedPreferences prefs = getContext().getSharedPreferences(
-				SettingsMain.SETTINGS_SHARED_PREFS, 0);
-
-		int temp = prefs.getInt(SettingsMain.KEY_DPAD_SIZE, 35);
-
-		if (!restoreValue)
-			persistInt(temp);
-
-		this.oldValue = temp;
 	}
 
 	private int validateValue(int value) {

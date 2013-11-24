@@ -10,6 +10,7 @@
         </Preference>
 
         <high.caliber.productions.demigod.settings.DpadSizePref
+            android:defaultValue="35"
             android:key="dPadSize"
             android:title="D-Pad Size" />
     </PreferenceCategory>
