@@ -2,11 +2,11 @@ package high.caliber.productions.demigod.utils;
 
 import android.content.*;
 
-public class PrefsManager {
+public class SharedPrefsManager {
 
 	Context context;
 
-	public PrefsManager(Context context) {
+	public SharedPrefsManager(Context context) {
 		this.context = context;
 	}
 

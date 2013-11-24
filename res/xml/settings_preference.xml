@@ -4,16 +4,14 @@
     android:title="Settings" >
 
     <PreferenceCategory android:title="Virtual D-Pad" >
-        <SeekBarPreference
-            android:id="@+id/sbDpadSize"
-            android:defaultValue="35"
-            android:key="dPadSize"
-            android:title="Resize the Virtual D-Pad with seekbar" >
-        </SeekBarPreference>
         <Preference
             android:key="dPadPosition"
-            android:title="D-Pad Position" >
+            android:title="Virtual D-Pad Position" >
         </Preference>
+
+        <high.caliber.productions.demigod.settings.DpadSizePref
+            android:defaultValue="35"
+            android:key="dPadSize" />
     </PreferenceCategory>
 
 </PreferenceScreen>

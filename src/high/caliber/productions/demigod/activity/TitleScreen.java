@@ -24,7 +24,8 @@ import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.database.ItemDB;
 import high.caliber.productions.demigod.settings.SettingsMain;
-import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
+import high.caliber.productions.demigod.utils.PixelUnitConverter;
+import high.caliber.productions.demigod.utils.SharedPrefsManager.BattleLogPrefs;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -106,12 +107,6 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 		if (v.getId() == R.id.bDeleteGame) {
 			deleteDatabase(HeroDB.getDbName());
-
-			SharedPreferences prefs = getSharedPreferences(
-					BattleLogPrefs.BATTLE_LOG, 0);
-			Editor editor = prefs.edit();
-			editor.clear();
-			editor.commit();
 
 			Toast.makeText(this, "Succesfully deleted game data",
 					Toast.LENGTH_SHORT).show();
@@ -195,6 +190,23 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 						itemDbHelper.PopulateConsumablesTable();
 						progressCounter = 45;
 						publishProgress(progressCounter);
+
+						itemDbHelper.close();
+
+						// create initial values for D-Pad Size
+						SharedPreferences prefs = getSharedPreferences(
+								SettingsMain.SETTINGS_SHARED_PREFS,
+								MODE_PRIVATE);
+
+						PixelUnitConverter converter = new PixelUnitConverter(
+								TitleScreen.this);
+
+						int defaultValue = prefs.getInt(
+								SettingsMain.KEY_DPAD_SIZE,
+								converter.dpToPx(35));
+						Editor editor = prefs.edit();
+						editor.putInt(SettingsMain.KEY_DPAD_SIZE, defaultValue);
+						editor.apply();
 					}
 
 					try {

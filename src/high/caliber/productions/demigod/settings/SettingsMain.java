@@ -7,7 +7,6 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.util.Log;
 import android.widget.SeekBar;
 
 public class SettingsMain extends PreferenceActivity {
@@ -18,12 +17,11 @@ public class SettingsMain extends PreferenceActivity {
 	public static final String KEY_DPAD_POS_X = "D-Pad X Position";
 	public static final String KEY_DPAD_POS_Y = "D-Pad Y Position";
 
-	Preference dPadPosPref, dPadSizePref;
+	Preference dPadPosPref;
+	DpadSizePref dPadSizePref;
 
 	SharedPreferences prefs;
 	Editor editor;
-
-	int dPadSize;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -31,25 +29,23 @@ public class SettingsMain extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_preference);
 
-		// prefs = getSharedPreferences(SettingsMain.SETTINGS_SHARED_PREFS,
-		// MODE_PRIVATE);
-		// editor = prefs.edit();
-		//
-		// dPadSize = prefs.getInt(KEY_DPAD_SIZE, 35);
-
-		Log.d("D-Pad resize", String.valueOf(dPadSize));
+		prefs = getSharedPreferences(SettingsMain.SETTINGS_SHARED_PREFS,
+				MODE_PRIVATE);
+		editor = prefs.edit();
 
 		dPadPosPref = findPreference("dPadPosition");
 		dPadPosPref
 				.setIntent(new Intent(SettingsMain.this, DpadPosition.class));
 
+		dPadSizePref = new DpadSizePref(this);
+		dPadSizePref.setProgress(prefs.getInt(KEY_DPAD_SIZE,
+				(int) getResources().getDimension(R.dimen.button_size)));
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-
-		// editor.putInt(KEY_DPAD_SIZE, dPadSize);
-		// editor.commit();
+		editor.putInt(KEY_DPAD_SIZE, dPadSizePref.getProgress());
+		editor.apply();
 	}
 }

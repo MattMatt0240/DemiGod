@@ -7,8 +7,8 @@ import high.caliber.productions.demigod.characters.Enemy;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
-import high.caliber.productions.demigod.utils.PrefsManager;
-import high.caliber.productions.demigod.utils.PrefsManager.BattleLogPrefs;
+import high.caliber.productions.demigod.utils.SharedPrefsManager;
+import high.caliber.productions.demigod.utils.SharedPrefsManager.BattleLogPrefs;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -90,7 +90,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 	boolean playerTurn;
 
-	PrefsManager prefManager;
+	SharedPrefsManager prefManager;
 	BattleLogPrefs battlePrefs;
 
 	@Override
@@ -166,7 +166,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 		lvlUp = new LevelUpWorker();
 
-		prefManager = new PrefsManager(this);
+		prefManager = new SharedPrefsManager(this);
 		battlePrefs = prefManager.new BattleLogPrefs();
 
 		damageDealt = battlePrefs.getDamageDealt();

@@ -23,6 +23,7 @@ import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.characters.Hero;
 import high.caliber.productions.demigod.drawing.Tile;
 import high.caliber.productions.demigod.settings.SettingsMain;
+import high.caliber.productions.demigod.utils.PixelUnitConverter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,7 +32,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,10 +41,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.view.Display;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -435,13 +434,14 @@ public class Home extends Activity implements View.OnTouchListener {
 					SharedPreferences prefs = getSharedPreferences(
 							SettingsMain.SETTINGS_SHARED_PREFS, MODE_PRIVATE);
 
+					PixelUnitConverter converter = new PixelUnitConverter(
+							Home.this);
+
+					int buttonDimen = prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
+							converter.dpToPx(35));
+
 					tileDimen = (int) getResources().getDimension(
 							R.dimen.tile_dimen);
-
-					int buttonDimen = prefs.getInt(
-							SettingsMain.KEY_DPAD_SIZE,
-							(int) getResources().getDimension(
-									R.dimen.button_size));
 
 					Point size = new Point();
 					WindowManager w;
@@ -651,7 +651,7 @@ public class Home extends Activity implements View.OnTouchListener {
 							SettingsMain.KEY_DPAD_POS_Y,
 							screenHeight
 									- (prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
-											buttonDimen)));
+											buttonDimen)) * 3);
 
 					dPadRect = new Rect(dPadX, dPadY,
 							dPadX + (buttonDimen * 3), dPadY

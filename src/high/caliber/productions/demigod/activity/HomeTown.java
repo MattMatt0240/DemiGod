@@ -22,6 +22,7 @@ package high.caliber.productions.demigod.activity;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.characters.Hero;
 import high.caliber.productions.demigod.settings.SettingsMain;
+import high.caliber.productions.demigod.utils.PixelUnitConverter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -395,10 +396,11 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					tileDimen = (int) getResources().getDimension(
 							R.dimen.tile_dimen);
 
-					int buttonDimen = prefs.getInt(
-							SettingsMain.KEY_DPAD_SIZE,
-							(int) getResources().getDimension(
-									R.dimen.button_size));
+					PixelUnitConverter converter = new PixelUnitConverter(
+							HomeTown.this);
+
+					int buttonDimen = prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
+							converter.dpToPx(35));
 
 					xAnchor = tileDimen;
 					yAnchor = tileDimen;
@@ -529,7 +531,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 							SettingsMain.KEY_DPAD_POS_Y,
 							screenHeight
 									- (prefs.getInt(SettingsMain.KEY_DPAD_SIZE,
-											buttonDimen)));
+											buttonDimen)) * 3);
 
 					dPadRect = new Rect(dPadX, dPadY,
 							dPadX + (buttonDimen * 3), dPadY
