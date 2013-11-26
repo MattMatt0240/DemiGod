@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 public class InventoryAdapter extends ArrayAdapter<InventoryData> {
 
@@ -26,8 +27,9 @@ public class InventoryAdapter extends ArrayAdapter<InventoryData> {
 	}
 
 	static class ViewHolder {
-		TextView postTitleView;
-		TextView postDateView;
+		ImageView listIcon;
+		TextView listItem;
+		TextView listQty;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -38,17 +40,18 @@ public class InventoryAdapter extends ArrayAdapter<InventoryData> {
 			convertView = inflater.inflate(R.layout.inventory_rows, null);
 
 			viewHolder = new ViewHolder();
-			viewHolder.postTitleView = (TextView) convertView
+			viewHolder.listIcon = (ImageView) convertView.findViewById(R.id.ivInventoryIcon);
+			viewHolder.listItem = (TextView) convertView
 					.findViewById(R.id.tvInventoryItem);
-			viewHolder.postDateView = (TextView) convertView
+			viewHolder.listQty= (TextView) convertView
 					.findViewById(R.id.tvInventoryQty);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.postTitleView.setText(datas.get(position).item);
-		viewHolder.postDateView.setText(datas.get(position).quantity);
+		viewHolder.listItem.setText(datas.get(position).item);
+		viewHolder.listQty.setText(datas.get(position).quantity);
 
 		return convertView;
 	}
