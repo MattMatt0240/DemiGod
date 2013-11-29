@@ -19,7 +19,7 @@
 
 package high.caliber.productions.demigod.database;
 
-import high.caliber.productions.demigod.utils.InventoryData;
+import high.caliber.productions.demigod.utils.Item;
 
 import java.util.ArrayList;
 
@@ -59,7 +59,8 @@ public class HeroDB extends SQLiteOpenHelper {
 	public static final String COL_AGILITY = "Agility";
 	public static final String COL_DEXTERITY = "Dexterity";
 
-	public static final String COL_ITEM = "Item";
+	public static final String COL_ITEM_ID = "ItemId";
+	public static final String COL_TABLE_ID = "TableId";
 	public static final String COL_QTY = "Quantity";
 
 	private static final String STATS_CREATE = ("CREATE TABLE " + TABLE_STATS
@@ -74,8 +75,8 @@ public class HeroDB extends SQLiteOpenHelper {
 
 	private static final String INVENTORY_CREATE = ("CREATE TABLE "
 			+ TABLE_INVENTORY + " (" + COL_ID
-			+ "  INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_ITEM + " TEXT,"
-			+ COL_QTY + " TEXT)");
+			+ "  INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_ITEM_ID + " TEXT,"
+			+ COL_TABLE_ID + " TEXT," + COL_QTY + " TEXT)");
 
 	private static SQLiteDatabase db;
 	Context context;
@@ -106,20 +107,26 @@ public class HeroDB extends SQLiteOpenHelper {
 
 			ContentValues cv = new ContentValues();
 
+			// 150 Gold
 			cv.put(COL_ID, "1");
-			cv.put(COL_ITEM, "Gold");
+			cv.put(COL_ITEM_ID, "1");
+			cv.put(COL_TABLE_ID, ItemDB.TABLE_CONSUMABLES_ID);
 			cv.put(COL_QTY, "150");
 
 			db.insert(TABLE_INVENTORY, COL_ID, cv);
 
+			// 3 chicken legs
 			cv.put(COL_ID, "2");
-			cv.put(COL_ITEM, "Bread");
+			cv.put(COL_ITEM_ID, "3");
+			cv.put(COL_TABLE_ID, ItemDB.TABLE_CONSUMABLES_ID);
 			cv.put(COL_QTY, "3");
 
 			db.insert(TABLE_INVENTORY, COL_ID, cv);
 
+			// 1 wooden sword
 			cv.put(COL_ID, "3");
-			cv.put(COL_ITEM, "Bronze Sword");
+			cv.put(COL_ITEM_ID, "1");
+			cv.put(COL_TABLE_ID, ItemDB.TABLE_WEAPONS_ID);
 			cv.put(COL_QTY, "1");
 
 			db.insert(TABLE_INVENTORY, COL_ID, cv);
@@ -178,11 +185,11 @@ public class HeroDB extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Retrieves all inventory items, and adds them to custom ListAdapter
+	 * Retrieves all inventory items, and adds them to custom ArrayAdapter
 	 * 
 	 * @return InventoryData ArrayList
 	 */
-	public ArrayList<InventoryData> getInventory() {
+	public ArrayList<Item> getInventory() {
 
 		db = SQLiteDatabase.openDatabase(DB_PATH, null,
 				SQLiteDatabase.OPEN_READWRITE);
@@ -190,18 +197,23 @@ public class HeroDB extends SQLiteOpenHelper {
 		Cursor c = db
 				.query(TABLE_INVENTORY, null, null, null, null, null, null);
 
-		ArrayList<InventoryData> data = new ArrayList<InventoryData>();
-		int rowItem = c.getColumnIndex(COL_ITEM);
+		ArrayList<Item> data = new ArrayList<Item>();
+		int rowItemId = c.getColumnIndex(COL_ITEM_ID);
+		int rowTableId = c.getColumnIndex(COL_TABLE_ID);
 		int rowQty = c.getColumnIndex(COL_QTY);
 
-		data = new ArrayList<InventoryData>();
+		ItemDB itemDbHelper = new ItemDB(context);
+
+		data = new ArrayList<Item>();
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-			InventoryData datas = new InventoryData();
-			datas.item = c.getString(rowItem);
-			datas.quantity = c.getString(rowQty);
-			data.add(datas);
+			Item items = new Item();
+			items = itemDbHelper.getItem(c.getInt(rowItemId),
+					c.getInt(rowTableId));
+			items.quantity = c.getInt(rowQty);
+			data.add(items);
 
 		}
+		db.close();
 		return data;
 	}
 

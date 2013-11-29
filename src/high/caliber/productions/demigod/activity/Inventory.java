@@ -3,7 +3,7 @@ package high.caliber.productions.demigod.activity;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.utils.InventoryAdapter;
-import high.caliber.productions.demigod.utils.InventoryData;
+import high.caliber.productions.demigod.utils.Item;
 
 import java.util.ArrayList;
 
@@ -18,10 +18,7 @@ public class Inventory extends Activity {
 
 	HeroDB heroDbHelper;
 
-	static final String colItem = HeroDB.COL_ITEM;
-	static final String colQty = HeroDB.COL_QTY;
-
-	private ArrayList<InventoryData> listData;
+	private ArrayList<Item> items;
 	private InventoryAdapter inventoryAdapter;
 	private ListView listItems;
 
@@ -33,10 +30,10 @@ public class Inventory extends Activity {
 		heroDbHelper = new HeroDB(this);
 		heroDb = heroDbHelper.getWritableDatabase();
 
-		listData = heroDbHelper.getInventory();
+		items = heroDbHelper.getInventory();
 		listItems = (ListView) findViewById(R.id.listViewInventory);
 		inventoryAdapter = new InventoryAdapter(this, R.layout.inventory_rows,
-				listData);
+				items);
 
 		listItems.setAdapter(inventoryAdapter);
 
