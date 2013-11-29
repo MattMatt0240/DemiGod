@@ -115,9 +115,9 @@ public class HeroDB extends SQLiteOpenHelper {
 
 			db.insert(TABLE_INVENTORY, COL_ID, cv);
 
-			// 3 chicken legs
+			// 3 apples
 			cv.put(COL_ID, "2");
-			cv.put(COL_ITEM_ID, "3");
+			cv.put(COL_ITEM_ID, "5");
 			cv.put(COL_TABLE_ID, ItemDB.TABLE_CONSUMABLES_ID);
 			cv.put(COL_QTY, "3");
 
@@ -130,6 +130,23 @@ public class HeroDB extends SQLiteOpenHelper {
 			cv.put(COL_QTY, "1");
 
 			db.insert(TABLE_INVENTORY, COL_ID, cv);
+
+			// 1 leather armor
+			cv.put(COL_ID, "4");
+			cv.put(COL_ITEM_ID, "2");
+			cv.put(COL_TABLE_ID, ItemDB.TABLE_ARMOR_ID);
+			cv.put(COL_QTY, "1");
+
+			db.insert(TABLE_INVENTORY, COL_ID, cv);
+
+			// 1 mana potion
+			cv.put(COL_ID, "5");
+			cv.put(COL_ITEM_ID, "4");
+			cv.put(COL_TABLE_ID, ItemDB.TABLE_CONSUMABLES_ID);
+			cv.put(COL_QTY, "1");
+
+			db.insert(TABLE_INVENTORY, COL_ID, cv);
+
 			db.close();
 		} catch (SQLiteException e) {
 			Log.d("Inventory Table", "Error Inserting Values");

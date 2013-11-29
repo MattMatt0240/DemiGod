@@ -38,31 +38,36 @@ public class ItemDB extends SQLiteOpenHelper {
 	public static final String COL_EFFECT = "Effect";
 	public static final String COL_EFFECT_VALUE = "EffectValue";
 	public static final String COL_ICON_PATH = "IconPath";
+	public static final String COL_ITEM_DESCRIPTION = "ItemDescription";
 
 	// Effect Constants
 	public static final String EFFECT_ATTACK = "Attack";
 	public static final String EFFECT_PH_DEF = "PhDef";
 	public static final String EFFECT_MG_DEF = "MgDef";
 	public static final String EFFECT_RESTORE_HEALTH = "Heal";
-	public static final String EFFECT_RESTORE_STAMINA = "Rest";
+	public static final String EFFECT_RESTORE_ENERGY = "Rest";
+	public static final String EFFECT_RESTORE_MANA = "Meditate";
 	public static final String EFFECT_RESTORE_ALL = "Rejuvinate";
 
 	private static final String CREATE_ARMOR = ("CREATE TABLE " + TABLE_ARMOR
 			+ " (" + COL_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ COL_ITEM + " TEXT, " + COL_ITEM_VALUE + " TEXT, " + COL_EFFECT
-			+ " TEXT, " + COL_EFFECT_VALUE + " TEXT,  " + COL_ICON_PATH + " TEXT)");
+			+ " TEXT, " + COL_EFFECT_VALUE + " TEXT,  " + COL_ICON_PATH
+			+ " TEXT, " + COL_ITEM_DESCRIPTION + " TEXT)");
 
 	private static final String CREATE_WEAPONS = ("CREATE TABLE "
 			+ TABLE_WEAPONS + " (" + COL_ID
 			+ "  INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_ITEM + " TEXT, "
 			+ COL_ITEM_VALUE + " TEXT, " + COL_EFFECT + " TEXT, "
-			+ COL_EFFECT_VALUE + " TEXT,  " + COL_ICON_PATH + " TEXT)");
+			+ COL_EFFECT_VALUE + " TEXT,  " + COL_ICON_PATH + " TEXT, "
+			+ COL_ITEM_DESCRIPTION + " TEXT)");
 
 	private static final String CREATE_CONSUMABLES = ("CREATE TABLE "
 			+ TABLE_CONSUMABLES + " (" + COL_ID
 			+ "  INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_ITEM + " TEXT, "
 			+ COL_ITEM_VALUE + " TEXT, " + COL_EFFECT + " TEXT, "
-			+ COL_EFFECT_VALUE + " TEXT,  " + COL_ICON_PATH + " TEXT)");
+			+ COL_EFFECT_VALUE + " TEXT,  " + COL_ICON_PATH + " TEXT, "
+			+ COL_ITEM_DESCRIPTION + " TEXT)");
 
 	private SQLiteDatabase db;
 	private Context context;
@@ -124,7 +129,8 @@ public class ItemDB extends SQLiteOpenHelper {
 	 * @param itemId
 	 *            Id of the desired item in the database
 	 * @param tableId
-	 *            Id associated with the Table to query against
+	 *            Id associated with the Table to query against (1=weapons
+	 *            2=armor 3=consumables)
 	 * @return
 	 */
 	public Item getItem(int itemId, int tableId) {
@@ -153,6 +159,7 @@ public class ItemDB extends SQLiteOpenHelper {
 		int rowEffect = c.getColumnIndex(COL_EFFECT);
 		int rowEffectValue = c.getColumnIndex(COL_EFFECT_VALUE);
 		int rowIconPath = c.getColumnIndex(COL_ICON_PATH);
+		int rowItemDescription = c.getColumnIndex(COL_ITEM_DESCRIPTION);
 
 		Item item = new Item();
 
@@ -167,6 +174,8 @@ public class ItemDB extends SQLiteOpenHelper {
 				item.effectValue = c.getInt(rowEffectValue);
 
 				item.icon = getItemIconImage(c.getString(rowIconPath), null);
+
+				item.description = c.getString(rowItemDescription);
 			}
 		}
 		db.close();
@@ -196,7 +205,7 @@ public class ItemDB extends SQLiteOpenHelper {
 			db = SQLiteDatabase.openDatabase(DB_PATH, null,
 					SQLiteDatabase.OPEN_READWRITE);
 
-			Log.d("Weapons Table", "Inserting Values for Armor");
+			Log.d("Weapons Table", "Inserting Values for Weapons");
 
 			ContentValues cv = new ContentValues();
 
@@ -206,6 +215,8 @@ public class ItemDB extends SQLiteOpenHelper {
 			cv.put(COL_EFFECT, EFFECT_ATTACK);
 			cv.put(COL_EFFECT_VALUE, "2");
 			cv.put(COL_ICON_PATH, "icons/weapons/sword_wood.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A sturdy sword made from the finest soft-wood trees around");
 
 			db.insert(TABLE_WEAPONS, COL_ID, cv);
 
@@ -215,6 +226,8 @@ public class ItemDB extends SQLiteOpenHelper {
 			cv.put(COL_EFFECT, EFFECT_ATTACK);
 			cv.put(COL_EFFECT_VALUE, "3");
 			cv.put(COL_ICON_PATH, "icons/weapons/sword_bronze.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A worn bronze sword, great for killing pests and small animals");
 
 			db.insert(TABLE_WEAPONS, COL_ID, cv);
 
@@ -224,6 +237,8 @@ public class ItemDB extends SQLiteOpenHelper {
 			cv.put(COL_EFFECT, EFFECT_ATTACK);
 			cv.put(COL_EFFECT_VALUE, "5");
 			cv.put(COL_ICON_PATH, "icons/weapons/sword_silver.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"An aged silver sword that still glimmers when the light hits it just right");
 
 			db.insert(TABLE_WEAPONS, COL_ID, cv);
 			db.close();
@@ -258,6 +273,7 @@ public class ItemDB extends SQLiteOpenHelper {
 			cv.put(COL_EFFECT, EFFECT_PH_DEF);
 			cv.put(COL_EFFECT_VALUE, "2");
 			cv.put(COL_ICON_PATH, "");
+			cv.put(COL_ITEM_DESCRIPTION, "Worn and torn set of clothes");
 
 			// needs icon
 			// cv.put(COL_ICON_PATH, "icons/armor/.png");
@@ -270,6 +286,8 @@ public class ItemDB extends SQLiteOpenHelper {
 			cv.put(COL_EFFECT, EFFECT_PH_DEF);
 			cv.put(COL_EFFECT_VALUE, "3");
 			cv.put(COL_ICON_PATH, "icons/armor/armor_leather.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A light, cow-skin armor ideal hunting, while providing basic defense");
 
 			db.insert(TABLE_ARMOR, COL_ID, cv);
 
@@ -279,6 +297,8 @@ public class ItemDB extends SQLiteOpenHelper {
 			cv.put(COL_EFFECT, EFFECT_PH_DEF);
 			cv.put(COL_EFFECT_VALUE, "5");
 			cv.put(COL_ICON_PATH, "icons/armor/armor_silver.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A sturdy sword made from the finest soft-wood trees around");
 
 			db.insert(TABLE_ARMOR, COL_ID, cv);
 			db.close();
@@ -313,33 +333,95 @@ public class ItemDB extends SQLiteOpenHelper {
 			cv.put(COL_EFFECT, "Currency");
 			cv.put(COL_EFFECT_VALUE, "1");
 			cv.put(COL_ICON_PATH, "icons/gold.png");
+			cv.put(COL_ITEM_DESCRIPTION, "The only currency that matters");
 
 			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
 
 			cv.put(COL_ID, "2");
-			cv.put(COL_ITEM, "Apple");
-			cv.put(COL_ITEM_VALUE, "5");
+			cv.put(COL_ITEM, "Health Potion");
+			cv.put(COL_ITEM_VALUE, "20");
 			cv.put(COL_EFFECT, EFFECT_RESTORE_HEALTH);
-			cv.put(COL_EFFECT_VALUE, "5");
-			cv.put(COL_ICON_PATH, "");
+			cv.put(COL_EFFECT_VALUE, "10");
+			cv.put(COL_ICON_PATH, "icons/consumables/potion_health.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A small health potion, restores 10 health");
 
 			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
 
 			cv.put(COL_ID, "3");
+			cv.put(COL_ITEM, "Energy Potion");
+			cv.put(COL_ITEM_VALUE, "20");
+			cv.put(COL_EFFECT, EFFECT_RESTORE_ENERGY);
+			cv.put(COL_EFFECT_VALUE, "10");
+			cv.put(COL_ICON_PATH, "icons/consumables/potion_energy.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A small energy potion, restores 10 energy");
+
+			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
+
+			cv.put(COL_ID, "4");
+			cv.put(COL_ITEM, "Mana Potion");
+			cv.put(COL_ITEM_VALUE, "20");
+			cv.put(COL_EFFECT, EFFECT_RESTORE_MANA);
+			cv.put(COL_EFFECT_VALUE, "10");
+			cv.put(COL_ICON_PATH, "icons/consumables/potion_mana.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A small mana potion, restores 10 mana");
+
+			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
+
+			cv.put(COL_ID, "5");
+			cv.put(COL_ITEM, "Apple");
+			cv.put(COL_ITEM_VALUE, "5");
+			cv.put(COL_EFFECT, EFFECT_RESTORE_HEALTH);
+			cv.put(COL_EFFECT_VALUE, "5");
+			cv.put(COL_ICON_PATH, "icons/consumables/apple.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A delicious red apple, restores 5 health");
+
+			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
+
+			cv.put(COL_ID, "6");
 			cv.put(COL_ITEM, "Chicken Leg");
 			cv.put(COL_ITEM_VALUE, "25");
 			cv.put(COL_EFFECT, EFFECT_RESTORE_HEALTH);
 			cv.put(COL_EFFECT_VALUE, "30");
 			cv.put(COL_ICON_PATH, "icons/consumables/chicken_leg.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A greasy chicken leg, restores 30 health");
 
 			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
 
-			cv.put(COL_ID, "4");
+			cv.put(COL_ID, "7");
 			cv.put(COL_ITEM, "Steak");
 			cv.put(COL_ITEM_VALUE, "40");
 			cv.put(COL_EFFECT, EFFECT_RESTORE_HEALTH);
 			cv.put(COL_EFFECT_VALUE, "50");
 			cv.put(COL_ICON_PATH, "icons/consumables/steak.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A hunk of T-Bone steak, restores 50 health");
+
+			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
+
+			cv.put(COL_ID, "8");
+			cv.put(COL_ITEM, "Bread");
+			cv.put(COL_ITEM_VALUE, "10");
+			cv.put(COL_EFFECT, EFFECT_RESTORE_HEALTH);
+			cv.put(COL_EFFECT_VALUE, "15");
+			cv.put(COL_ICON_PATH, "icons/consumables/bread.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A fresh-baked loaf of bread, restores 15 health");
+
+			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
+
+			cv.put(COL_ID, "9");
+			cv.put(COL_ITEM, "Soup");
+			cv.put(COL_ITEM_VALUE, "35");
+			cv.put(COL_EFFECT, EFFECT_RESTORE_HEALTH);
+			cv.put(COL_EFFECT_VALUE, "25");
+			cv.put(COL_ICON_PATH, "icons/consumables/soup.png");
+			cv.put(COL_ITEM_DESCRIPTION,
+					"A warm bowl of hearty soup, restores 25 health");
 
 			db.insert(TABLE_CONSUMABLES, COL_ID, cv);
 			db.close();
@@ -353,5 +435,4 @@ public class ItemDB extends SQLiteOpenHelper {
 		Log.d("Consumables Table", "Values Successfully Inserted Into Table");
 
 	}
-
 }

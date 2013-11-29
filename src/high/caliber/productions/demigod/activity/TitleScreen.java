@@ -24,11 +24,8 @@ import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.database.ItemDB;
 import high.caliber.productions.demigod.settings.SettingsMain;
-import high.caliber.productions.demigod.utils.PixelUnitConverter;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
@@ -191,6 +188,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 						publishProgress(progressCounter);
 
 						itemDbHelper.close();
+						itemDb.close();
 
 					}
 
