@@ -19,8 +19,8 @@
 
 package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.Hero;
 import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.characters.Hero;
 import high.caliber.productions.demigod.settings.SettingsMain;
 import high.caliber.productions.demigod.utils.PixelUnitConverter;
 

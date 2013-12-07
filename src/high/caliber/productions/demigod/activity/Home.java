@@ -19,9 +19,9 @@
 
 package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.Hero;
 import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.characters.Hero;
-import high.caliber.productions.demigod.drawing.Tile;
+import high.caliber.productions.demigod.Tile;
 import high.caliber.productions.demigod.settings.SettingsMain;
 import high.caliber.productions.demigod.utils.PixelUnitConverter;
 
@@ -43,7 +43,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

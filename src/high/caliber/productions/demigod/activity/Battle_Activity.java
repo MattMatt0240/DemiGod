@@ -1,14 +1,15 @@
 package high.caliber.productions.demigod.activity;
 
-import java.util.Random;
-
+import high.caliber.productions.demigod.Enemy;
 import high.caliber.productions.demigod.R;
-import high.caliber.productions.demigod.characters.Enemy;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
 import high.caliber.productions.demigod.utils.SharedPrefsManager;
 import high.caliber.productions.demigod.utils.SharedPrefsManager.BattleLogPrefs;
+
+import java.util.Random;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;

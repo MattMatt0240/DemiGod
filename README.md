@@ -11,7 +11,7 @@ Android RPG game
  Any help, contributions, ideas, and/or concerns are welcome. 
  This is a learning project for me, and I'm very excited to see where this goes.
  
- Images are currently 32x32 px, but am considering a higher resolution (64x64).
+ Tile images are 32x32 px, and battle sprites are 100x100 px.
  
  This project is licensed under GNU GPL v3
  
@@ -36,6 +36,7 @@ true origins...
  * Level-ups
  * Status Screen
  * Viewing pre-populated Inventory (No using/exchanging items yet)
+ * Re-positionable and re-sizeable D-Pad
  
  IDEAS:
 

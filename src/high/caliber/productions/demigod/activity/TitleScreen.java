@@ -19,15 +19,21 @@
 
 package high.caliber.productions.demigod.activity;
 
+import high.caliber.productions.demigod.JsonActivityTest;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.database.ItemDB;
 import high.caliber.productions.demigod.settings.SettingsMain;
+
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.AnimationDrawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -46,7 +52,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 	ImageView loadingSprite;
 	TextView tvMainTitle;
 	Button bPlay, bStatus, bBattleLog, bInventory, bBattle, bCreateHero,
-			bDeleteGame;
+			bDeleteGame, bJsonTest;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +114,10 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 					Toast.LENGTH_SHORT).show();
 		}
 
+		if (v.getId() == R.id.bJsonTest) {
+			startActivity(new Intent(TitleScreen.this, JsonActivityTest.class));
+		}
+
 	}
 
 	private class DatabaseCreator extends AsyncTask<Void, Integer, Void> {
@@ -117,19 +127,19 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 			setContentView(R.layout.loading_screen);
 
-			AnimationDrawable anim = new AnimationDrawable();
-			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front1),
-					150);
-			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front2),
-					150);
-			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front1),
-					150);
-			anim.addFrame(
-					getResources().getDrawable(R.drawable.shadow_knight_front3),
-					150);
+			// AnimationDrawable anim = new AnimationDrawable();
+			// anim.addFrame(
+			// getResources().getDrawable(R.drawable.shadow_knight_front1),
+			// 150);
+			// anim.addFrame(
+			// getResources().getDrawable(R.drawable.shadow_knight_front2),
+			// 150);
+			// anim.addFrame(
+			// getResources().getDrawable(R.drawable.shadow_knight_front1),
+			// 150);
+			// anim.addFrame(
+			// getResources().getDrawable(R.drawable.shadow_knight_front3),
+			// 150);
 
 			progbar = (ProgressBar) findViewById(R.id.progBarLoadingScreen);
 			progbar.setIndeterminate(false);
@@ -137,10 +147,19 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 			progbar.setMax(100);
 
 			loadingSprite = (ImageView) findViewById(R.id.ivLoadingSprite);
-			loadingSprite.setImageDrawable(anim);
+			AssetManager manager = getAssets();
+			Bitmap bitmap = null;
+			try {
+				bitmap = BitmapFactory.decodeStream(manager
+						.open("drawables/x100/dragon_blood.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			loadingSprite.setImageBitmap(bitmap);
 
-			anim.setOneShot(false);
-			anim.start();
+			// anim.setOneShot(false);
+			// anim.start();
 
 		}
 
@@ -162,7 +181,8 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 						progressCounter = 15;
 						publishProgress(progressCounter);
 
-						enemyDbHelper.PopulateCommonTable(enemyDb);
+						enemyDbHelper.PopulateCommonTable();
+						enemyDbHelper.PopulateRareTable();
 
 						enemyDbHelper.close();
 						enemyDb.close();
@@ -242,6 +262,9 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 
 			bDeleteGame = (Button) findViewById(R.id.bDeleteGame);
 			bDeleteGame.setOnClickListener(TitleScreen.this);
+
+			bJsonTest = (Button) findViewById(R.id.bJsonTest);
+			bJsonTest.setOnClickListener(TitleScreen.this);
 
 		}
 	}

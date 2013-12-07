@@ -17,40 +17,39 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package high.caliber.productions.demigod.characters;
+package high.caliber.productions.demigod;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class Sprite {
+public class Hero {
 
-	private static final String TAG = Sprite.class.getSimpleName();
-	private int x; // the X coordinate of the object (top left of the image)
-	private int y; // the Y coordinate of the object (top left of the image)
-	private Bitmap bitmap; // the animation sequence
-	private Rect sourceRect; // the rectangle to be drawn from the animation
-								// bitmap
-	private int frameNr; // number of frames in animation
-	private int currentFrame; // the current frame
-	private long frameTicker; // the time of the last frame update
-	private int framePeriod; // milliseconds between each frame (1000/fps)
-	private int spriteWidth; // the width of the sprite to calculate the cut out
-								// rectangle
-	private int spriteHeight; // the height of the sprite
-	private Resources res; // Access to Resources outside of non-Activity Class
-	private int direction; // Used to determine which spritesheet is animated
-	private Rect collisionRect; // Rect to detect collisions
+	public static final int DIRECTION_UP = 1;
+	public static final int DIRECTION_DOWN = 2;
+	public static final int DIRECTION_LEFT = 3;
+	public static final int DIRECTION_RIGHT = 4;
 
-	public Sprite(Context context) {
-		res = context.getResources();
+	private int x;
+	private int y;
+	private Bitmap bitmap;
+	private Rect sourceRect;
+	private int frameNr;
+	private int currentFrame;
+	private long frameTicker;
+	private int framePeriod;
+	private int spriteWidth;
+	private int spriteHeight;
+	private int direction;
+	private Rect collisionRect;
+
+	public Hero(Context context) {
 		x = 0;
 		y = 0;
 	}
 
-	public Sprite(Context context, Bitmap bitmap, int x, int y, int fps,
+	public Hero(Context context, Bitmap bitmap, int x, int y, int fps,
 			int frameCount) {
 		this.bitmap = bitmap;
 		this.x = x;
@@ -76,13 +75,11 @@ public class Sprite {
 	public void update(long gameTime) {
 		if (gameTime > frameTicker + framePeriod) {
 			frameTicker = gameTime;
-			// increment the frame
 			currentFrame++;
 			if (currentFrame >= frameNr) {
 				currentFrame = 0;
 			}
 		}
-		// define the rectangle to cut out sprite
 		this.sourceRect.left = currentFrame * spriteWidth;
 		this.sourceRect.right = this.sourceRect.left + spriteWidth;
 	}
@@ -113,5 +110,13 @@ public class Sprite {
 
 	public Rect getCollisionRect() {
 		return this.collisionRect;
+	}
+
+	public void setAnimBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
+	}
+
+	public Bitmap getAnimBitmap() {
+		return this.bitmap;
 	}
 }

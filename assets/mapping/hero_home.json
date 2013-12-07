@@ -1,0 +1,19 @@
+{
+	map:{
+		"name":"hero_home",
+		"map_width":"15",
+		"map_height":"10",
+		"tile_width":"32",
+		"tile_height":"32",
+		"tile_data":[wh,wv,wv,wv,wv,wv,wv,wv,wv,wh,wv,wv,wv,wv,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
+					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
+					 wv,wv,wv,wv,dr,wv,wv,wv,wv,wv,wv,wv,wv,wv,wv]
+	}
+}

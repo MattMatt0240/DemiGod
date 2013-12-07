@@ -1,6 +1,6 @@
 package high.caliber.productions.demigod.database;
 
-import high.caliber.productions.demigod.utils.Item;
+import high.caliber.productions.demigod.Item;
 
 import java.io.IOException;
 import java.io.InputStream;

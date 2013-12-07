@@ -14,6 +14,7 @@ public class EnemyDB extends SQLiteOpenHelper {
 	private static final String DB_PATH = "data/data/high.caliber.productions.demigod/databases/Enemy.db";
 	private static final String DB_NAME = "Enemy.db";
 	private static final String TABLE_COMMON = "Common";
+	private static final String TABLE_RARE = "Rare";
 	private static final int DB_VERSION = 1;
 
 	public static final String COL_ID = "_id";
@@ -40,6 +41,15 @@ public class EnemyDB extends SQLiteOpenHelper {
 			+ COL_MG_DEFENSE + " TEXT, " + COL_AGILITY + " TEXT, "
 			+ COL_DEXTERITY + " TEXT)");
 
+	private final String CREATE_RARE = ("CREATE TABLE " + TABLE_RARE + " ("
+			+ COL_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_CLASS
+			+ " TEXT, " + COL_NAME + " TEXT, " + COL_LVL + " TEXT, "
+			+ COL_EXP_VALUE + " TEXT, " + COL_HEALTH + " TEXT, " + COL_ENERGY
+			+ " TEXT, " + COL_MANA + " TEXT, " + COL_ATTACK + " TEXT, "
+			+ COL_MAGIC + " TEXT, " + COL_PH_DEFENSE + " TEXT, "
+			+ COL_MG_DEFENSE + " TEXT, " + COL_AGILITY + " TEXT, "
+			+ COL_DEXTERITY + " TEXT)");
+
 	private static SQLiteDatabase db;
 	Context context;
 
@@ -51,13 +61,16 @@ public class EnemyDB extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_COMMON);
+		db.execSQL(CREATE_RARE);
 	}
 
 	/**
 	 * Populates Common Enemy Table with enemies
 	 */
-	public void PopulateCommonTable(SQLiteDatabase db) {
+	public void PopulateCommonTable() {
 
+		db = SQLiteDatabase.openDatabase(DB_PATH, null,
+				SQLiteDatabase.OPEN_READWRITE);
 		try {
 
 			Log.d("Common Enemy Table", "Inserting Values for Common Enemies");
@@ -121,6 +134,46 @@ public class EnemyDB extends SQLiteOpenHelper {
 		}
 
 		Log.d("Common Enemy Table", "Values Successfully Inserted Into Table");
+
+	}
+
+	/**
+	 * Populates Rare Enemy Table with enemies
+	 */
+	public void PopulateRareTable() {
+
+		db = SQLiteDatabase.openDatabase(DB_PATH, null,
+				SQLiteDatabase.OPEN_READWRITE);
+
+		try {
+
+			Log.d("Rare Enemy Table", "Inserting Values for Rare Enemies");
+
+			ContentValues cv = new ContentValues();
+
+			cv.put(COL_ID, "1");
+			cv.put(COL_CLASS, "Warrior");
+			cv.put(COL_NAME, "Blood Dragon");
+			cv.put(COL_LVL, "10");
+			cv.put(COL_EXP_VALUE, "250");
+			cv.put(COL_HEALTH, "100");
+			cv.put(COL_ENERGY, "30");
+			cv.put(COL_MANA, "10");
+			cv.put(COL_ATTACK, "10");
+			cv.put(COL_MAGIC, "5");
+			cv.put(COL_PH_DEFENSE, "9");
+			cv.put(COL_MG_DEFENSE, "4");
+			cv.put(COL_AGILITY, "6");
+			cv.put(COL_DEXTERITY, "5");
+
+			db.insert(TABLE_RARE, COL_ID, cv);
+			db.close();
+		} catch (SQLiteException e) {
+			Log.d("Rare Table", "Error Inserting Values");
+
+		}
+
+		Log.d("Rare Enemy Table", "Values Successfully Inserted Into Table");
 
 	}
 

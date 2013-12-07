@@ -7,6 +7,8 @@ for profanity, gore, or humor (Mature Audience).
  I need help in the following aspects:
 
  * Maps (world, towns, buildings) I need to know if my method of "tiling" is efficient/effective
+ 		
+ 		++ I am now considering/testing JSON for map properties
  
  * User interaction with NPC/AI characters (Dialog, recieving quests, etc...)
  
@@ -16,7 +18,7 @@ for profanity, gore, or humor (Mature Audience).
    
     + "Inventory slots"
    
- * The actual Turn-Based mechanics. (Array of methods possible?)
+ * The actual Turn-Based mechanics. (AI decision-making)
  
  * Player's party (up to 3 playable characters on hero's team)
         + turn order
