@@ -1,19 +1,16 @@
 {
 	map:{
 		"name":"hero_home",
-		"map_width":"15",
-		"map_height":"10",
+		"map_width":"14",
+		"map_height":"7",
 		"tile_width":"32",
 		"tile_height":"32",
-		"tile_data":[wh,wv,wv,wv,wv,wv,wv,wv,wv,wh,wv,wv,wv,wv,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,wh,fh,fh,fh,fh,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
-					 wh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,fh,wh,
-					 wv,wv,wv,wv,dr,wv,wv,wv,wv,wv,wv,wv,wv,wv,wv]
+		"tile_data":[4,5,5,5,5,5,5,5,4,5,5,5,5,4,
+					 4,7,7,7,7,7,7,7,4,7,7,7,7,4,
+					 4,7,7,7,7,7,7,7,4,7,7,7,7,4,
+					 4,7,7,7,7,7,7,7,5,7,7,7,7,4,
+					 4,7,7,7,7,7,7,7,7,7,7,7,7,4,
+					 4,7,7,7,7,7,7,7,7,7,7,7,7,4,
+					 5,5,5,5,8,5,5,5,5,5,5,5,5,5]
 	}
 }

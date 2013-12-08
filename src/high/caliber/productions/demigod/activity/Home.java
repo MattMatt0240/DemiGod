@@ -511,7 +511,7 @@ public class Home extends Activity implements View.OnTouchListener {
 
 					// objects
 					Bitmap tempWallHoriz = getBitmapFromAssets(
-							"drawables/x32/objects/wall_wood_top_horizontal.png",
+							"drawables/x32/tiles/wall_wood_top_horizontal.png",
 							opts);
 					wallHoriz = Bitmap.createScaledBitmap(tempWallHoriz,
 							tileDimen, tileDimen, true);
@@ -521,7 +521,7 @@ public class Home extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap tempWallVert = getBitmapFromAssets(
-							"drawables/x32/objects/wall_wood_top_vertical.png",
+							"drawables/x32/tiles/wall_wood_top_vertical.png",
 							opts);
 					wallVert = Bitmap.createScaledBitmap(tempWallVert,
 							tileDimen, tileDimen, true);
@@ -531,7 +531,7 @@ public class Home extends Activity implements View.OnTouchListener {
 					publishProgress(progressCounter);
 
 					Bitmap tempFloorHoriz = getBitmapFromAssets(
-							"drawables/x32/objects/floor_wood_horizontal.png",
+							"drawables/x32/tiles/floor_wood_horizontal.png",
 							opts);
 					floorHoriz = Bitmap.createScaledBitmap(tempFloorHoriz,
 							tileDimen, tileDimen, true);
@@ -601,7 +601,8 @@ public class Home extends Activity implements View.OnTouchListener {
 					shieldTemp = null;
 
 					bedTile = new Tile(getBaseContext(), bedWood,
-							tileDimen * 13, tileDimen, tileDimen, tileDimen * 2);
+							tileDimen * 13, tileDimen, tileDimen,
+							tileDimen * 2, true);
 					bedRect = bedTile.getCollisionRect();
 
 					coordsWallHoriz = new int[][] { { tileDimen, 0 },

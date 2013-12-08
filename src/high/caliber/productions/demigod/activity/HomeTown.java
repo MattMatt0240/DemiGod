@@ -483,8 +483,7 @@ public class HomeTown extends Activity implements View.OnTouchListener {
 					tempGrass1 = null;
 
 					Bitmap tempWallVert = getBitmapFromAssets(
-							"drawables/x32/objects/floor_wood_vertical.png",
-							opts);
+							"drawables/x32/tiles/floor_wood_vertical.png", opts);
 					wallVert = Bitmap.createScaledBitmap(tempWallVert,
 							tileDimen, tileDimen, true);
 					tempWallVert.recycle();

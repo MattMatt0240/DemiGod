@@ -32,16 +32,26 @@ public class Tile {
 	private Rect collisionRect;
 	private int width, height;
 
+	public Tile(Context context, Bitmap bitmap) {
+		this.context = context;
+		this.bitmap = bitmap;
+
+		collisionRect = new Rect(0, 0, width, height);
+	}
+
 	public Tile(Context context, Bitmap bitmap, int x, int y, int width,
-			int height) {
+			int height, boolean collideable) {
 		this.context = context;
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.isCollideable = collideable;
 
-		collisionRect = new Rect(x, y, x + width, y + height);
+		if (isCollideable) {
+			collisionRect = new Rect(x, y, x + width, y + height);
+		}
 	}
 
 	public Bitmap getBitmap() {
