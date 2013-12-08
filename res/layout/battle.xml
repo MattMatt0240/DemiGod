@@ -171,12 +171,20 @@
         android:progressDrawable="@drawable/energy_progbar" />
 
     <ImageView
+        android:id="@+id/ivHero"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true" />
+
+    <ImageView
         android:id="@+id/ivEnemy"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
         android:src="@drawable/shadow_knight_front1" />
 
 </RelativeLayout>

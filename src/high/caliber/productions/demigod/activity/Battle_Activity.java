@@ -8,17 +8,22 @@ import high.caliber.productions.demigod.utils.LevelUpWorker;
 import high.caliber.productions.demigod.utils.SharedPrefsManager;
 import high.caliber.productions.demigod.utils.SharedPrefsManager.BattleLogPrefs;
 
+import java.io.IOException;
 import java.util.Random;
 
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,10 +99,29 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	SharedPrefsManager prefManager;
 	BattleLogPrefs battlePrefs;
 
+	ImageView ivHero, ivEnemy;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.battle);
+
+		ivHero = (ImageView) findViewById(R.id.ivHero);
+		ivEnemy = (ImageView) findViewById(R.id.ivEnemy);
+
+		AssetManager manager = getAssets();
+		Bitmap bitmap1 = null, bitmap2 = null;
+		try {
+			bitmap1 = BitmapFactory
+					.decodeStream(manager
+							.open("drawables/x32/characters/knight/knight_male_right1.png"));
+			bitmap2 = BitmapFactory.decodeStream(manager
+					.open("drawables/x100/dragon_blood.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ivHero.setImageBitmap(bitmap1);
+		ivEnemy.setImageBitmap(bitmap2);
 
 		EnemyDB enemyDbHelper = new EnemyDB(this);
 		enemyDb = enemyDbHelper.getWritableDatabase();
