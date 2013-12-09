@@ -98,20 +98,20 @@ public class LevelUpWorker {
 
 		ContentValues cv = new ContentValues();
 
-		heroExp = (heroExp - heroMaxExp);
-		heroMaxExp = (heroMaxExp + (heroLevel * 10));
-		heroMaxHealth = (heroMaxHealth + (heroLevel * 4));
+		heroExp -= heroMaxExp;
+		heroMaxExp += heroLevel * 10;
+		heroMaxHealth += heroLevel * 4;
 		heroHealth = heroMaxHealth;
-		heroMaxEnergy = (heroMaxEnergy + (heroLevel * 2));
+		heroMaxEnergy += heroLevel * 2;
 		heroEnergy = heroMaxEnergy;
-		heroMaxMana = (heroMaxMana + heroLevel);
+		heroMaxMana += heroLevel;
 		heroMana = heroMaxMana;
-		heroAttack = (heroAttack + (heroLevel + 1));
-		heroMagic = (heroMagic + heroLevel);
-		heroPhDefense = (heroPhDefense + (heroLevel + 2));
-		heroMgDefense = (heroMgDefense + heroLevel);
-		heroAgility = (heroAgility + (heroLevel - 1));
-		heroAgility = (heroDexterity + (heroLevel - 1));
+		heroAttack += heroLevel + 1;
+		heroMagic += heroLevel;
+		heroPhDefense += heroLevel + 2;
+		heroMgDefense += heroLevel;
+		heroAgility += heroLevel - 1;
+		heroDexterity += heroLevel - 1;
 
 		cv.put(colID, "1");
 		cv.put(colLevel, heroLevel + 1);
@@ -142,7 +142,7 @@ public class LevelUpWorker {
 				SQLiteDatabase.OPEN_READWRITE);
 
 		c = db.rawQuery(
-				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Speed, Agility, Dexterity FROM Stats",
+				"SELECT Class, Name, Level, Exp, MaxExp, Health, MaxHealth, Energy, MaxEnergy, Mana, MaxMana, Attack, Magic, PhDefense, MgDefense, Agility, Dexterity FROM Stats",
 				null);
 
 		if (c != null) {
@@ -179,20 +179,20 @@ public class LevelUpWorker {
 
 		ContentValues cv = new ContentValues();
 
-		heroExp = (heroExp - heroMaxExp);
-		heroMaxExp = (heroMaxExp + (heroLevel * 10));
-		heroMaxHealth = (heroHealth + (heroLevel * 2));
+		heroExp -= heroMaxExp;
+		heroMaxExp += heroLevel * 10;
+		heroMaxHealth += heroLevel * 2;
 		heroHealth = heroMaxHealth;
-		heroMaxEnergy = (heroEnergy + heroLevel);
+		heroMaxEnergy += heroLevel;
 		heroEnergy = heroMaxEnergy;
-		heroMaxMana = (heroMana + (heroLevel * 2));
+		heroMaxMana += heroLevel * 2;
 		heroMana = heroMaxMana;
-		heroAttack = (heroAttack + (heroLevel - 1));
-		heroMagic = (heroMagic + (heroLevel * 2));
-		heroPhDefense = (heroPhDefense + (heroLevel - 1));
-		heroMgDefense = (heroMgDefense + (heroLevel + 1));
-		heroAgility = (heroAgility + heroLevel);
-		heroDexterity = (heroDexterity + heroLevel);
+		heroAttack += heroLevel - 1;
+		heroMagic += heroLevel * 2;
+		heroPhDefense += heroLevel - 1;
+		heroMgDefense += heroLevel + 1;
+		heroAgility += heroLevel;
+		heroDexterity += heroLevel;
 
 		cv.put(colID, "1");
 		cv.put(colLevel, heroLevel + 1);
@@ -259,20 +259,20 @@ public class LevelUpWorker {
 
 		ContentValues cv = new ContentValues();
 
-		heroExp = (heroExp - heroMaxExp);
-		heroMaxExp = (heroMaxExp + (heroLevel * 10));
-		heroMaxHealth = (heroMaxHealth + (heroLevel * 3));
+		heroExp -= heroMaxExp;
+		heroMaxExp += heroLevel * 10;
+		heroMaxHealth += heroLevel * 3;
 		heroHealth = heroMaxHealth;
-		heroMaxEnergy = (heroMaxEnergy + (heroLevel * 3));
+		heroMaxEnergy += heroLevel * 3;
 		heroEnergy = heroMaxEnergy;
-		heroMaxMana = (heroMaxMana + (heroLevel + 1));
+		heroMaxMana += heroLevel + 1;
 		heroMana = heroMaxMana;
-		heroAttack = (heroAttack + (heroLevel + 1));
-		heroMagic = (heroMagic + (heroLevel + 1));
-		heroPhDefense = (heroPhDefense + (heroLevel + 1));
-		heroMgDefense = (heroMgDefense + (heroLevel + 1));
-		heroAgility = (heroAgility + (heroLevel + 1));
-		heroDexterity = (heroDexterity + (heroLevel + 1));
+		heroAttack += heroLevel + 1;
+		heroMagic += heroLevel + 1;
+		heroPhDefense += heroLevel + 1;
+		heroMgDefense += heroLevel + 1;
+		heroAgility += heroLevel + 1;
+		heroDexterity += heroLevel + 1;
 
 		cv.put(colID, "1");
 		cv.put(colLevel, heroLevel + 1);

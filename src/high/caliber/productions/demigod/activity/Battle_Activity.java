@@ -5,12 +5,14 @@ import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
+import high.caliber.productions.demigod.utils.PixelUnitConverter;
 import high.caliber.productions.demigod.utils.SharedPrefsManager;
 import high.caliber.productions.demigod.utils.SharedPrefsManager.BattleLogPrefs;
 
 import java.io.IOException;
 import java.util.Random;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -20,8 +22,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -173,7 +180,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 					heroHealth = c.getInt(c.getColumnIndex(colHealth));
 					heroMaxHealth = c.getInt(c.getColumnIndex(colMaxHealth));
 					heroEnergy = c.getInt(c.getColumnIndex(colEnergy));
-					heroEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
+					heroMaxEnergy = c.getInt(c.getColumnIndex(colMaxEnergy));
 					heroMana = c.getInt(c.getColumnIndex(colMana));
 					heroMaxMana = c.getInt(c.getColumnIndex(colMaxMana));
 					heroAttack = c.getInt(c.getColumnIndex(colAttack));
@@ -216,11 +223,11 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		progBarHealth.setMax(heroMaxHealth);
 
 		tvHeroEnergy = (TextView) findViewById(R.id.tvBattle_Hero_Energy);
-		tvHeroEnergy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
+		tvHeroEnergy.setText("Energy: " + heroEnergy + " / " + heroMaxEnergy);
 
 		progBarEnergy = (ProgressBar) findViewById(R.id.progBar_HeroEnergy);
 		progBarEnergy.setProgress(heroEnergy);
-		progBarEnergy.setMax(heroEnergy);
+		progBarEnergy.setMax(heroMaxEnergy);
 
 		tvHeroExp = (TextView) findViewById(R.id.tvBattle_Hero_EXP);
 		tvHeroExp.setText("EXP: " + heroExp + " / " + heroMaxExp);
@@ -299,18 +306,59 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	// User Attack Formula
 	public void Attack() {
 
+		PixelUnitConverter converter = new PixelUnitConverter(this);
+		int startX = (int) ivHero.getLeft();
+		int destX = startX + converter.dpToPx(20);
+
+		Animation animationForward = new TranslateAnimation(startX, destX, 0, 0);
+		animationForward.setDuration(150);
+		animationForward.setFillEnabled(true);
+		animationForward.setFillBefore(true);
+		animationForward.setFillAfter(true);
+		animationForward.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
+				animation.setDuration(1);
+				ivHero.startAnimation(animation);
+			}
+		});
+
+		Animation animationReverse = new TranslateAnimation(destX, startX, 0, 0);
+		animationReverse.setDuration(150);
+		animationReverse.setFillEnabled(true);
+		animationReverse.setFillBefore(true);
+		animationReverse.setFillAfter(true);
+
+		AnimationSet anim = new AnimationSet(false);
+		anim.addAnimation(animationForward);
+		anim.addAnimation(animationReverse);
+
+		ivHero.startAnimation(anim);
+
 		int damage = ((heroAttack / enemy.phDefense) + 1);
 
 		if (heroEnergy <= 0) {
 			damage = 0;
 
-			heroEnergy = heroEnergy + 2;
+			heroEnergy += 2;
 
 		} else {
 
 			enemy.health -= damage;
 
-			heroEnergy = heroEnergy - 1;
+			heroEnergy -= 1;
 
 			damageDealt = battlePrefs.getDamageDealt();
 			lifeTimeDamageDealt = battlePrefs.getLifetimeDamageDealt();
@@ -337,7 +385,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		tvEnemyHealth.setText("Health: " + enemy.health + " / "
 				+ enemyMaxHealth);
 
-		tvHeroEnergy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
+		tvHeroEnergy.setText("Energy: " + heroEnergy + " / " + heroMaxEnergy);
 
 		tvEnemyName.setBackgroundColor(getApplicationContext().getResources()
 				.getColor(R.color.dark_grey));
@@ -352,6 +400,48 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 	// AI Attack Formula
 	public void EnemyAttack() {
+
+		PixelUnitConverter converter = new PixelUnitConverter(this);
+		final int startX = (int) ivEnemy.getLeft();
+		int destX = startX - converter.dpToPx(20);
+
+		Animation animationForward = new TranslateAnimation(ivEnemy.getX(),
+				destX, 0, 0);
+		animationForward.setDuration(150);
+		animationForward.setFillEnabled(true);
+		animationForward.setFillBefore(true);
+		animationForward.setFillAfter(true);
+		animationForward.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				ivEnemy.setVisibility(View.VISIBLE);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
+				animation.setDuration(1);
+				ivEnemy.startAnimation(animation);
+			}
+		});
+
+		Animation animationReverse = new TranslateAnimation(destX, startX, 0, 0);
+		animationReverse.setDuration(150);
+		animationReverse.setFillEnabled(true);
+		animationReverse.setFillBefore(true);
+		animationReverse.setFillAfter(true);
+
+		AnimationSet anim = new AnimationSet(false);
+		anim.addAnimation(animationForward);
+		anim.addAnimation(animationReverse);
+
+		ivEnemy.startAnimation(anim);
 
 		int damage = (enemy.attack / heroPhDefense);
 
@@ -408,10 +498,10 @@ public class Battle_Activity extends Activity implements OnClickListener {
 			heroEnergy = heroMaxEnergy;
 
 		} else {
-			heroEnergy = heroEnergy + 2;
+			heroEnergy += 2;
 		}
 
-		tvHeroEnergy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
+		tvHeroEnergy.setText("Energy: " + heroEnergy + " / " + heroMaxEnergy);
 		heroPhDefense = heroPhDefense + 2;
 
 		playerTurn = false;
