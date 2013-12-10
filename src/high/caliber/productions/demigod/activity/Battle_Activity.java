@@ -12,7 +12,6 @@ import high.caliber.productions.demigod.utils.SharedPrefsManager.BattleLogPrefs;
 import java.io.IOException;
 import java.util.Random;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -22,7 +21,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -108,10 +106,14 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 	ImageView ivHero, ivEnemy;
 
+	PixelUnitConverter converter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.battle);
+
+		converter = new PixelUnitConverter(this);
 
 		ivHero = (ImageView) findViewById(R.id.ivHero);
 		ivEnemy = (ImageView) findViewById(R.id.ivEnemy);
@@ -306,7 +308,6 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	// User Attack Formula
 	public void Attack() {
 
-		PixelUnitConverter converter = new PixelUnitConverter(this);
 		int startX = (int) ivHero.getLeft();
 		int destX = startX + converter.dpToPx(20);
 
@@ -345,6 +346,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		anim.addAnimation(animationForward);
 		anim.addAnimation(animationReverse);
 
+		ivHero.setVisibility(View.VISIBLE);
 		ivHero.startAnimation(anim);
 
 		int damage = ((heroAttack / enemy.phDefense) + 1);
@@ -401,7 +403,6 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	// AI Attack Formula
 	public void EnemyAttack() {
 
-		PixelUnitConverter converter = new PixelUnitConverter(this);
 		final int startX = (int) ivEnemy.getLeft();
 		int destX = startX - converter.dpToPx(20);
 
@@ -415,7 +416,6 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 			@Override
 			public void onAnimationStart(Animation animation) {
-				ivEnemy.setVisibility(View.VISIBLE);
 			}
 
 			@Override
@@ -441,6 +441,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 		anim.addAnimation(animationForward);
 		anim.addAnimation(animationReverse);
 
+		ivEnemy.setVisibility(View.VISIBLE);
 		ivEnemy.startAnimation(anim);
 
 		int damage = (enemy.attack / heroPhDefense);
@@ -529,11 +530,12 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 			tvHeroHealth.setText("Health: " + heroHealth + " / "
 					+ heroMaxHealth);
-			tvHeroEnergy.setText("Energy: " + heroEnergy + " / " + heroEnergy);
+			tvHeroEnergy.setText("Energy: " + heroEnergy + " / "
+					+ heroMaxEnergy);
 
 			if (playerTurn == true) {
 				Defend();
-				heroPhDefense = heroPhDefense - 2;
+				heroPhDefense += 2;
 			}
 			if (playerTurn == false) {
 				EnemyAttack();

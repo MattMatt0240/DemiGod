@@ -9,12 +9,16 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 public class Inventory extends Activity {
 
@@ -26,10 +30,17 @@ public class Inventory extends Activity {
 	private InventoryAdapter inventoryAdapter;
 	private ListView listItems;
 
+	ViewFlipper vf;
+
+	LinearLayout.LayoutParams paramsFill;
+	boolean isViewing = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.inventory);
+
+		vf = (ViewFlipper) findViewById(R.id.inventoryFlipper);
 
 		heroDbHelper = new HeroDB(this);
 		heroDb = heroDbHelper.getWritableDatabase();
@@ -47,13 +58,45 @@ public class Inventory extends Activity {
 		listItems.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
+			public void onItemClick(AdapterView<?> arg0, View view,
 					int position, long arg3) {
-				Toast.makeText(Inventory.this, "Position = " + position,
-						Toast.LENGTH_SHORT).show();
+
+				vf.showNext();
+
+				isViewing = true;
+
+				TextView tvItemName = (TextView) findViewById(R.id.tvInventoryViewItemName);
+				tvItemName.setText(inventoryAdapter.getItem(position).item);
+
+				ImageView ivIcon = (ImageView) findViewById(R.id.ivInventoryViewIcon);
+				Bitmap icon = inventoryAdapter.getItem(position).icon;
+				ivIcon.setImageBitmap(icon);
+
+				TextView tvDescription = (TextView) findViewById(R.id.tvInventoryViewDescription);
+				tvDescription.setText(inventoryAdapter.getItem(position).description);
+
+				TextView tvEffect = (TextView) findViewById(R.id.tvInventoryViewEffect);
+				tvEffect.setText(inventoryAdapter.getItem(position).effect
+						+ " : "
+						+ inventoryAdapter.getItem(position).effectValue);
+
+				TextView tvValue = (TextView) findViewById(R.id.tvInventoryViewValue);
+				tvValue.setText("Value = "
+						+ inventoryAdapter.getItem(position).itemValue);
 
 			}
 		});
 
+	}
+
+	@Override
+	public void onBackPressed() {
+
+		if (isViewing) {
+			vf.showPrevious();
+			isViewing = false;
+		} else {
+			finish();
+		}
 	}
 }
