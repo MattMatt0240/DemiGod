@@ -594,7 +594,7 @@ public class Home extends Activity implements View.OnTouchListener {
 					bedWoodTemp = null;
 
 					Bitmap shieldTemp = getBitmapFromAssets(
-							"drawables/x32/objects/shield.png", opts);
+							"drawables/x32/objects/shield_silver.png", opts);
 					shield = Bitmap.createScaledBitmap(shieldTemp, tileDimen,
 							tileDimen, true);
 					shieldTemp.recycle();

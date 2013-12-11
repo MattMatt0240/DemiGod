@@ -30,10 +30,13 @@ public class XmlMapAdapter {
 	public static final int TILE_WALL_WOOD_HORIZONTAL = 5;
 	public static final int TILE_FLOOR_WOOD_VERTICAL = 6;
 	public static final int TILE_FLOOR_WOOD_HORIZONTAL = 7;
-	public static final int TILE_DOOR_WOOD = 8;
-	public static final int TILE_TABLE_WOOD = 9;
-	public static final int TILE_BED_WOOD = 10;
-	public static final int TILE_CHAIR_BLUE = 11;
+	public static final int OBJECT_DOOR_WOOD = 8;
+	public static final int OBJECT_TABLE_WOOD = 9;
+	public static final int OBJECT_BED_WOOD = 10;
+	public static final int OBJECT_CHAIR_BLUE = 11;
+	public static final int OBJECT_SHIELD_SILVER = 12;
+	public static final int OBJECT_CHEST_CLOSED = 13;
+	public static final int OBJECT_CHEST_OPEN = 14;
 
 	private Context context;
 	int x = 0;
@@ -253,6 +256,30 @@ public class XmlMapAdapter {
 		case 11:
 			bitmap = getBitmapFromAssets(
 					"drawables/x32/objects/chair_blue_front.png", tileDimen,
+					tileDimen);
+			tile = new Tile(context, bitmap, x, y, x + bitmap.getWidth(), y
+					+ bitmap.getHeight(), false);
+			break;
+
+		case 12:
+			bitmap = getBitmapFromAssets(
+					"drawables/x32/objects/shield_silver.png", tileDimen,
+					tileDimen);
+			tile = new Tile(context, bitmap, x, y, x + bitmap.getWidth(), y
+					+ bitmap.getHeight(), false);
+			break;
+
+		case 13:
+			bitmap = getBitmapFromAssets(
+					"drawables/x32/objects/chest_closed.png", tileDimen,
+					tileDimen);
+			tile = new Tile(context, bitmap, x, y, x + bitmap.getWidth(), y
+					+ bitmap.getHeight(), false);
+			break;
+
+		case 14:
+			bitmap = getBitmapFromAssets(
+					"drawables/x32/objects/chest_open.png", tileDimen,
 					tileDimen);
 			tile = new Tile(context, bitmap, x, y, x + bitmap.getWidth(), y
 					+ bitmap.getHeight(), false);

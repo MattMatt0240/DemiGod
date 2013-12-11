@@ -13,14 +13,23 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.View.OnTouchListener;
 
-public class XmlActivityTest extends Activity {
+public class XmlActivityTest extends Activity implements OnTouchListener {
 
 	TestSurfaceView view;
 	ArrayList<Tile> tiles;
 	ArrayList<Tile> objects;
+
+	int anchorX = 0;
+	int anchorY = 0;
+
+	SurfaceHolder holder;
+	Canvas c;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,7 @@ public class XmlActivityTest extends Activity {
 					"error loading asset");
 		}
 		view = new TestSurfaceView(this);
+		view.setOnTouchListener(this);
 		setContentView(view);
 	}
 
@@ -53,6 +63,21 @@ public class XmlActivityTest extends Activity {
 	protected void onResume() {
 		super.onResume();
 		view.resume();
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+
+		int action = event.getAction();
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 
 	public class TestSurfaceView extends SurfaceView implements
@@ -83,7 +108,8 @@ public class XmlActivityTest extends Activity {
 
 		@Override
 		public void surfaceCreated(SurfaceHolder holder) {
-			Canvas c = holder.lockCanvas();
+			this.holder = holder;
+			c = holder.lockCanvas();
 			draw(c);
 			holder.unlockCanvasAndPost(c);
 		}
@@ -110,7 +136,7 @@ public class XmlActivityTest extends Activity {
 					continue;
 				}
 
-				Canvas c = holder.lockCanvas();
+				c = holder.lockCanvas();
 
 				holder.unlockCanvasAndPost(c);
 
@@ -124,7 +150,6 @@ public class XmlActivityTest extends Activity {
 
 			for (int i = 0; i < tiles.size(); i++) {
 				Tile tile = tiles.get(i);
-
 				c.drawBitmap(tile.getBitmap(), tile.getX(), tile.getY(), null);
 			}
 
@@ -133,6 +158,7 @@ public class XmlActivityTest extends Activity {
 				c.drawBitmap(object.getBitmap(), object.getX(), object.getY(),
 						null);
 			}
+			c.translate(anchorX, anchorY);
 		}
 
 		public void init() {

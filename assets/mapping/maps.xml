@@ -25,7 +25,7 @@
         <row>
             <tile>4</tile>
             <tile>7</tile>
-            <tile>7</tile>
+            <tile object="13">7</tile>
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
@@ -51,7 +51,7 @@
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
-            <tile>7</tile>
+            <tile object="9">7</tile>
             <tile>4</tile>
             <tile>7</tile>
             <tile>7</tile>
@@ -71,26 +71,7 @@
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
-            <tile>5</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>4</tile>
-        </row>
-        <row>
-            <tile>4</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
+            <tile object="12">5</tile>
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
@@ -137,12 +118,31 @@
             <tile>4</tile>
         </row>
         <row>
+            <tile>4</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>4</tile>
+        </row>
+        <row>
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
-            <tile>8</tile>
+            <tile object="8">5</tile>
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
@@ -181,36 +181,14 @@
                 <tile>1</tile>
             </row>
             <row>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-            </row>
-            <row>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
                 <tile>1</tile>
                 <tile>1</tile>
                 <tile>1</tile>
@@ -225,14 +203,14 @@
                 <tile>1</tile>
             </row>
             <row>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
-                <tile>1</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
                 <tile>1</tile>
                 <tile>1</tile>
                 <tile>1</tile>
@@ -247,6 +225,14 @@
                 <tile>1</tile>
             </row>
             <row>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
+                <tile>6</tile>
                 <tile>1</tile>
                 <tile>1</tile>
                 <tile>1</tile>
@@ -255,6 +241,20 @@
                 <tile>1</tile>
                 <tile>1</tile>
                 <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>5</tile>
+                <tile>5</tile>
+                <tile>8</tile>
+                <tile>5</tile>
+                <tile>5</tile>
+                <tile>5</tile>
+                <tile>5</tile>
+                <tile>5</tile>
                 <tile>1</tile>
                 <tile>1</tile>
                 <tile>1</tile>
