@@ -21,6 +21,7 @@ import android.util.Log;
 public class XmlMapAdapter {
 
 	public static final String MAP_HOME = "home";
+	public static final String MAP_HOME_TOWN = "home_town";
 
 	public static final int TILE_GRASS1 = 1;
 	public static final int TILE_GRASS2 = 2;
@@ -37,6 +38,9 @@ public class XmlMapAdapter {
 	private Context context;
 	int x = 0;
 	int y = 0;
+
+	private ArrayList<Tile> tiles;
+	private ArrayList<Tile> objects;
 
 	public XmlMapAdapter(Context context) {
 		this.context = context;
@@ -69,7 +73,8 @@ public class XmlMapAdapter {
 		AssetManager manager = context.getAssets();
 
 		InputStream is = null;
-		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		tiles = new ArrayList<Tile>();
+		objects = new ArrayList<Tile>();
 		try {
 			is = manager.open("mapping/maps.xml");
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -77,9 +82,13 @@ public class XmlMapAdapter {
 			XmlPullParser xpp = factory.newPullParser();
 			xpp.setInput(is, null);
 			int eventType = xpp.getEventType();
+			String content;
 
 			Tile tile = null;
+			Tile object = null;
 			int tileId = 0;
+
+			boolean requestedMap = false;
 
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				if (eventType == XmlPullParser.START_DOCUMENT) {
@@ -90,25 +99,52 @@ public class XmlMapAdapter {
 
 					} else if (xpp.getName().equalsIgnoreCase("name")) {
 
+						if (xpp.nextText().equals(mapName)) {
+							requestedMap = true;
+						} else {
+							requestedMap = false;
+						}
+
 					} else if (xpp.getName().equalsIgnoreCase("row")) {
-						x = 0;
+
+						if (requestedMap) {
+							x = 0;
+						}
 
 					} else if (xpp.getName().equalsIgnoreCase("tile")) {
 
-						tileId = Integer.valueOf(xpp.nextText());
-						tile = getTile(tileId);
-						tiles.add(tile);
-						x += tileDimen;
+						if (requestedMap) {
+							int attrCount = xpp.getAttributeCount();
+							if (attrCount != -1) {
+
+								for (int x = 0; x < attrCount; x++) {
+
+									if (xpp.getAttributeName(x)
+											.equals("object")) {
+
+										object = getTile(Integer.valueOf(xpp
+												.getAttributeValue(x)));
+										objects.add(object);
+									}
+								}
+
+								tileId = Integer.valueOf(xpp.nextText());
+								tile = getTile(tileId);
+								tiles.add(tile);
+							}
+							x += tileDimen;
+						}
 					}
 				} else if (eventType == XmlPullParser.END_TAG) {
 					if (xpp.getName().equalsIgnoreCase("row")) {
-						y += tileDimen;
+
+						if (requestedMap) {
+							y += tileDimen;
+						}
 					}
 
 				} else if (eventType == XmlPullParser.TEXT) {
-					String content = xpp.getText();
-					content = content.trim();
-
+					content = xpp.getText().trim();
 				}
 				eventType = xpp.next();
 
@@ -120,8 +156,8 @@ public class XmlMapAdapter {
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		}
-		Log.d("tile array size",
-				String.valueOf((tiles.size())) + tiles.toString());
+		Log.d("tile array size", String.valueOf((tiles.size())));
+		Log.d("object array size", String.valueOf((objects.size())));
 		return tiles;
 	}
 
@@ -224,5 +260,21 @@ public class XmlMapAdapter {
 
 		}
 		return tile;
+	}
+
+	public ArrayList<Tile> getTiles() {
+		return tiles;
+	}
+
+	public void setTiles(ArrayList<Tile> tiles) {
+		this.tiles = tiles;
+	}
+
+	public ArrayList<Tile> getObjects() {
+		return objects;
+	}
+
+	public void setObjects(ArrayList<Tile> objects) {
+		this.objects = objects;
 	}
 }

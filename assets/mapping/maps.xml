@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <index>
-    <map width="14" height="8">
+    <map width="17" height="8">
         <name>home</name>
         <row>
             <tile>4</tile>
@@ -12,11 +12,14 @@
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
+            <tile>5</tile>
+            <tile>5</tile>
             <tile>4</tile>
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
+            <tile>5</tile>
             <tile>4</tile>
         </row>
         <row>
@@ -28,7 +31,29 @@
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
+            <tile>7</tile>
+            <tile object="11">7</tile>
             <tile>4</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile object="10">7</tile>
+            <tile>4</tile>
+        </row>
+        <row>
+            <tile>4</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>4</tile>
+            <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
@@ -39,20 +64,6 @@
             <tile>4</tile>
             <tile>7</tile>
             <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>4</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>4</tile>
-        </row>
-        <row>
-            <tile>4</tile>
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
@@ -65,21 +76,6 @@
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
-            <tile>4</tile>
-        </row>
-        <row>
-            <tile>4</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
-            <tile>7</tile>
             <tile>7</tile>
             <tile>4</tile>
         </row>
@@ -97,6 +93,28 @@
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>4</tile>
+        </row>
+        <row>
+            <tile>4</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
             <tile>4</tile>
         </row>
         <row>
@@ -113,9 +131,13 @@
             <tile>7</tile>
             <tile>7</tile>
             <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
+            <tile>7</tile>
             <tile>4</tile>
         </row>
         <row>
+            <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
@@ -130,6 +152,341 @@
             <tile>5</tile>
             <tile>5</tile>
             <tile>5</tile>
+            <tile>5</tile>
+            <tile>5</tile>
         </row>
+    </map>
+    <map width="20" height="15">
+        <name>home_town</name>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
+            <row>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+                <tile>1</tile>
+            </row>
     </map>
 </index>

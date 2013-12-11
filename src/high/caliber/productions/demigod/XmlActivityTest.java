@@ -20,6 +20,7 @@ public class XmlActivityTest extends Activity {
 
 	TestSurfaceView view;
 	ArrayList<Tile> tiles;
+	ArrayList<Tile> objects;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +29,15 @@ public class XmlActivityTest extends Activity {
 		XmlMapAdapter adapter = new XmlMapAdapter(this);
 		try {
 			tiles = adapter.convertMapData(XmlMapAdapter.MAP_HOME);
+			objects = adapter.getObjects();
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
-			Log.d("test", "error");
+			Log.d(this.getPackageName().getClass().getSimpleName(),
+					"error parsing XML");
 		} catch (IOException e) {
 			e.printStackTrace();
-			Log.d("test", "error");
+			Log.d(this.getPackageName().getClass().getSimpleName(),
+					"error loading asset");
 		}
 		view = new TestSurfaceView(this);
 		setContentView(view);
@@ -122,6 +126,12 @@ public class XmlActivityTest extends Activity {
 				Tile tile = tiles.get(i);
 
 				c.drawBitmap(tile.getBitmap(), tile.getX(), tile.getY(), null);
+			}
+
+			for (int j = 0; j < objects.size(); j++) {
+				Tile object = objects.get(j);
+				c.drawBitmap(object.getBitmap(), object.getX(), object.getY(),
+						null);
 			}
 		}
 
