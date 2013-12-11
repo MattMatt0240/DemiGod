@@ -1,16 +1,14 @@
 package high.caliber.productions.demigod;
 
-import high.caliber.productions.demigod.utils.JsonMapAdapter;
+import high.caliber.productions.demigod.utils.XmlMapAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -18,34 +16,27 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class JsonActivityTest extends Activity {
+public class XmlActivityTest extends Activity {
 
 	TestSurfaceView view;
-	JSONArray array;
-	ArrayList<Tile> tileBitmaps;
-	int tileDimen, mapWidth, mapHeight;
+	ArrayList<Tile> tiles;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		tileDimen = (int) getResources().getDimension(R.dimen.tile_dimen);
-
-		JsonMapAdapter adapter = new JsonMapAdapter(this);
-		JSONObject map = adapter.loadJsonFromAssets("mapping/hero_home.json");
-		mapWidth = adapter.getMapWidth(map);
-		mapHeight = adapter.getMapHeight(map);
+		XmlMapAdapter adapter = new XmlMapAdapter(this);
 		try {
-			array = map.getJSONArray("tile_data");
-			tileBitmaps = adapter.convertMapData(array);
-			Log.d("array conversion", "success");
-		} catch (JSONException e) {
+			tiles = adapter.convertMapData(XmlMapAdapter.MAP_HOME);
+		} catch (XmlPullParserException e) {
 			e.printStackTrace();
+			Log.d("test", "error");
+		} catch (IOException e) {
+			e.printStackTrace();
+			Log.d("test", "error");
 		}
-
 		view = new TestSurfaceView(this);
 		setContentView(view);
-
 	}
 
 	@Override
@@ -127,19 +118,10 @@ public class JsonActivityTest extends Activity {
 		protected void onDraw(Canvas c) {
 			super.onDraw(c);
 
-			int x = 0;
-			int y = 0;
+			for (int i = 0; i < tiles.size(); i++) {
+				Tile tile = tiles.get(i);
 
-			for (int i = 0; i < tileBitmaps.size(); i++) {
-				Bitmap bitmap = tileBitmaps.get(i).getBitmap();
-
-				c.drawBitmap(bitmap, x, y, null);
-				x += tileDimen;
-
-				if (x > (tileDimen * mapWidth) - tileDimen) {
-					y += tileDimen;
-					x = 0;
-				}
+				c.drawBitmap(tile.getBitmap(), tile.getX(), tile.getY(), null);
 			}
 		}
 

@@ -19,7 +19,7 @@
 
 package high.caliber.productions.demigod.activity;
 
-import high.caliber.productions.demigod.JsonActivityTest;
+import high.caliber.productions.demigod.XmlActivityTest;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
@@ -52,7 +52,7 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 	ImageView loadingSprite;
 	TextView tvMainTitle;
 	Button bPlay, bStatus, bBattleLog, bInventory, bBattle, bCreateHero,
-			bDeleteGame, bJsonTest;
+			bDeleteGame, bXmlTest;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +114,8 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 					Toast.LENGTH_SHORT).show();
 		}
 
-		if (v.getId() == R.id.bJsonTest) {
-			startActivity(new Intent(TitleScreen.this, JsonActivityTest.class));
+		if (v.getId() == R.id.bXmlTest) {
+			startActivity(new Intent(TitleScreen.this, XmlActivityTest.class));
 		}
 
 	}
@@ -263,8 +263,8 @@ public class TitleScreen extends Activity implements View.OnClickListener {
 			bDeleteGame = (Button) findViewById(R.id.bDeleteGame);
 			bDeleteGame.setOnClickListener(TitleScreen.this);
 
-			bJsonTest = (Button) findViewById(R.id.bJsonTest);
-			bJsonTest.setOnClickListener(TitleScreen.this);
+			bXmlTest = (Button) findViewById(R.id.bXmlTest);
+			bXmlTest.setOnClickListener(TitleScreen.this);
 
 		}
 	}

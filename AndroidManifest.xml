@@ -60,7 +60,7 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity
-            android:name="high.caliber.productions.demigod.JsonActivityTest"
+            android:name="high.caliber.productions.demigod.XmlActivityTest"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
     </application>

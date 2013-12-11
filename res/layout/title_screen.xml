@@ -81,13 +81,13 @@
         android:text="Delete Game" />
 
     <Button
-        android:id="@+id/bJsonTest"
+        android:id="@+id/bXmlTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bDeleteGame"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="10dp"
         android:background="@drawable/wood_bttn_bg"
-        android:text="Json Test" />
+        android:text="Xml Test" />
 
 </RelativeLayout>
