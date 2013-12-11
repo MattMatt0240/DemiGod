@@ -308,14 +308,11 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	// User Attack Formula
 	public void Attack() {
 
-		int startX = (int) ivHero.getLeft();
+		int startX = (int) ivHero.getX();
 		int destX = startX + converter.dpToPx(20);
 
 		Animation animationForward = new TranslateAnimation(startX, destX, 0, 0);
 		animationForward.setDuration(150);
-		animationForward.setFillEnabled(true);
-		animationForward.setFillBefore(true);
-		animationForward.setFillAfter(true);
 		animationForward.setAnimationListener(new AnimationListener() {
 
 			@Override
@@ -338,9 +335,6 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 		Animation animationReverse = new TranslateAnimation(destX, startX, 0, 0);
 		animationReverse.setDuration(150);
-		animationReverse.setFillEnabled(true);
-		animationReverse.setFillBefore(true);
-		animationReverse.setFillAfter(true);
 
 		AnimationSet anim = new AnimationSet(false);
 		anim.addAnimation(animationForward);
@@ -403,15 +397,11 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	// AI Attack Formula
 	public void EnemyAttack() {
 
-		final int startX = (int) ivEnemy.getLeft();
+		final int startX = (int) ivEnemy.getX();
 		int destX = startX - converter.dpToPx(20);
 
-		Animation animationForward = new TranslateAnimation(ivEnemy.getX(),
-				destX, 0, 0);
+		Animation animationForward = new TranslateAnimation(startX, destX, 0, 0);
 		animationForward.setDuration(150);
-		animationForward.setFillEnabled(true);
-		animationForward.setFillBefore(true);
-		animationForward.setFillAfter(true);
 		animationForward.setAnimationListener(new AnimationListener() {
 
 			@Override
@@ -433,9 +423,6 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 		Animation animationReverse = new TranslateAnimation(destX, startX, 0, 0);
 		animationReverse.setDuration(150);
-		animationReverse.setFillEnabled(true);
-		animationReverse.setFillBefore(true);
-		animationReverse.setFillAfter(true);
 
 		AnimationSet anim = new AnimationSet(false);
 		anim.addAnimation(animationForward);
