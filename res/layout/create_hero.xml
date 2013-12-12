@@ -12,7 +12,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:gravity="center"
+        android:hint="Enter Name"
         android:inputType="textPersonName"
+        android:maxLength="15"
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
 

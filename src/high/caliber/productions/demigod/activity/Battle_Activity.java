@@ -4,6 +4,8 @@ import high.caliber.productions.demigod.Enemy;
 import high.caliber.productions.demigod.R;
 import high.caliber.productions.demigod.database.EnemyDB;
 import high.caliber.productions.demigod.database.HeroDB;
+import high.caliber.productions.demigod.utils.AnimationUtils;
+import high.caliber.productions.demigod.utils.AnimationUtils.Fireball;
 import high.caliber.productions.demigod.utils.LevelUpWorker;
 import high.caliber.productions.demigod.utils.PixelUnitConverter;
 import high.caliber.productions.demigod.utils.SharedPrefsManager;
@@ -21,15 +23,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -108,12 +112,22 @@ public class Battle_Activity extends Activity implements OnClickListener {
 
 	PixelUnitConverter converter;
 
+	AnimationUtils animUtils;
+
+	RelativeLayout containerLayout = null;
+
+	Fireball fireball;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.battle);
 
+		containerLayout = (RelativeLayout) findViewById(R.id.battle_rl_container);
+
 		converter = new PixelUnitConverter(this);
+
+		animUtils = new AnimationUtils(this);
 
 		ivHero = (ImageView) findViewById(R.id.ivHero);
 		ivEnemy = (ImageView) findViewById(R.id.ivEnemy);
@@ -283,6 +297,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 			Toast.makeText(getApplicationContext(), "Enemy's Turn",
 					Toast.LENGTH_SHORT).show();
 		}
+
 	}
 
 	protected void onResume() {
@@ -308,11 +323,9 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	// User Attack Formula
 	public void Attack() {
 
-		int startX = (int) ivHero.getX();
-		int destX = startX + converter.dpToPx(20);
-
-		Animation animationForward = new TranslateAnimation(startX, destX, 0, 0);
-		animationForward.setDuration(150);
+		Animation animationForward = new TranslateAnimation(0,
+				converter.dpToPx(50), 0, 0);
+		animationForward.setDuration(200);
 		animationForward.setAnimationListener(new AnimationListener() {
 
 			@Override
@@ -333,15 +346,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 			}
 		});
 
-		Animation animationReverse = new TranslateAnimation(destX, startX, 0, 0);
-		animationReverse.setDuration(150);
-
-		AnimationSet anim = new AnimationSet(false);
-		anim.addAnimation(animationForward);
-		anim.addAnimation(animationReverse);
-
-		ivHero.setVisibility(View.VISIBLE);
-		ivHero.startAnimation(anim);
+		ivHero.startAnimation(animationForward);
 
 		int damage = ((heroAttack / enemy.phDefense) + 1);
 
@@ -397,11 +402,9 @@ public class Battle_Activity extends Activity implements OnClickListener {
 	// AI Attack Formula
 	public void EnemyAttack() {
 
-		final int startX = (int) ivEnemy.getX();
-		int destX = startX - converter.dpToPx(20);
-
-		Animation animationForward = new TranslateAnimation(startX, destX, 0, 0);
-		animationForward.setDuration(150);
+		Animation animationForward = new TranslateAnimation(0,
+				-converter.dpToPx(50), 0, 0);
+		animationForward.setDuration(200);
 		animationForward.setAnimationListener(new AnimationListener() {
 
 			@Override
@@ -421,15 +424,52 @@ public class Battle_Activity extends Activity implements OnClickListener {
 			}
 		});
 
-		Animation animationReverse = new TranslateAnimation(destX, startX, 0, 0);
-		animationReverse.setDuration(150);
+		ivEnemy.startAnimation(animationForward);
+		//
+		// final Animation fireballAnim = new TranslateAnimation(0,
+		// ivHero.getRight() - ivEnemy.getLeft(), 0, 0);
+		// fireballAnim.setDuration(1100);
+		// fireballAnim.setAnimationListener(new AnimationListener() {
+		//
+		// @Override
+		// public void onAnimationStart(Animation animation) {
+		//
+		// }
+		//
+		// @Override
+		// public void onAnimationRepeat(Animation animation) {
+		// }
+		//
+		// @Override
+		// public void onAnimationEnd(Animation animation) {
+		// fireball.setVisibility(View.INVISIBLE);
+		// fireball = null;
+		// }
+		// });
 
-		AnimationSet anim = new AnimationSet(false);
-		anim.addAnimation(animationForward);
-		anim.addAnimation(animationReverse);
+		Handler handler = new Handler();
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
 
-		ivEnemy.setVisibility(View.VISIBLE);
-		ivEnemy.startAnimation(anim);
+				fireball = animUtils.new Fireball(Battle_Activity.this);
+
+				RelativeLayout.LayoutParams fireParams = new RelativeLayout.LayoutParams(
+						new LayoutParams(converter.dpToPx(32), converter
+								.dpToPx(32)));
+				fireParams.addRule(RelativeLayout.LEFT_OF, ivEnemy.getId());
+				fireParams.addRule(RelativeLayout.ALIGN_TOP, ivEnemy.getId());
+
+				containerLayout.addView(fireball, fireParams);
+				containerLayout.invalidate();
+
+				fireball.start();
+
+				fireball.animateMovement(ivHero.getRight());
+				// fireball.startAnimation(fireballAnim);
+
+			}
+		});
 
 		int damage = (enemy.attack / heroPhDefense);
 
