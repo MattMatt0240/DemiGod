@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
 
 public class AnimationUtils {
@@ -33,45 +33,46 @@ public class AnimationUtils {
 
 			manager = context.getAssets();
 
-			try {
-				fireball = Drawable.createFromStream(
-						manager.open(ANIMATIONS_HOME + "fireball1.png"), null);
-				anim.addFrame(fireball, 200);
-
-				fireball = Drawable.createFromStream(
-						manager.open(ANIMATIONS_HOME + "fireball2.png"), null);
-				anim.addFrame(fireball, 200);
-
-				anim.setOneShot(false);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			this.setImageDrawable(anim);
-
 			return;
 		}
 
-		public void animateMovement(final int destX) {
+		public void startFireball(final int destX) {
 
-			Handler handler = new Handler();
-			handler.post(new Runnable() {
+			Thread thread = new Thread(new Runnable() {
 
 				@Override
 				public void run() {
+
+					setVisibility(View.VISIBLE);
+					try {
+						fireball = Drawable.createFromStream(
+								manager.open(ANIMATIONS_HOME + "fireball1.png"),
+								null);
+						anim.addFrame(fireball, 200);
+
+						fireball = Drawable.createFromStream(
+								manager.open(ANIMATIONS_HOME + "fireball2.png"),
+								null);
+						anim.addFrame(fireball, 200);
+
+						anim.setOneShot(false);
+						setImageDrawable(anim);
+						anim.start();
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 
 					for (int i = (int) getX(); i > destX; i--) {
 						setX(i);
 					}
 					hit();
-				}
 
+				}
 			});
 
-		}
+			post(thread);
 
-		public void start() {
-			anim.start();
 		}
 
 		private void hit() {

@@ -463,9 +463,7 @@ public class Battle_Activity extends Activity implements OnClickListener {
 				containerLayout.addView(fireball, fireParams);
 				containerLayout.invalidate();
 
-				fireball.start();
-
-				fireball.animateMovement(ivHero.getRight());
+				fireball.startFireball((int) (ivHero.getX() + ivHero.getWidth()));
 				// fireball.startAnimation(fireballAnim);
 
 			}
