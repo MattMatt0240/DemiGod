@@ -13,6 +13,7 @@ Android RPG game
  
  Tile images are 32x32 px, and battle sprites are 100x100 px.
  
+ XDA Thread: http://forum.xda-developers.com/showthread.php?t=2526858
  This project is licensed under GNU GPL v3
  
 
