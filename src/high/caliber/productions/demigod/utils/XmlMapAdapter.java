@@ -1,5 +1,6 @@
 package high.caliber.productions.demigod.utils;
 
+import high.caliber.productions.demigod.Map;
 import high.caliber.productions.demigod.Tile;
 
 import java.io.IOException;
@@ -20,9 +21,15 @@ import android.util.Log;
 
 public class XmlMapAdapter {
 
+	// Map names in XML file
 	public static final String MAP_HOME = "home";
 	public static final String MAP_HOME_TOWN = "home_town";
 
+	// Order Map objects are stored in ArrayList
+	public static final int MAP_HOME_INDEX = 0;
+	public static final int MAP_HOME_TOWN_INDEX = 1;
+
+	// Tile IDs
 	public static final int TILE_GRASS1 = 1;
 	public static final int TILE_GRASS2 = 2;
 	public static final int TILE_GRASS3 = 3;
@@ -30,6 +37,8 @@ public class XmlMapAdapter {
 	public static final int TILE_WALL_WOOD_HORIZONTAL = 5;
 	public static final int TILE_FLOOR_WOOD_VERTICAL = 6;
 	public static final int TILE_FLOOR_WOOD_HORIZONTAL = 7;
+
+	// Object IDs
 	public static final int OBJECT_DOOR_WOOD = 8;
 	public static final int OBJECT_TABLE_WOOD = 9;
 	public static final int OBJECT_BED_WOOD = 10;
@@ -42,8 +51,8 @@ public class XmlMapAdapter {
 	int x = 0;
 	int y = 0;
 
-	private ArrayList<Tile> tiles;
-	private ArrayList<Tile> objects;
+	private ArrayList<Tile> tiles, objects;
+	private ArrayList<Map> maps;
 
 	public XmlMapAdapter(Context context) {
 		this.context = context;
@@ -67,8 +76,10 @@ public class XmlMapAdapter {
 		}
 	}
 
-	public ArrayList<Tile> convertMapData(String mapName)
-			throws XmlPullParserException, IOException {
+	public ArrayList<Map> convertMapData() {
+
+		Map map = null;
+		int index = 0;
 
 		PixelUnitConverter converter = new PixelUnitConverter(context);
 		int tileDimen = converter.dpToPx(32);
@@ -76,8 +87,6 @@ public class XmlMapAdapter {
 		AssetManager manager = context.getAssets();
 
 		InputStream is = null;
-		tiles = new ArrayList<Tile>();
-		objects = new ArrayList<Tile>();
 		try {
 			is = manager.open("mapping/maps.xml");
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -91,64 +100,66 @@ public class XmlMapAdapter {
 			Tile object = null;
 			int tileId = 0;
 
-			boolean requestedMap = false;
-
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				if (eventType == XmlPullParser.START_DOCUMENT) {
+					maps = new ArrayList<Map>();
 
 				} else if (eventType == XmlPullParser.START_TAG) {
-					if (xpp.getName().equalsIgnoreCase("index")) {
-					} else if (xpp.getName().equalsIgnoreCase("map")) {
+					if (xpp.getName().equalsIgnoreCase("map")) {
+						map = new Map();
+						tiles = new ArrayList<Tile>();
+						objects = new ArrayList<Tile>();
 
 					} else if (xpp.getName().equalsIgnoreCase("name")) {
 
-						if (xpp.nextText().equals(mapName)) {
-							requestedMap = true;
-						} else {
-							requestedMap = false;
-						}
+						map.setMapName(xpp.nextText());
 
 					} else if (xpp.getName().equalsIgnoreCase("row")) {
-
-						if (requestedMap) {
-							x = 0;
-						}
+						x = 0;
 
 					} else if (xpp.getName().equalsIgnoreCase("tile")) {
 
-						if (requestedMap) {
-							int attrCount = xpp.getAttributeCount();
-							if (attrCount != -1) {
+						int attrCount = xpp.getAttributeCount();
+						if (attrCount != -1) {
 
-								for (int x = 0; x < attrCount; x++) {
+							for (int x = 0; x < attrCount; x++) {
 
-									if (xpp.getAttributeName(x)
-											.equals("object")) {
+								if (xpp.getAttributeName(x).equals("object")) {
 
-										object = getTile(Integer.valueOf(xpp
-												.getAttributeValue(x)));
-										objects.add(object);
-									}
+									object = getTile(Integer.valueOf(xpp
+											.getAttributeValue(x)));
+									objects.add(object);
 								}
-
-								tileId = Integer.valueOf(xpp.nextText());
-								tile = getTile(tileId);
-								tiles.add(tile);
 							}
-							x += tileDimen;
+
+							tileId = Integer.valueOf(xpp.nextText());
+							tile = getTile(tileId);
+							tiles.add(tile);
 						}
+						x += tileDimen;
+
 					}
 				} else if (eventType == XmlPullParser.END_TAG) {
-					if (xpp.getName().equalsIgnoreCase("row")) {
 
-						if (requestedMap) {
-							y += tileDimen;
-						}
+					if (xpp.getName().equalsIgnoreCase("row")) {
+						y += tileDimen;
+
+					} else if (xpp.getName().equalsIgnoreCase("map")) {
+						map.setTiles(tiles);
+						map.setObjects(objects);
+
+						maps.add(index, map);
+						index++;
+
+						x = 0;
+						y = 0;
+
 					}
 
 				} else if (eventType == XmlPullParser.TEXT) {
 					content = xpp.getText().trim();
 				}
+
 				eventType = xpp.next();
 
 			}
@@ -161,7 +172,8 @@ public class XmlMapAdapter {
 		}
 		Log.d("tile array size", String.valueOf((tiles.size())));
 		Log.d("object array size", String.valueOf((objects.size())));
-		return tiles;
+
+		return maps;
 	}
 
 	public Tile getTile(int tileID) {
@@ -303,5 +315,13 @@ public class XmlMapAdapter {
 
 	public void setObjects(ArrayList<Tile> objects) {
 		this.objects = objects;
+	}
+
+	public ArrayList<Map> getMaps() {
+		return maps;
+	}
+
+	public void setMaps(ArrayList<Map> maps) {
+		this.maps = maps;
 	}
 }

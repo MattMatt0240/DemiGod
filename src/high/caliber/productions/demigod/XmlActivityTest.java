@@ -1,7 +1,5 @@
 package high.caliber.productions.demigod;
 
-import high.caliber.productions.demigod.activity.Home;
-import high.caliber.productions.demigod.activity.HomeTown;
 import high.caliber.productions.demigod.settings.SettingsMain;
 import high.caliber.productions.demigod.utils.PixelUnitConverter;
 import high.caliber.productions.demigod.utils.XmlMapAdapter;
@@ -10,11 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -26,7 +21,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -41,9 +35,13 @@ import android.widget.Toast;
 public class XmlActivityTest extends Activity implements OnTouchListener {
 
 	TestSurfaceView worldCanvas;
-	ArrayList<Tile> tiles;
-	ArrayList<Tile> objects;
+	ArrayList<Map> maps;
+	Map map;
+	ArrayList<Tile> tiles, objects;
 
+	XmlMapAdapter mapAdapter;
+
+	// Map anchor points
 	int anchorX = 0;
 	int anchorY = 0;
 
@@ -134,9 +132,30 @@ public class XmlActivityTest extends Activity implements OnTouchListener {
 
 			break;
 
+		case MotionEvent.ACTION_UP:
+
+			// Test code
+			if (map.equals(maps.get(0))) {
+
+				// On door hit
+				if (anchorY == -tileDimen * 2 && anchorX == tileDimen * 5) {
+					map = maps.get(1);
+					tiles = map.getTiles();
+					objects = map.getObjects();
+
+					worldCanvas.invalidate();
+
+					anchorX = 0;
+					anchorY = 0;
+				}
+			}
+
+			break;
+
 		default:
 			break;
 		}
+
 		return true;
 	}
 
@@ -343,21 +362,13 @@ public class XmlActivityTest extends Activity implements OnTouchListener {
 					screenWidth = size.x;
 					screenHeight = size.y;
 
-					XmlMapAdapter adapter = new XmlMapAdapter(
-							XmlActivityTest.this);
-					try {
-						tiles = adapter
-								.convertMapData(XmlMapAdapter.MAP_HOME_TOWN);
-						objects = adapter.getObjects();
-					} catch (XmlPullParserException e) {
-						e.printStackTrace();
-						Log.d(XmlActivityTest.this.getPackageName().getClass()
-								.getSimpleName(), "error parsing XML");
-					} catch (IOException e) {
-						e.printStackTrace();
-						Log.d(XmlActivityTest.this.getPackageName().getClass()
-								.getSimpleName(), "error loading asset");
-					}
+					mapAdapter = new XmlMapAdapter(XmlActivityTest.this);
+
+					maps = mapAdapter.convertMapData();
+
+					map = maps.get(0);
+					tiles = map.getTiles();
+					objects = map.getObjects();
 
 					BitmapFactory.Options opts = new BitmapFactory.Options();
 					opts.inDither = true;
